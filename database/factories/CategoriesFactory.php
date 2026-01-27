@@ -16,8 +16,10 @@ class CategoriesFactory extends Factory
      */
     public function definition(): array
     {
+        $categoriesName = fake()->sentence(rand(1,2));
         return [
-            //
+            'name' => $categoriesName,
+            'slug' => str()->slug($categoriesName),
         ];
     }
 }

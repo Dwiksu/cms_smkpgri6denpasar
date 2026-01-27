@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Galleries;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,9 @@ class GalleryPhotosFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'gallery_id' => Galleries::factory(),
+            'image' => fake()->imageUrl(),
+            'caption' => fake()->sentence(rand(3, 5)),
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Categories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,15 @@ class PostsFactory extends Factory
      */
     public function definition(): array
     {
+        $titleName = fake()->sentence(rand(3, 5));
         return [
-            //
+            'category_id' => Categories::factory(),
+            'title' => $titleName,
+            'slug' => str()->slug($titleName),
+            'content' => fake()->paragraph(rand(10, 15)),
+            'thumbnail' => fake()->imageUrl(),
+            'status' => fake()->randomElement(['publish', 'draft']),
+            'published_at' => now(),
         ];
     }
 }

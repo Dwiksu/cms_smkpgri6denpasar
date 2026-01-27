@@ -17,7 +17,8 @@ class GalleriesFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => fake()->sentence(rand(2,3)),
+            'description' => fake()->paragraph(rand(10, 15)),
         ];
     }
 }
