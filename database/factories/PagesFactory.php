@@ -16,8 +16,14 @@ class PagesFactory extends Factory
      */
     public function definition(): array
     {
+        $tilleName = fake()->sentence(rand(3, 5));
         return [
-            //
+            'title' => $tilleName,
+            'slug' => str()->slug($tilleName),
+            'content' => fake()->paragraph(rand(10, 15)),
+            'meta_title' => $tilleName,
+            'meta_description' => fake()->sentence(rand(10, 15)),
+            'status' => fake()->randomElement(['publish', 'draft']),
         ];
     }
 }
