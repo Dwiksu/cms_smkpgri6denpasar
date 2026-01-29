@@ -13,6 +13,6 @@ class LogoutController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return to_route('login');
+        return redirect()->route('login');
     }
 }
