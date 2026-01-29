@@ -12,7 +12,7 @@
             from-sky-700
             to-sky-600 border-e border-cyan/30">
       <a href="https://flowbite.com/" class="flex items-center px-5 py-3">
-         <img src="{{ asset('assets/logo_smk_pgri_6.png') }}" class="h-6 me-3" alt="SMK PGRI 6 DPS LOGO" />
+         <img src="{{ asset('assets/logo_smk_pgri_6.png') }}" class="h-8 me-2" alt="SMK PGRI 6 DPS LOGO" />
          <span class="self-center text-xl text-neutral-tertiary font-bold whitespace-nowrap">Admin Panel</span>
       </a>
       <ul class="space-y-2 font-medium border-t border-cyan/40 pt-4 mt-4">
@@ -75,7 +75,7 @@
             </a>
          </li>
          <li>
-            <a href="#" class="flex items-center px-2 py-1.5 rounded-base {{ isActiveSidebar('#') }}">
+            <a href="{{ route('logout') }}" class="flex items-center px-2 py-1.5 rounded-base {{ isActiveSidebar('#') }}">
                <svg class="shrink-0 w-5 h-5 transition duration-75 group-hover:text-cyan-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H8m12 0-4 4m4-4-4-4M9 4H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h2"/></svg>
                <span class="flex-1 ms-3 whitespace-nowrap">Logout</span>
             </a>
