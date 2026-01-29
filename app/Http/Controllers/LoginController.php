@@ -7,17 +7,26 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    public function login() {
+    public function login()
+    {
         return view('auth.login');
     }
 
-    public function authenticate(Request $request) {
+    public function authenticate(Request $request)
+    {
         $credentials = $request->validate([
             'email' => ['required'],
             'password' => ['required'],
         ]);
 
-        if(Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials)) {
+
+            // CEK ROLE
+            if (Auth::user()->role !== 'admin') {
+                Auth::logout();
+                abort(404);
+            }
+            
             $request->session()->regenerate();
 
             return redirect()->intended('/admin/dashboard'); // isi nya url nya

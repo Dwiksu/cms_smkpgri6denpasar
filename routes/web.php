@@ -2,64 +2,37 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
 /* HALAMAN ADMIN */
 Route::prefix('admin')->group(function () {
 
-  Route::get('/', function () {
-    if (Auth::check()) {
-      return redirect()->route('admin.dashboard');
-    }
-
-    return view('auth.login');
-  })->name('home');
-
+  // LOGIN GUEST ONLY
   Route::middleware(['guest'])->group(function () {
     Route::get('/login', [LoginController::class, 'login'])->name('login');
     Route::post('/login', [LoginController::class, 'authenticate']);
   });
 
-  Route::middleware(['auth'])->group(function () {
-    Route::get('/', function () {
-      return view('admin.dashboard');
-    })->name('dashboard.admin');
+  // KALAU SUDAH LOGIN
+  Route::middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('/', fn() => redirect()->route('dashboard.admin'));
 
     Route::get('/dashboard', function () {
       return view('admin.dashboard');
     })->name('dashboard.admin');
 
-    Route::get('/beranda', function () {
-      return view('admin.konten-beranda');
-    })->name('beranda.admin');
+    Route::get('/beranda', fn() => view('admin.konten-beranda'))->name('beranda.admin');
+    Route::get('/berita', fn() => view('admin.berita'))->name('berita.admin');
+    Route::get('/jurusan', fn() => view('admin.jurusan'))->name('jurusan.admin');
+    Route::get('/profil', fn() => view('admin.profil-guru'))->name('profil.admin');
+    Route::get('/galeri', fn() => view('admin.galeri'))->name('galeri.admin');
+    Route::get('/kalender', fn() => view('admin.kalender'))->name('kalender.admin');
+    Route::get('/pengaturan', fn() => view('admin.pengaturan'))->name('pengaturan.admin');
 
-    Route::get('/berita', function () {
-      return view('admin.berita');
-    })->name('berita.admin');
-
-    Route::get('/jurusan', function () {
-      return view('admin.jurusan');
-    })->name('jurusan.admin');
-
-    Route::get('/profil', function () {
-      return view('admin.profil-guru');
-    })->name('profil.admin');
-
-    Route::get('/galeri', function () {
-      return view('admin.galeri');
-    })->name('galeri.admin');
-
-    Route::get('/kalender', function () {
-      return view('admin.kalender');
-    })->name('kalender.admin');
-
-    Route::get('/pengaturan', function () {
-      return view('admin.pengaturan');
-    })->name('pengaturan.admin');
-
-    Route::get('logout', LogoutController::class)->name('logout');
+    // LOGOUT
+    Route::post('/logout', LogoutController::class)->name('logout');
   });
 
 });
