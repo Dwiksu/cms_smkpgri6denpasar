@@ -59,6 +59,18 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('kategori-berita.admin') }}"
+                    class="flex items-center px-2 py-1.5 rounded-base {{ isActiveSidebar('kategori-berita.admin') }}">
+                    <svg class="shrink-0 w-5 h-5 transition duration-75 group-hover:text-cyan-600" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                        viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9.143 4H4.857A.857.857 0 0 0 4 4.857v4.286c0 .473.384.857.857.857h4.286A.857.857 0 0 0 10 9.143V4.857A.857.857 0 0 0 9.143 4Zm10 0h-4.286a.857.857 0 0 0-.857.857v4.286c0 .473.384.857.857.857h4.286A.857.857 0 0 0 20 9.143V4.857A.857.857 0 0 0 19.143 4Zm-10 10H4.857a.857.857 0 0 0-.857.857v4.286c0 .473.384.857.857.857h4.286a.857.857 0 0 0 .857-.857v-4.286A.857.857 0 0 0 9.143 14Zm10 0h-4.286a.857.857 0 0 0-.857.857v4.286c0 .473.384.857.857.857h4.286a.857.857 0 0 0 .857-.857v-4.286a.857.857 0 0 0-.857-.857Z" />
+                    </svg>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Kategori Berita</span>
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('jurusan.admin') }}"
                     class="flex items-center px-2 py-1.5 rounded-base {{ isActiveSidebar('jurusan.admin') }}">
                     <svg class="shrink-0 w-5 h-5 transition duration-75 group-hover:text-cyan-600" aria-hidden="true"
@@ -138,7 +150,7 @@
                     @csrf
                     <button type="submit"
                         class="w-full flex items-center px-2 py-1.5 rounded-base text-neutral-tertiary hover:bg-gray-200 hover:text-cyan-600 transition">
-                        <svg class="w-6 h-6 transition duration-75 group-hover:text-cyan-600"  aria-hidden="true"
+                        <svg class="w-6 h-6 transition duration-75 group-hover:text-cyan-600" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                             viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
