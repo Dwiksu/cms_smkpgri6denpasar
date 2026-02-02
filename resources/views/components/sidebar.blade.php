@@ -12,7 +12,7 @@
     aria-label="Sidebar">
     <div
         class="h-full px-3 py-4 overflow-y-auto flex flex-col
-            bg-linear-to-b 
+            bg-linear-to-b
             from-sky-700
             to-sky-600 border-e border-cyan/30">
         <a href="https://flowbite.com/" class="flex items-center px-5 py-3">
