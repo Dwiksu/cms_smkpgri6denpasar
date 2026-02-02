@@ -14,7 +14,7 @@ class TeacherController extends Controller
     public function index()
     {
         $teachers = Teacher::latest()->get();
-        return view('admin.guru', compact('teachers'));
+        return view('admin.teachers.profil-guru', compact('teachers'));
     }
 
     /**
@@ -22,7 +22,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.teachers.form-profil-guru');
     }
 
     /**
@@ -42,7 +42,13 @@ class TeacherController extends Controller
             'education' => 'required|string|max:100',
         ]);
 
-        Teacher::create($data);
+        try {
+            Teacher::create($data);
+        } catch (\Throwable $e) {
+            // gagal
+            dd($e->getMessage());
+        }
+
 
         return back()->with('success', 'Guru berhasil ditambahkan');
     }
@@ -83,7 +89,6 @@ class TeacherController extends Controller
         $teacher->update($data);
 
         return back()->with('success', 'Guru berhasil diubah');
-
     }
 
     /**
