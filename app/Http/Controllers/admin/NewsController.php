@@ -14,7 +14,7 @@ class NewsController extends Controller
     public function index()
     {
         $news = News::with('category')->latest()->get();
-        return view('admin.berita', compact('news'));
+        return view('admin.news.berita', compact('news'));
     }
 
     /**
@@ -22,7 +22,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.news.form-berita');
     }
 
     /**
@@ -40,7 +40,7 @@ class NewsController extends Controller
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:255',
         ]);
-        
+
         $data['slug'] = str()->slug($data['title']);
         $data['author'] = auth()->user()->name ?? 'Admin';
 
