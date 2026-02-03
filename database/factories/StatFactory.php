@@ -19,15 +19,9 @@ class StatFactory extends Factory
         $label = fake()->words(2, true);
 
         return [
+            'key' => str()->slug($label),
             'label' => ucfirst($label),
             'value' => fake()->numberBetween(10, 5000),
-            'suffix' => fake()->randomElement(['+', '%', null]),
-            'icon' => fake()->randomElement([
-                'heroicon-o-user-group',
-                'heroicon-o-academic-cap',
-                'heroicon-o-building-library',
-                'heroicon-o-trophy',
-            ]),
         ];
     }
 }
