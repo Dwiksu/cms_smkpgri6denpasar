@@ -16,10 +16,24 @@ class Teacher extends Model
         'nip',
         'position',
         'subject',
-        'major',
+        'major_id',
         'photo',
         'email',
         'phone',
         'education',
     ];
+
+    public function major(): BelongsTo
+    {
+        return $this->belongsTo(Major::class);
+    }
+
+    public static function getTeacher() {
+        return self::with('major')->latest()->paginate(10);
+    }
+    public static function getTeacher2() {
+        return self::latest()->paginate(10);
+    }
+
+    
 }

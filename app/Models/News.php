@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class News extends Model
 {
@@ -16,7 +15,7 @@ class News extends Model
         'slug',
         'excerpt',
         'content',
-        'category_id',
+        'category',
         'image',
         'author',
         'published_at',
@@ -24,8 +23,19 @@ class News extends Model
         'meta_description',
     ];
 
-    public function category(): BelongsTo
+    public static function getNews() {
+        return self::where('published_at', '<=', now())
+            ->orderByDesc('published_at')
+            ->latest('published_at')
+            ->paginate(5);
+    }
+
+    public static function getNewsForDashboard()
     {
-        return $this->belongsTo(NewsCategory::class);
+        return self::select('title', 'category', 'image')
+            ->where('published_at', '<=', now())
+            ->orderByDesc('published_at')
+            ->limit(3)
+            ->get();
     }
 }

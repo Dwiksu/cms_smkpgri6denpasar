@@ -25,4 +25,9 @@ class About extends Model
     protected $casts = [
         'mission' => 'array',
     ];
+
+    public function schoolValues(): HasMany
+    {
+        return $this->hasMany(SchoolValue::class);
+    }
 }

@@ -13,7 +13,5 @@ class Stat extends Model
     protected $fillable = [
         'label',
         'value',
-        'suffix',
-        'icon',
     ];
 }
