@@ -45,40 +45,41 @@
                     <p class="text-sm text-gray-500">Edit banner utama dan tagline di halaman beranda.
                     </p>
                 </div>
-                <div class="p-6 pt-0">
+                <form class="p-6 pt-0" action="{{ route('admin.beranda.hero') }}" method="POST">
+                    @csrf
                     <div class="space-y-2">
                         <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Gambar
                             Background</label>
-                        <x-image-upload name="hero_background" :value="$hero->background_image ?? ''" folder="hero" aspect="video" />
+                        <x-image-upload name="background_image" :value="$hero->background_image ?? ''" folder="beranda/hero" aspect="video" />
                     </div>
                     <div class="mb-5">
                         <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Judul</label>
-                        <input id="hero-title" type="text"
+                        <input id="hero-title" type="text" name="title" value="{{ old('title', $hero->title ?? '') }}"
                             class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                             placeholder="SMK PGRI 6 Denpasar" />
                     </div>
                     <div class="mb-5">
                         <label class="block mb-2.5 text-sm font-medium text-heading">Subtitle</label>
-                        <input type="text"
+                        <input type="text" name="subtitle" value="{{ old('subtitle', $hero->subtitle ?? '') }}"
                             class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                             placeholder="Mencetak Generasi Unggul dan Berkarakter" />
                     </div>
                     <div class="mb-5">
                         <label class="block mb-2.5 text-sm font-medium text-heading">Tagline</label>
-                        <input type="text"
+                        <input type="text" name="tagline" value="{{ old('tagline', $hero->tagline ?? '') }}"
                             class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                             placeholder="Siap Kerja, Cerdas, dan Kompetitif" />
                     </div>
                     <div class="grid sm:grid-cols-2 gap-4">
                         <div class="mb-5">
                             <label class="block mb-2.5 text-sm font-medium text-heading">Teks Tombol CTA</label>
-                            <input type="text"
+                            <input type="text" name="cta_text" value="{{ old('cta_text', $hero->cta_text ?? '') }}"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="Daftar Sekarang" />
                         </div>
                         <div class="mb-5">
                             <label class="block mb-2.5 text-sm font-medium text-heading">Link Tombol CTA</label>
-                            <input type="text"
+                            <input type="text" name="cta_link" value="{{ old('cta_link', $hero->cta_link ?? '') }}"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="/pendaftaran" />
                         </div>
@@ -87,7 +88,7 @@
                         class="text-white bg-brand box-border border border-transparent inline-flex items-center  hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
                         @svg('lucide-save', 'h-4 w-4 me-1.5')
                         Simpan Hero</button>
-                </div>
+                </form>
             </div>
         </div>
         <div x-show="tab==='about'" x-transition>
@@ -97,34 +98,35 @@
                     <p class="text-sm text-gray-500">Edit informasi visi, misi, sejarah, dan nilai-nilai sekolah.
                     </p>
                 </div>
-                <div class="p-6 pt-0">
+                <form class="p-6 pt-0" action="{{ route('admin.beranda.about') }}" method="POST">
+                    @csrf
                     <div class="space-y-2">
                         <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Gambar
                             Background</label>
-                        <x-image-upload name="about_background" :value="$about->background_image ?? ''" folder="about" aspect="video" />
+                        <x-image-upload name="image" :value="$about->image ?? ''" folder="beranda/about" aspect="video" />
                     </div>
                     <div class="mb-5">
                         <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Judul
                             Section</label>
-                        <input type="text"
+                        <input type="text" name="title" value="{{ old('title', $about->title ?? '') }}"
                             class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                             placeholder="Tentang Sekolah Kami" />
                     </div>
                     <div class="mb-5">
                         <label class="block mb-2.5 text-sm font-medium text-heading">Deskripsi</label>
-                        <input type="text"
+                        <input type="text" name="description" value="{{ old('description', $about->description ?? '') }}"
                             class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                             placeholder="Deskripsi tentang sekolah" />
                     </div>
                     <div class="mb-5">
                         <label class="block mb-2.5 text-sm font-medium text-heading">Sejarah Sekolah</label>
-                        <input type="text"
+                        <input type="text" name="history" value="{{ old('title', $about->history ?? '') }}"
                             class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                             placeholder="Sejarah sekolah" />
                     </div>
                     <div class="mb-5">
                         <label class="block mb-2.5 text-sm font-medium text-heading">Visi</label>
-                        <input type="text"
+                        <input type="text" name="vision" value="{{ old('title', $about->vision ?? '') }}"
                             class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                             placeholder="Visi sekolah" />
                     </div>
@@ -155,12 +157,12 @@
                         <template x-for="(value, index) in values" :key="index">
                             <div class="flex gap-2 mb-2">
 
-                                <input type="text" :name="'values[' + index + '][name]'" x-model="value.name"
+                                <input type="text" :name="'values[' + index + '][name]'" x-model="values[index][name]"
                                     placeholder="Nama nilai"
                                     class="w-1/3 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block px-3 py-2.5 shadow-xs placeholder:text-body">
 
                                 <input type="text" :name="'values[' + index + '][description]'"
-                                    x-model="value.description" placeholder="Deskripsi nilai"
+                                    x-model="values[index][description]" placeholder="Deskripsi nilai"
                                     class="flex-1 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
 
                                 <button type="button" @click="removeValue(index)"
@@ -182,7 +184,7 @@
                         class="text-white bg-brand box-border border border-transparent inline-flex items-center  hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
                         @svg('lucide-save', 'h-4 w-4 me-1.5')
                         Simpan Tentang Sekolah</button>
-                </div>
+                </form>
             </div>
         </div>
         <div x-show="tab==='principal'" x-transition>
@@ -191,21 +193,22 @@
                     <h3 class="text-2xl font-semibold tracking-tight">Sambutan Kepala Sekolah</h3>
                     <p class="text-sm text-gray-500">Edit informasi dan sambutan kepala sekolah.</p>
                 </div>
-                <div class="p-6 pt-0">
+                <form class="p-6 pt-0" action="{{ route('admin.beranda.principal') }}" method="POST">
+                    @csrf
                     <div class="space-y-2">
                         <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Foto</label>
-                        <x-image-upload name="principal_image" :value="$sambutan->image_url ?? ''" folder="principal" aspect="video" />
+                        <x-image-upload name="photo" :value="$principal->photo ?? ''" folder="beranda/principal" aspect="video" />
                     </div>
                     <div class="grid sm:grid-cols-2 gap-4">
                         <div class="mb-5">
                             <label class="block mb-2.5 text-sm font-medium text-heading">Nama Kepala Sekolah</label>
-                            <input type="text"
+                            <input type="text" name="name" value="{{ old('name', $principal->name ?? '') }}"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="Nama Kepala Sekolah" />
                         </div>
                         <div class="mb-5">
                             <label class="block mb-2.5 text-sm font-medium text-heading">NIP</label>
-                            <input type="text"
+                            <input type="text" name="nip" value="{{ old('nip', $principal->nip ?? '') }}"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="1965051..." />
                         </div>
@@ -213,18 +216,18 @@
                     <div class="grid sm:grid-cols-2 gap-4">
                         <div class="mb-5">
                             <label class="block mb-2.5 text-sm font-medium text-heading">Jabatan</label>
-                            <input type="text"
+                            <input type="text" name="position" value="{{ old('position', $principal->position ?? '') }}"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="Kepala Sekolah" />
                         </div>
                         <div class="mb-5">
                             <label class="block mb-2.5 text-sm font-medium text-heading">Periode</label>
-                            <input type="text"
+                            <input type="text" name="period" value="{{ old('period', $principal->period ?? '') }}"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="2020 - Sekarang" />
                         </div>
                     </div>
-                    <div class="mb-5" x-data="{ principalProfile: @js($sambutan->profile_url ?? '') }">
+                    {{-- <div class="mb-5" x-data="{ principalProfile: @js($principal->photo ?? '') }">
                         <label class="block mb-2.5 text-sm font-medium text-heading">URL Foto</label>
                         <input type="text" x-model="principalProfile"
                             class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
@@ -234,92 +237,63 @@
                                 class="mt-2 w-32 h-32 object-cover rounded-full"
                                 x-on:error="$el.style.display = 'none'" x-on:load="$el.style.display = 'block'" />
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="mb-5">
                         <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Teks
                             Sambutan</label>
-                        <textarea id="sambutan-textarea" rows="4"
+                        <textarea id="sambutan-textarea" rows="4" name="message"
                             class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                            placeholder="Teks sambutan sekolah..."></textarea>
+                            placeholder="Teks sambutan sekolah...">{{ old('message', $principal->message ?? '') }}</textarea>
                     </div>
                     <button type="submit"
                         class="text-white bg-brand box-border border border-transparent inline-flex items-center  hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
                         @svg('lucide-save', 'h-4 w-4 me-1.5')
                         Simpan Sambutan</button>
-                </div>
+                </form>
             </div>
         </div>
         <div x-show="tab==='stats'" x-transition>
             <div class="rounded-xl border border-default bg-neutral-primary-soft shadow-xs text-card-foreground">
-                <div class="flex flex-col p-6">
-                    <h3 class="text-2xl font-semibold tracking-tight">Statistik Sekolah</h3>
-                    <p class="text-sm text-gray-500">Edit angka-angka statistik yang ditampilkan.
-                    </p>
+                <div class="p-6">
+                    <h3 class="text-2xl font-semibold">Statistik Sekolah</h3>
+                    <p class="text-sm text-gray-500">Edit label & nilai statistik</p>
                 </div>
-                <div class="p-6 pt-0">
-                    <div class="grid sm:grid-cols-3 gap-4">
-                        <div class="mb-5">
-                            <label class="block mb-2.5 text-sm font-medium text-heading">Label</label>
-                            <input type="text"
-                                class="bg-neutral-secondary-medium read-only:bg-neutral-secondary border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                value="Siswa Aktif" readonly disabled />
+
+                <form class="p-6 pt-0 space-y-4" method="POST" action="{{ route('admin.beranda.stats') }}">
+                    @csrf
+                    @foreach ($stats as $stat)
+                        <div class="grid sm:grid-cols-3 gap-4">
+
+                            {{-- KEY (hidden, jangan diubah admin) --}}
+                            <input type="hidden" name="stats[{{ $stat->key }}][key]" value="{{ old('key', $stat->key ?? '') }}">
+
+                            {{-- LABEL --}}
+                            <div class="mb-5">
+                                <label class="block mb-2.5 text-sm font-medium text-heading">Label</label>
+                                <input type="text" name="stats[{{ $stat->key }}][label]"
+                                    value="{{ old('label', $stat->label ?? '') }}" 
+                                    class="bg-neutral-secondary-medium read-only:bg-neutral-secondary border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" 
+                                    readonly disabled>              
+                            </div>
+
+                            {{-- VALUE --}}
+                            <div class="mb-5 col-span-2">
+                                <label class="block mb-2.5 text-sm font-medium text-heading">Value</label>
+                                <input type="number" min="0" name="stats[{{ $stat->key }}][value]"
+                                    value="{{ old('value', $stat->value ?? '') }}" 
+                                    class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+                            </div>
                         </div>
-                        <div class="mb-5 col-span-2">
-                            <label class="block mb-2.5 text-sm font-medium text-heading">Value</label>
-                            <input type="number" min="0"
-                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="Siswa Aktif.." />
-                        </div>
-                    </div>
-                    <div class="grid sm:grid-cols-3 gap-4">
-                        <div class="mb-5">
-                            <label class="block mb-2.5 text-sm font-medium text-heading">Label</label>
-                            <input type="text"
-                                class="bg-neutral-secondary-medium read-only:bg-neutral-secondary border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                value="Tenaga Pendidik" readonly disabled />
-                        </div>
-                        <div class="mb-5 col-span-2">
-                            <label class="block mb-2.5 text-sm font-medium text-heading">Value</label>
-                            <input type="number" min="0"
-                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="Tenaga Pendidik..." />
-                        </div>
-                    </div>
-                    <div class="grid sm:grid-cols-3 gap-4">
-                        <div class="mb-5">
-                            <label class="block mb-2.5 text-sm font-medium text-heading">Label</label>
-                            <input type="text"
-                                class="bg-neutral-secondary-medium read-only:bg-neutral-secondary border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                value="Program Keahlian" readonly disabled />
-                        </div>
-                        <div class="mb-5 col-span-2">
-                            <label class="block mb-2.5 text-sm font-medium text-heading">Value</label>
-                            <input type="number" min="0"
-                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="Program Keahlian..." />
-                        </div>
-                    </div>
-                    <div class="grid sm:grid-cols-3 gap-4">
-                        <div class="mb-5">
-                            <label class="block mb-2.5 text-sm font-medium text-heading">Label</label>
-                            <input type="text"
-                                class="bg-neutral-secondary-medium read-only:bg-neutral-secondary border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                value="Mitra Industri" readonly disabled />
-                        </div>
-                        <div class="mb-5 col-span-2">
-                            <label class="block mb-2.5 text-sm font-medium text-heading">Value</label>
-                            <input type="number" min="0"
-                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="Mitra Industri..." />
-                        </div>
-                    </div>
-                    <button type="submit"
-                        class="text-white bg-brand box-border border border-transparent inline-flex items-center  hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+                    @endforeach
+
+                    <button type="submit" class="text-white bg-brand box-border border border-transparent inline-flex items-center  hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
                         @svg('lucide-save', 'h-4 w-4 me-1.5')
-                        Simpan Statistik</button>
-                </div>
+                        Simpan Statistik
+                    </button>
+                </form>
             </div>
         </div>
+        </form>
         <div x-show="tab==='info'" x-transition>
             <div class="rounded-xl border border-default bg-neutral-primary-soft shadow-xs text-card-foreground">
                 <div class="flex flex-col p-6">
@@ -327,44 +301,45 @@
                     <p class="text-sm text-gray-500">Edit informasi kontak dan sosial media sekolah.
                     </p>
                 </div>
-                <div class="p-6 pt-0">
+                <form class="p-6 pt-0" method="POST" action="{{ route('admin.beranda.school') }}">
+                    @csrf
                     <div class="grid sm:grid-cols-2 gap-4">
                         <div class="mb-5">
                             <label class="block mb-2.5 text-sm font-medium text-heading">Nama Singkat</label>
-                            <input type="text"
+                            <input type="text" name="short_name" value="{{ old('short_name', $school->short_name ?? '') }}"
                                 class="bg-neutral-secondary-medium read-only:bg-neutral-secondary border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="SMK PGRI 6 Denpasar" />
                         </div>
                         <div class="mb-5">
                             <label class="block mb-2.5 text-sm font-medium text-heading">Nama Lengkap</label>
-                            <input type="text"
+                            <input type="text" name="full_name" value="{{ old('full_name', $school->full_name ?? '') }}"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="Sekolah Menengah Kejuruan PGRI 6 Denpasar" />
                         </div>
                     </div>
                     <div class="mb-5">
                         <label class="block mb-2.5 text-sm font-medium text-heading">Alamat</label>
-                        <textarea type="text"
+                        <textarea type="text" name="address"
                             class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                            placeholder="Alamat..." rows="3"></textarea>
+                            placeholder="Alamat..." rows="3">{{ old('address', $school->address ?? '') }}</textarea>
                     </div>
                     <div class="grid sm:grid-cols-2 gap-4">
                         <div class="mb-5">
                             <label class="block mb-2.5 text-sm font-medium text-heading">Telepon</label>
-                            <input type="text"
+                            <input type="text" name="phone" value="{{ old('phone', $school->phone ?? '') }}"
                                 class="bg-neutral-secondary-medium read-only:bg-neutral-secondary border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="0361-123456" />
                         </div>
                         <div class="mb-5">
                             <label class="block mb-2.5 text-sm font-medium text-heading">Email</label>
-                            <input type="text"
+                            <input type="text" name="email" value="{{ old('email', $school->email ?? '') }}"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="email@smkpgri6denpasar.sch.id" />
                         </div>
                     </div>
                     <div class="mb-5">
                         <label class="block mb-2.5 text-sm font-medium text-heading">Website</label>
-                        <input type="text"
+                        <input type="text" name="website" value="{{ old('website', $school->website ?? '') }}"
                             class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                             placeholder="https://smkpgri6denpasar.sch.id" />
                     </div>
@@ -373,13 +348,13 @@
                         <div class="grid sm:grid-cols-2 gap-4">
                             <div class="mb-5">
                                 <label class="block mb-2.5 text-sm font-medium text-heading">Facebook</label>
-                                <input type="text"
+                                <input type="text" name="facebook" value="{{ old('facebook', $school->facebook ?? '') }}"
                                     class="bg-neutral-secondary-medium read-only:bg-neutral-secondary border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                     value="https://www.facebook.com/smkpgri6denpasar" />
                             </div>
                             <div class="mb-5">
                                 <label class="block mb-2.5 text-sm font-medium text-heading">Instagram</label>
-                                <input type="text"
+                                <input type="text" name="instagram" value="{{ old('instagram', $school->instagram ?? '') }}"
                                     class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                     value="https://www.instagram.com/smkpgri6denpasar" />
                             </div>
@@ -387,23 +362,29 @@
                         <div class="grid sm:grid-cols-2 gap-4">
                             <div class="mb-5">
                                 <label class="block mb-2.5 text-sm font-medium text-heading">YoutTube</label>
-                                <input type="text"
+                                <input type="text" name="youtube" value="{{ old('youtube', $school->youtube ?? '') }}"
                                     class="bg-neutral-secondary-medium read-only:bg-neutral-secondary border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                     value="" />
                             </div>
                             <div class="mb-5">
                                 <label class="block mb-2.5 text-sm font-medium text-heading">Twitter</label>
-                                <input type="text"
+                                <input type="text" name="twitter" value="{{ old('twitter', $school->twitter ?? '') }}"
                                     class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                     value="https://www.twitter.com/smkpgri6denpasar" />
                             </div>
                         </div>
                     </div>
+                    <div class="mb-5">
+                        <label class="block mb-2.5 text-sm font-medium text-heading">Link Map</label>
+                        <input type="text" name="map_embed" value="{{ old('map_embed', $school->map_embed ?? '') }}"
+                            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                            placeholder="https://maps.google.com/?q=SMK PGRI 6 Denpasar" />
+                    </div>
                     <button type="submit"
                         class="text-white bg-brand box-border border border-transparent inline-flex items-center  hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
                         @svg('lucide-save', 'h-4 w-4 me-1.5')
                         Simpan Info Sekolah</button>
-                </div>
+                </form>
             </div>
         </div>
     </div>

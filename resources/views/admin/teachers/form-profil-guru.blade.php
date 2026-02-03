@@ -12,11 +12,11 @@
 
         <div>
             <div class="rounded-xl border border-default bg-neutral-primary-soft shadow-xs  text-card-foreground">
-                <form class="p-6" action="{{ route('store.profil.admin') }}" method="POST">
+                <form class="p-6" action="{{ route('admin.profil.store') }}" method="POST">
                     @csrf
                     <div class="space-y-2">
                         <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Foto</label>
-                        <x-image-upload name="photo" :value="$guru->profile ?? ''" folder="guru" aspect="video" />
+                        <x-image-upload name="photo" :value="$teacher->photo ?? ''" folder="guru" aspect="video" />
                     </div>
                     <div class="mb-5">
                         <label for="teacher-name" class="block mb-2.5 text-sm font-medium text-heading">Nama <span
@@ -48,12 +48,15 @@
                         <div class="mb-5">
                             <label for="teacher-jurusan"
                                 class="block mb-2.5 text-sm font-medium text-heading">Jurusan</label>
-                            <select name="major" id="teacher-jurusan"
+                            <select name="major_id" id="teacher-jurusan"
                                 class="block w-full px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body">
-                                <option value="1">Teknik Komputer dan Jaringan</option>
-                                <option value="2">Multimedia</option>
-                                <option value="3">Rekayasa Perangkat Lunak</option>
-                                <option value="4">Teknik Audio Video</option>
+                                <option value="">Umum</option>
+                                @forelse ($majors as $m)
+                                    <option value="{{ $m->id }}">{{ $m->name }}</option>
+                                @empty
+                                    <p>Tidak ada jurusan</p>
+                                @endforelse
+
                             </select>
                         </div>
                     </div>
@@ -81,7 +84,7 @@
                     <button type="submit"
                         class="text-white bg-brand box-border border border-transparent inline-flex items-center  hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
                         @svg('lucide-save', 'h-4 w-4 me-1.5')
-                        Simpan Berita</button>
+                        Simpan Guru</button>
             </div>
         </div>
     </div>
