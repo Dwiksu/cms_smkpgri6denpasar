@@ -16,6 +16,15 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://cdn.ckeditor.com/ckeditor5/35.1.0/classic/ckeditor.js"></script>
 
+
+    @if (session('success'))
+        <meta name="swal-success" content="{{ session('success') }}">
+    @endif
+
+    @if (session('error'))
+        <meta name="swal-error" content="{{ session('error') }}">
+    @endif
+    
 </head>
 
 <body class="font-sans">
