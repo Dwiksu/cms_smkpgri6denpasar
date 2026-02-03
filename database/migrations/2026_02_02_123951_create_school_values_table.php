@@ -10,14 +10,13 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('photos', function (Blueprint $table) {
+        Schema::create('school_values', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('gallery_album_id')
-                ->constrained(table: 'gallery_albums', indexName: 'photos_gallery_album_id')
-                ->cascadeOnDelete()->onDelete('cascade')->onUpdate('cascade');
-
-            $table->string('url');
-            $table->string('caption')->nullable(); 
+            $table->foreignId('about_id')
+            ->constrained(table: 'abouts', indexName: 'school_values_about_id')
+            ->cascadeOnDelete()->onDelete('cascade')->onUpdate('cascade');
+            $table->string('name');
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('photos');
+        Schema::dropIfExists('school_values');
     }
 };

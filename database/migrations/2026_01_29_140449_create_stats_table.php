@@ -12,10 +12,9 @@ return new class extends Migration {
     {
         Schema::create('stats', function (Blueprint $table) {
             $table->id();
+            $table->string('key')->unique(); 
             $table->string('label');
-            $table->integer('value');
-            $table->string('suffix')->nullable();
-            $table->string('icon')->nullable();
+            $table->integer('value')->default(0);
             $table->timestamps();
         });
     }
