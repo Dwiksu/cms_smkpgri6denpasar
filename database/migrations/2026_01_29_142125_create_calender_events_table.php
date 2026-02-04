@@ -24,7 +24,6 @@ return new class extends Migration {
                 'ujian'
             ]);
 
-            $table->string('color')->nullable();
             $table->timestamps();
         });
     }
