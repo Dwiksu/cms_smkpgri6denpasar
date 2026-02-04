@@ -26,7 +26,7 @@
                         </div>
                         <div class="flex-1 min-w-0">
                             <span
-                                class="bg-[{{ $e->color }}] text-white text-xs font-bold px-2 py-1 rounded-full">{{ ucfirst($e->category) }}</span>
+                                class="{{ CalendarCategoryColor($e->category) }} text-white text-xs font-bold px-2 py-1 rounded-full">{{ ucfirst($e->category) }}</span>
                             <h3 class="font-semibold mt-1">{{ $e->title }}</h3>
                             <p class="text-sm text-gray-500 line-clamp-1">{{ $e->description }}</p>
                             <p class="text-sm text-blue-600 line-clamp-1 pt-1">
@@ -36,12 +36,18 @@
                             </p>
                         </div>
                         <div class="flex gap-2">
-                            <button type="button"
-                                class="bg-disabled box-border border border-gray-200 inline-flex items-center  hover:bg-amber-400 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
-                                @svg('lucide-pencil', 'h-4 w-4')</button>
-                            <button type="button"
-                                class="text-white bg-red-500 box-border border border-fg-disabled inline-flex items-center  hover:bg-red-400 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
-                                @svg('lucide-trash-2', 'h-4 w-4')</button>
+                            <a type="button" href="{{ route('admin.kalender.edit', $e) }}"
+                                class="bg-amber-400 box-border border border-gray-200 inline-flex items-center  hover:bg-amber-300 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
+                                @svg('lucide-pencil', 'h-4 w-4')</a>
+
+                            <form action="{{ route('admin.kalender.destroy', $e) }}" method="POST" class="delete-form"
+                                data-confirm="Hapus agenda {{ $e->title }}">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="text-white bg-red-500 box-border border border-fg-disabled inline-flex items-center  hover:bg-red-400 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
+                                    @svg('lucide-trash-2', 'h-4 w-4')</button>
+                            </form>
                         </div>
                     </div>
                 </div>

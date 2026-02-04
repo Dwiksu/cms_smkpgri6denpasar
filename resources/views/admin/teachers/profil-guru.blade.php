@@ -39,12 +39,17 @@
                         <p class="text-sm text-gray-500">{{ $item->subject }}</p>
                         <p class="text-sm text-purple-500">{{ $item->major->name ?? 'Umum' }}</p>
                         <div class="flex gap-2 mt-4 justify-center">
-                            <button type="button"
-                                class="bg-disabled box-border border border-gray-200 inline-flex items-center  hover:bg-amber-400 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
-                                @svg('lucide-pencil', 'h-4 w-4')</button>
-                            <button type="button"
-                                class="text-white bg-red-500 box-border border border-fg-disabled inline-flex items-center  hover:bg-red-400 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
-                                @svg('lucide-trash-2', 'h-4 w-4')</button>
+                            <a type="button" href="{{ route('admin.profil.edit', $item) }}"
+                                class="bg-amber-400 box-border border border-amber-200 inline-flex items-center  hover:bg-amber-300 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
+                                @svg('lucide-pencil', 'h-4 w-4')</a>
+                            <form action="{{ route('admin.profil.destroy', $item) }}" method="POST" class="delete-form"
+                                data-confirm="Hapus guru {{ $item->name }}">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="text-white bg-red-500 box-border border border-fg-disabled inline-flex items-center  hover:bg-red-400 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
+                                    @svg('lucide-trash-2', 'h-4 w-4')</button>
+                            </form>
                         </div>
                     </div>
                 </div>

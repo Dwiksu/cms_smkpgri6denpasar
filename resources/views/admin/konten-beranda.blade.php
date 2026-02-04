@@ -45,7 +45,7 @@
                     <p class="text-sm text-gray-500">Edit banner utama dan tagline di halaman beranda.
                     </p>
                 </div>
-                <form class="p-6 pt-0" action="{{ route('admin.beranda.hero') }}" method="POST">
+                <form class="p-6 pt-0" action="{{ route('admin.beranda.hero') }}" method="POST" data-delay-submit>
                     @csrf
                     <div class="space-y-2">
                         <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Gambar
@@ -98,7 +98,7 @@
                     <p class="text-sm text-gray-500">Edit informasi visi, misi, sejarah, dan nilai-nilai sekolah.
                     </p>
                 </div>
-                <form class="p-6 pt-0" action="{{ route('admin.beranda.about') }}" method="POST">
+                <form class="p-6 pt-0" action="{{ route('admin.beranda.about') }}" method="POST" data-delay-submit>
                     @csrf
                     <div class="space-y-2">
                         <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Gambar
@@ -193,7 +193,7 @@
                     <h3 class="text-2xl font-semibold tracking-tight">Sambutan Kepala Sekolah</h3>
                     <p class="text-sm text-gray-500">Edit informasi dan sambutan kepala sekolah.</p>
                 </div>
-                <form class="p-6 pt-0" action="{{ route('admin.beranda.principal') }}" method="POST">
+                <form class="p-6 pt-0" action="{{ route('admin.beranda.principal') }}" method="POST" data-delay-submit>
                     @csrf
                     <div class="space-y-2">
                         <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Foto</label>
@@ -259,7 +259,7 @@
                     <p class="text-sm text-gray-500">Edit label & nilai statistik</p>
                 </div>
 
-                <form class="p-6 pt-0 space-y-4" method="POST" action="{{ route('admin.beranda.stats') }}">
+                <form class="p-6 pt-0 space-y-4" method="POST" action="{{ route('admin.beranda.stats') }}" data-delay-submit>
                     @csrf
                     @foreach ($stats as $stat)
                         <div class="grid sm:grid-cols-3 gap-4">
@@ -301,7 +301,7 @@
                     <p class="text-sm text-gray-500">Edit informasi kontak dan sosial media sekolah.
                     </p>
                 </div>
-                <form class="p-6 pt-0" method="POST" action="{{ route('admin.beranda.school') }}">
+                <form class="p-6 pt-0" method="POST" action="{{ route('admin.beranda.school') }}" data-delay-submit>
                     @csrf
                     <div class="grid sm:grid-cols-2 gap-4">
                         <div class="mb-5">

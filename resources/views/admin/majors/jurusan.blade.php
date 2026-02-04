@@ -42,13 +42,20 @@
                                 </div>
                             </div>
                             <div class="flex gap-2 mt-4">
-                                <button type="button" size="sm" class="justify-center flex-1 bg-disabled box-border border border-gray-200 inline-flex items-center  hover:bg-amber-400 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
+                                <a href="{{ route('admin.jurusan.edit', $item) }}" type="button" size="sm"
+                                    class="justify-center flex-1 bg-amber-400 box-border border border-gray-200 inline-flex items-center  hover:bg-amber-300 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
                                     @svg('lucide-pencil', 'w-4 h-4 mr-1')
                                     Edit
-                                </button>
-                                <button type="button"
-                                    class="text-white bg-red-500 box-border border border-fg-disabled inline-flex items-center  hover:bg-red-400 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
-                                    @svg('lucide-trash-2', 'h-4 w-4')</button>
+                                </a>
+
+                                <form action="{{ route('admin.jurusan.destroy', $item) }}" method="post"
+                                    class="delete-form" data-confirm="Hapus jurusan {{ $item->name }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        class="text-white bg-red-500 box-border border border-fg-disabled inline-flex items-center  hover:bg-red-400 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
+                                        @svg('lucide-trash-2', 'h-4 w-4')</button>
+                                </form>
                             </div>
                         </div>
                     </div>
