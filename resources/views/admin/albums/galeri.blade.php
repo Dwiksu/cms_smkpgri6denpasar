@@ -3,6 +3,12 @@
     <x-slot:metaDesc>Ini halaman cuma buat galeri aja</x-slot:metaDesc>
     <x-slot:title>Galeri</x-slot:title>
 
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
+
     <div class="space-y-6" x-data="{
         album: modalAlbum(),
         photo: modalPhoto(),
@@ -22,7 +28,7 @@
         <div class="space-y-8">
             @if (count($albums) > 0)
                 @foreach ($albums as $album)
-                    <div class="rounded-lg border border-default bg-white shadow-sm">
+                    <div class="rounded-lg border border-default bg-white shadow-sm" x-data="{ showAll: false }">
                         <div class="space-y-1.5 p-6 flex flex-row items-start justify-between gap-4">
                             <div class="flex gap-4">
                                 <img src={{ $album['cover_image'] }} alt={{ $album['name'] }}
@@ -55,11 +61,12 @@
                         <div class="p-6 pt-0">
                             @if (count($album['photos']) > 0)
                                 <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
-                                    @foreach ($album['photos'] as $photo)
-                                        <div class="relative group aspect-square">
+                                    @foreach ($album['photos'] as $index => $photo)
+                                        <div class="relative group aspect-square"
+                                            x-show="showAll || {{ $index }} < 6" x-transition>
                                             <img src="{{ $photo['url'] }}" alt="{{ $photo['caption'] ?? 'Photo' }}"
                                                 class="w-full h-full object-cover rounded" />
-                                            <div
+                                            <div x-show="showAll || {{ $index }} !== 5"
                                                 class="absolute inset-0 bg-gray-800/50 opacity-0 group-hover:opacity-100 transition-opacity rounded flex items-center justify-center gap-1">
                                                 <button type="button"
                                                     @click="caption.openEdit({{ json_encode($photo) }})"
@@ -69,6 +76,12 @@
                                                     class="text-white bg-red-500 box-border border border-fg-disabled inline-flex items-center  hover:bg-red-500/90 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
                                                     @svg('lucide-trash-2', 'h-3 w-3')</button>
                                             </div>
+                                            @if ($index === 5 && count($album['photos']) > 6)
+                                                <div x-show="!showAll" @click="showAll = true"
+                                                    class="absolute inset-0 bg-black/70 text-white flex items-center justify-center text-2xl font-semibold rounded cursor-pointer z-20">
+                                                    +{{ count($album['photos']) - 6 }}
+                                                </div>
+                                            @endif
                                             @if (isset($photo['caption']))
                                                 <div
                                                     class="absolute bottom-0 left-0 right-0 bg-gray-800/70 text-white text-xs p-1 truncate rounded-b">
@@ -78,6 +91,14 @@
                                         </div>
                                     @endforeach
                                 </div>
+                                @if (count($album['photos']) > 6)
+                                    <div class="mt-3 text-center" x-show="showAll">
+                                        <button type="button" @click="showAll = false"
+                                            class="text-sm text-gray-500 hover:underline">
+                                            Tampilkan lebih sedikit
+                                        </button>
+                                    </div>
+                                @endif
                             @else
                                 <p class="text-sm text-gray-500 text-center py-4">
                                     Belum ada foto dalam album ini. Klik "Tambah Foto" untuk menambahkan.
@@ -93,7 +114,8 @@
                 </div>
             @endif
         </div>
-        <div x-show="album.open" class="fixed inset-0 bg-black/50 flex items-center justify-center">
+        <div x-show="album.open" class="fixed inset-0 w-full h-full bg-black/50 flex items-center justify-center"
+            x-cloak>
             <div
                 class="rounded-xl border border-default bg-neutral-primary-soft shadow-xs text-card-foreground w-full max-w-md">
                 <div class="flex flex-col p-6">
@@ -108,7 +130,7 @@
                     @csrf
                     <template x-if="album.isEdit">
                         <input type="hidden" name="_method" value="PUT">
-                        <input type="hidden" name="id" :value="album.form.id">
+                        <input type="hidden" name="id" x-model="album.form.id">
                     </template>
                     <div class="space-y-2">
                         <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Foto Sampul <span
@@ -124,7 +146,7 @@
                                 class="text-red-500">*</span></label>
                         <input id="hero-title" type="text" name="name" data-error-input
                             class="bg-neutral-secondary-medium border {{ errorBorder('name') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                            placeholder="Nama Album" :value="album.form.name" />
+                            placeholder="Nama Album" x-model="album.form.name" />
                         @error('name')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
@@ -134,7 +156,7 @@
                         <label class="block mb-2.5 text-sm font-medium text-heading">Deskripsi</label>
                         <textarea type="text" name="description" data-error-input
                             class="bg-neutral-secondary-medium border {{ errorBorder('description') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                            placeholder="Deskripsi album" rows="3" :value="album.form.description"></textarea>
+                            placeholder="Deskripsi album" rows="3" x-model="album.form.description"></textarea>
                         @error('description')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
@@ -152,7 +174,8 @@
             </div>
 
         </div>
-        <div x-show="photo.open" class="fixed inset-0 bg-black/50 flex items-center justify-center">
+        <div x-show="photo.open" class="fixed inset-0 w-full h-full bg-black/50 flex items-center justify-center"
+            x-cloak>
             <div
                 class="rounded-xl border border-default bg-neutral-primary-soft shadow-xs text-card-foreground w-full max-w-md">
                 <div class="flex flex-col p-6">
@@ -165,7 +188,7 @@
                 </div>
                 <form class="p-6 pt-0" :action="photo.formAction" method="POST" data-delay-submit>
                     @csrf
-                    <input type="hidden" name="gallery_album_id" :value="photo.form.gallery_album_id">
+                    <input type="hidden" name="gallery_album_id" x-model="photo.form.gallery_album_id">
                     <div class="space-y-2">
                         <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Foto
                             <span class="text-red-500">*</span></label>
@@ -187,7 +210,8 @@
             </div>
 
         </div>
-        <div x-show="caption.open" class="fixed inset-0 bg-black/50 flex items-center justify-center">
+        <div x-show="caption.open" class="fixed inset-0 w-full h-full bg-black/50 flex items-center justify-center"
+            x-cloak>
             <div
                 class="rounded-xl border border-default bg-neutral-primary-soft shadow-xs text-card-foreground w-full max-w-md">
                 <div class="flex flex-col p-6">
@@ -198,14 +222,14 @@
                 <form class="p-6 pt-0" :action="caption.formAction" method="POST">
                     @csrf
                     <input type="hidden" name="_method" value="PUT">
-                    <input type="hidden" name="gallery_album_id" :value="caption.form.gallery_album_id">
-                    <input type="hidden" name="url" :value="caption.form.url">
+                    <input type="hidden" name="gallery_album_id" x-model="caption.form.gallery_album_id">
+                    <input type="hidden" name="url" x-model="caption.form.url">
                     <img :src="caption.form.url" alt="" class="w-full max-h-48 object-contain rounded" />
                     <div class="my-5">
                         <label for="caption" class="block mb-2.5 text-sm font-medium text-heading">Caption</label>
                         <input id="caption" type="text" name="caption"
                             class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                            :value="caption.form.caption" />
+                            x-model="caption.form.caption" />
                     </div>
                     <div class="flex justify-end gap-2">
                         <button type="button" @click="caption.closeModal()"
@@ -264,6 +288,9 @@
 
                 closeModal() {
                     this.open = false
+                    this.form = {
+                        ...initialState
+                    }
                 }
             }
         }
@@ -293,6 +320,9 @@
 
                 closeModal() {
                     this.open = false
+                    this.form = {
+                        ...initialState
+                    }
                 }
             }
         }
@@ -322,6 +352,9 @@
 
                 closeModal() {
                     this.open = false
+                    this.form = {
+                        ...initialState
+                    }
                 }
             }
         }

@@ -515,7 +515,14 @@
     </script>
     <script>
         ClassicEditor
-            .create(document.querySelector('#sambutan-textarea'))
+            .create(document.querySelector('#sambutan-textarea'), {
+                toolbar: [
+                    'heading', '|',
+                    'bold', 'italic', 'link', '|',
+                    'bulletedList', 'numberedList', 'blockQuote', '|',
+                    'undo', 'redo'
+                ]
+            })
             .catch(error => {
                 console.error(error);
             });
