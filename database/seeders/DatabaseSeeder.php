@@ -24,8 +24,8 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin'
         ]);
 
-        // $this->call([
-            
-        // ]);
+        $this->call([
+            StatSeeder::class,
+        ]);
     }
 }

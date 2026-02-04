@@ -13,8 +13,8 @@ return new class extends Migration {
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('gallery_album_id')
-                ->constrained()
-                ->cascadeOnDelete();
+                ->constrained(table: 'gallery_albums', indexName: 'photos_gallery_album_id')
+                ->cascadeOnDelete()->onDelete('cascade')->onUpdate('cascade');
 
             $table->string('url');
             $table->string('caption')->nullable(); 

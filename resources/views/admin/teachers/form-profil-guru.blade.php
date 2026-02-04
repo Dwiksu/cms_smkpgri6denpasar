@@ -6,22 +6,30 @@
     <div class="space-y-6">
 
         <div>
-            <h1 class="text-3xl font-bold">Tambah Profil Guru</h1>
-            <p class="text-gray-500">Tambah profil guru baru.</p>
+            <h1 class="text-3xl font-bold">{{ isset($teacher) ? 'Edit' : 'Tambah' }} Profil Guru</h1>
+            <p class="text-gray-500 mt-1">{{ isset($teacher) ? 'Edit' : 'Tambah' }} profil guru baru.</p>
         </div>
 
         <div>
             <div class="rounded-xl border border-default bg-neutral-primary-soft shadow-xs  text-card-foreground">
-                <form class="p-6" action="{{ route('store.profil.admin') }}" method="POST">
+                <form class="p-6"
+                    action="{{ isset($teacher) ? route('admin.profil.update', $teacher->id) : route('admin.profil.store') }}"
+                    method="POST" data-delay-submit>
                     @csrf
+
+                    @if (isset($teacher))
+                        @method('PUT')
+                    @endif
+
                     <div class="space-y-2">
                         <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Foto</label>
-                        <x-image-upload name="photo" :value="$guru->profile ?? ''" folder="guru" aspect="video" />
+                        <x-image-upload name="photo" :value="$teacher->photo ?? ''" folder="guru" aspect="video" />
                     </div>
                     <div class="mb-5">
                         <label for="teacher-name" class="block mb-2.5 text-sm font-medium text-heading">Nama <span
                                 class="text-red-500">*</span></label>
                         <input id="teacher-name" name="name" type="text"
+                            value="{{ old('name', $teacher->name ?? '') }}"
                             class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                             required />
                     </div>
@@ -29,13 +37,17 @@
                         <div class="mb-5">
                             <label for="teacher-nip" class="block mb-2.5 text-sm font-medium text-heading">NIP</label>
                             <input id="teacher-nip" name="nip" type="text"
-                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" />
+                                value="{{ old('nip', $teacher->nip ?? '') }}"
+                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" 
+                                required />
                         </div>
                         <div class="mb-5">
                             <label for="teacher-jabatan"
                                 class="block mb-2.5 text-sm font-medium text-heading">Jabatan</label>
                             <input id="teacher-jabatan" name="position" type="text"
-                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" />
+                                value="{{ old('position', $teacher->position ?? '') }}"
+                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" 
+                                required/>
                         </div>
                     </div>
                     <div class="grid sm:grid-cols-2 gap-4">
@@ -43,17 +55,24 @@
                             <label for="teacher-mapel" class="block mb-2.5 text-sm font-medium text-heading">Mata
                                 Pelajaran</label>
                             <input id="teacher-mapel" name="subject" type="text"
+                                value="{{ old('subject', $teacher->subject ?? '') }}"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" />
                         </div>
                         <div class="mb-5">
                             <label for="teacher-jurusan"
                                 class="block mb-2.5 text-sm font-medium text-heading">Jurusan</label>
-                            <select name="major" id="teacher-jurusan"
+                            <select name="major_id" id="teacher-jurusan"
                                 class="block w-full px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body">
-                                <option value="1">Teknik Komputer dan Jaringan</option>
-                                <option value="2">Multimedia</option>
-                                <option value="3">Rekayasa Perangkat Lunak</option>
-                                <option value="4">Teknik Audio Video</option>
+                                <option value="">Umum</option>
+                                @forelse ($majors as $m)
+                                    <option value="{{ $m->id }}"
+                                        {{ old('major_id', $teacher->major_id ?? '') == $m->id ? 'selected' : '' }}>
+                                        {{ $m->name }}
+                                    </option>
+                                @empty
+                                    <p>Tidak ada jurusan</p>
+                                @endforelse
+
                             </select>
                         </div>
                     </div>
@@ -61,27 +80,29 @@
                         <div class="mb-5">
                             <label for="teacher-email"
                                 class="block mb-2.5 text-sm font-medium text-heading">Email</label>
-                            <input id="teacher-email" name="email" type="email"
+                            <input id="teacher-email" name="email" type="email" value="{{ old('email', $teacher->email ?? '') }}"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" />
                         </div>
                         <div class="mb-5">
                             <label for="teacher-telepon"
                                 class="block mb-2.5 text-sm font-medium text-heading">Telepon</label>
-                            <input id="teacher-telepon" name="phone" type="text"
+                            <input id="teacher-telepon" name="phone" type="text" value="{{ old('phone', $teacher->phone ?? '') }}"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" />
                         </div>
                     </div>
                     <div class="mb-5">
                         <label for="teacher-pendidikan" class="block mb-2.5 text-sm font-medium text-heading">Pendidikan
                             <span class="text-red-500">*</span></label>
-                        <input id="teacher-pendidikan" name="education" type="text"
-                            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" />
+                        <input id="teacher-pendidikan" name="education" type="text" value="{{ old('education', $teacher->education ?? '') }}"
+                            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" 
+                            required/>
                     </div>
 
                     <button type="submit"
                         class="text-white bg-brand box-border border border-transparent inline-flex items-center  hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
                         @svg('lucide-save', 'h-4 w-4 me-1.5')
-                        Simpan Berita</button>
+                        {{ isset($teacher) ? 'Update' : 'Tambah' }} Guru</button>
+                </form>
             </div>
         </div>
     </div>

@@ -9,7 +9,7 @@
                 <h1 class="font-display text-3xl font-bold">Kelola Jurusan</h1>
                 <p class="text-gray-500">Tambah, edit, atau hapus program keahlian.</p>
             </div>
-            <a href="{{ route('jurusan.create.admin') }}"
+            <a href="{{ route('admin.jurusan.create') }}"
                 class="text-white bg-brand box-border border border-transparent inline-flex items-center  hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
                 @svg('lucide-plus', 'h-4 w-4 me-1.5')
                 Tambah Jurusan</a>
@@ -32,29 +32,45 @@
             @if (count($majors) > 0)
                 @foreach ($majors as $item)
                     <div class="rounded-lg border border-default bg-white shadow-sm overflow-hidden">
-                        <img src="{{ $item['image'] }}" alt="{{ $item['name'] }}" class="w-full h-32 object-cover" />
+                        <img src="{{ $item->image }}" alt="{{ $item->name }}" class="w-full h-32 object-cover" />
                         <div class="p-4">
                             <div class="flex items-start justify-between gap-2">
                                 <div>
-                                    <Badge variant="secondary" class="mb-2">{{ $item['short_name'] }}</Badge>
-                                    <h3 class="font-semibold">{{ $item['name'] }}</h3>
-                                    <p class="text-sm text-gray-500 line-clamp-2 mt-1">{{ $item['description'] }}</p>
+                                    <Badge variant="secondary" class="mb-2">{{ $item->short_name }}</Badge>
+                                    <h3 class="font-semibold">{{ $item->name }}</h3>
+                                    <p class="text-sm text-gray-500 line-clamp-2 mt-1">{{ $item->description }}</p>
                                 </div>
                             </div>
                             <div class="flex gap-2 mt-4">
-                                <button type="button" size="sm" class="justify-center flex-1 bg-disabled box-border border border-gray-200 inline-flex items-center  hover:bg-amber-400 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
+                                <a href="{{ route('admin.jurusan.edit', $item) }}" type="button" size="sm"
+                                    class="justify-center flex-1 bg-amber-400 box-border border border-gray-200 inline-flex items-center  hover:bg-amber-300 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
                                     @svg('lucide-pencil', 'w-4 h-4 mr-1')
                                     Edit
-                                </button>
-                                <button type="button"
-                                    class="text-white bg-red-500 box-border border border-fg-disabled inline-flex items-center  hover:bg-red-400 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
-                                    @svg('lucide-trash-2', 'h-4 w-4')</button>
+                                </a>
+
+                                <form action="{{ route('admin.jurusan.destroy', $item) }}" method="post"
+                                    class="delete-form" data-confirm="Hapus jurusan {{ $item->name }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        class="text-white bg-red-500 box-border border border-fg-disabled inline-flex items-center  hover:bg-red-400 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
+                                        @svg('lucide-trash-2', 'h-4 w-4')</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 @endforeach
             @else
-                <p class="text-center text-gray-500 py-8 col-span-full">Tidak ada jurusan ditemukan.</p>
+                <div class="rounded-lg border border-default bg-white shadow-sm">
+                    <div class="p-4 flex items-center gap-4">
+                        <div class="w-14 text-center shrink-0">
+                            <p class="text-2xl font-bold text-blue-600">-</p>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="font-semibold mt-1">Tidak ada Jurusan.</h3>
+                        </div>
+                    </div>
+                </div>
             @endif
         </div>
     </div>

@@ -38,7 +38,7 @@
             <h2 class="text-xl font-semibold mb-4">Aksi Cepat</h2>
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                @foreach ($quickActions as $action)
+                @forelse ($quickActions as $action)
                     <a href="{{ $action['href'] }}">
                         <div
                             class="h-full rounded-xl border border-default bg-neutral-primary-soft shadow-x hover:bg-neutral-secondary-medium">
@@ -53,7 +53,9 @@
                             </div>
                         </div>
                     </a>
-                @endforeach
+                @empty
+                    <p class="text-center text-muted-foreground py-8">Tidak ada aksi cepat ditemukan.</p>
+                @endforelse
             </div>
         </div>
 
@@ -71,19 +73,21 @@
                 </div>
 
                 <div class="p-4 space-y-3">
-                    @foreach (array_slice($news, 0, 5) as $item)
+                    @forelse ($news as $item)
                         <div class="flex items-center gap-3 border-b border-gray last:border-0 pb-2">
-                            <img src="{{ $item['image'] }}" alt="{{ $item['title'] }}"
+                            <img src="{{ $item->image }}" alt="{{ $item->title }}"
                                 class="w-12 h-12 rounded object-cover">
 
                             <div class="flex-1 min-w-0">
-                                <p class="font-medium truncate">{{ $item['title'] }}</p>
+                                <p class="font-medium truncate">{{ $item->title }}</p>
                                 <p class="text-sm text-gray-500">
-                                    {{ $item['category']['name'] ?? 'Tidak ada kategori' }}
+                                    {{ $item->category ?? '-' }}
                                 </p>
                             </div>
                         </div>
-                    @endforeach
+                    @empty
+                        <p class="text-center text-muted-foreground py-8">Tidak ada berita terbaru.</p>
+                    @endforelse
                 </div>
             </div>
 
@@ -98,21 +102,23 @@
                 </div>
 
                 <div class="p-4 space-y-3">
-                    @foreach (array_slice($events, 0, 5) as $event)
+                    @forelse ($events as $event)
                         <div class="flex items-center gap-3 border-b border-gray last:border-0 pb-2">
                             <div
                                 class="flex h-10 w-10 items-center justify-center rounded bg-muted text-sm font-medium">
-                                {{ \Carbon\Carbon::parse($event['start_date'])->day }}
+                                {{ \Carbon\Carbon::parse($event->start_date)->day }}
                             </div>
 
                             <div class="flex-1 min-w-0">
-                                <p class="font-medium truncate">{{ $event['title'] }}</p>
+                                <p class="font-medium truncate">{{ $event->title }}</p>
                                 <p class="text-sm text-gray-500 capitalize">
-                                    {{ $event['category'] }}
+                                    {{ $event->category ?? '-' }}
                                 </p>
                             </div>
                         </div>
-                    @endforeach
+                    @empty
+                        <p class="text-center text-muted-foreground py-8">Tidak ada agenda mendatang.</p>
+                    @endforelse
                 </div>
             </div>
 

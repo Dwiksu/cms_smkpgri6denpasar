@@ -6,49 +6,59 @@
     <div class="space-y-6">
 
         <div>
-            <h1 class="text-3xl font-bold">Tambah Jurusan</h1>
-            <p class="text-gray-500">Tambahkan jurusan baru ke dalam sistem.</p>
+            <h1 class="text-3xl font-bold">{{ isset($major) ? 'Edit' : 'Tambah' }} Jurusan</h1>
+            <p class="text-gray-500 mt-1">{{ isset($major) ? 'Edit' : 'Tambah' }} jurusan baru ke dalam sistem.</p>
         </div>
 
         <div>
             <div class="rounded-xl border border-default bg-neutral-primary-soft shadow-xs text-card-foreground">
-                <div class="p-6">
+                <form class="p-6"
+                    action="{{ isset($major) ? route('admin.jurusan.update', $major->id) : route('admin.jurusan.store') }}"
+                    method="POST" data-delay-submit>
+                    @csrf
+
+                    @if (isset($major))
+                        @method('PUT')
+                    @endif
+
                     <div class="space-y-2">
                         <label for="background_jurusan" class="block mb-2.5 text-sm font-medium text-heading">Gambar
                             Background</label>
-                        <x-image-upload name="background_jurusan" :value="$jurusan->background_image ?? ''" folder="about" aspect="video" />
+                        <x-image-upload name="image" :value="$major->image ?? ''" folder="jurusan" aspect="video" />
                     </div>
                     <div class="grid sm:grid-cols-2 gap-4">
                         <div class="mb-5">
                             <label class="block mb-2.5 text-sm font-medium text-heading">Nama Jurusan</label>
-                            <input type="text"
+                            <input type="text" name="name" value="{{ old('name', $major->name ?? '') }}"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="Teknik Sepeda Motor" />
+                                placeholder="Teknik Sepeda Motor" required />
                         </div>
                         <div class="mb-5">
                             <label class="block mb-2.5 text-sm font-medium text-heading">Kode Singkat</label>
-                            <input type="text"
+                            <input type="text" name="short_name"
+                                value="{{ old('short_name', $major->short_name ?? '') }}"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="TSM" />
+                                placeholder="TSM" required />
                         </div>
                     </div>
                     <div class="mb-5">
                         <label class="block mb-2.5 text-sm font-medium text-heading">Deskripsi Singkat</label>
-                        <input type="text"
+                        <input type="text" name="description"
+                            value="{{ old('description', $major->description ?? '') }}"
                             class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                            placeholder="Deskripsi singkat jurusan" />
+                            placeholder="Deskripsi singkat jurusan" required/>
                     </div>
                     <div class="mb-5">
                         <label class="block mb-2.5 text-sm font-medium text-heading">Deskripsi Lengkap</label>
-                        <textarea type="text" id="major-description-textarea"
+                        <textarea type="text" id="major-description-textarea" name="full_description"
                             class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                            placeholder="Deskripsi Lengkap Jurusan"></textarea>
+                            placeholder="Deskripsi Lengkap Jurusan">{{ old('full_description', $major->full_description ?? '') }}</textarea>
                     </div>
                     <div x-data="curriculumField()" class="mb-5">
                         <label class="block mb-2.5 text-sm font-medium text-heading">Kurikulum</label>
                         <template x-for="(k, index) in kurikulum" :key="index">
                             <div class="flex gap-2 mb-2">
-                                <input type="text" :name="'kurikulum[' + index + ']'" x-model="k"
+                                <input type="text" :name="'curriculum[' + index + ']'" x-model="kurikulum[index]"
                                     class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                     :placeholder="'Kurikulum ' + (index + 1)">
 
@@ -69,7 +79,7 @@
                         <label class="block mb-2.5 text-sm font-medium text-heading">Prospek Karir</label>
                         <template x-for="(p, index) in prospek" :key="index">
                             <div class="flex gap-2 mb-2">
-                                <input type="text" :name="'prospek[' + index + ']'" x-model="p"
+                                <input type="text" :name="'careers[' + index + ']'" x-model="prospek[index]"
                                     class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                     :placeholder="'Prospek Karir ' + (index + 1)">
                                 <button type="button" @click="removeProspek(index)"
@@ -91,7 +101,7 @@
                         <template x-for="(p, index) in prestasi" :key="index">
                             <div class="flex gap-2 mb-2">
 
-                                <input type="text" :name="'prestasi[' + index + '][name]'" x-model="p.name"
+                                <input type="text" :name="'achievements[' + index + ']'" x-model="prestasi[index]"
                                     :placeholder="'Prestasi ' + (index + 1)"
                                     class="w-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block px-3 py-2.5 shadow-xs placeholder:text-body">
 
@@ -113,15 +123,15 @@
                     <div class="space-y-2">
                         <label for="background_jurusan"
                             class="block mb-2.5 text-sm font-medium text-heading">Galeri</label>
-                        <x-multiple-image-upload name="galeri_jurusan" :value="$jurusan->galeri ?? ''" folder="jurusan"
+                        <x-multiple-image-upload name="gallery" :value="$major->gallery ?? ''" folder="jurusan/gallery"
                             aspect="video" />
                     </div>
 
                     <button type="submit"
                         class="text-white bg-brand box-border border border-transparent inline-flex items-center  hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
                         @svg('lucide-save', 'h-4 w-4 me-1.5')
-                        Simpan Jurusan</button>
-                </div>
+                        {{ isset($major) ? 'Update' : 'Tambah' }} Jurusan</button>
+                </form>
             </div>
         </div>
     </div>
@@ -129,7 +139,7 @@
     <script>
         function prestationField() {
             return {
-                prestasi: @json($jurusan->prestasi ?? ['']),
+                prestasi: @json(old('prestasi', $major->achievements ?? [''])),
 
                 addPrestasi() {
                     this.prestasi.push('');
@@ -143,7 +153,7 @@
 
         function prospectusField() {
             return {
-                prospek: @json($jurusan->prospek ?? ['']),
+                prospek: @json(old('prospek', $major->careers ?? [''])),
 
                 addProspek() {
                     this.prospek.push('');
@@ -157,7 +167,7 @@
 
         function curriculumField() {
             return {
-                kurikulum: @json($jurusan->kurikulum ?? ['']),
+                kurikulum: @json(old('kurikulum', $major->curriculum ?? [''])),
 
                 addKurikulum() {
                     this.kurikulum.push('');

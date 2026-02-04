@@ -10,13 +10,13 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('news_categories', function (Blueprint $table) {
+        Schema::create('school_values', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('about_id')
+            ->constrained(table: 'abouts', indexName: 'school_values_about_id')
+            ->cascadeOnDelete()->onDelete('cascade')->onUpdate('cascade');
             $table->string('name');
-            $table->string('slug')->unique();
-            $table->string('color')->nullable();
-            $table->string('meta_title')->nullable();
-            $table->text('meta_description')->nullable();
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('news_categories');
+        Schema::dropIfExists('school_values');
     }
 };

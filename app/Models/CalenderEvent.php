@@ -16,6 +16,21 @@ class CalenderEvent extends Model
         'start_date',
         'end_date',
         'category',
-        'color',
     ];
+
+    public static function getEvents() {
+        return self::where('start_date', '>=', now())
+            ->orderBy('start_date', 'asc')
+            ->latest('start_date')
+            ->paginate(5);
+    }
+
+    public static function getEventsForDashboard()
+    {
+        return self::select('start_date', 'title', 'category')
+            ->where('start_date', '>=', now())
+            ->orderBy('start_date', 'asc')
+            ->limit(3)
+            ->get();
+    }
 }

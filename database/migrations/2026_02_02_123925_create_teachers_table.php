@@ -12,11 +12,13 @@ return new class extends Migration {
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
-            
+            $table->foreignId('major_id')->nullable()
+            ->constrained(table: 'majors', indexName: 'teachers_major_id')
+            ->nullOnDelete()->onDelete('cascade')->onUpdate('cascade');
+
             $table->string('name');
             $table->string('nip');
             $table->string('position');
-            $table->string('major');
             $table->string('subject')->nullable();
             $table->string('photo')->nullable();
 

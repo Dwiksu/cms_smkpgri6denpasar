@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Major;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        $teachers = Teacher::latest()->get();
+        $teachers = Teacher::getTeacher();
         return view('admin.teachers.profil-guru', compact('teachers'));
     }
 
@@ -22,7 +23,8 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        return view('admin.teachers.form-profil-guru');
+        $majors = Major::getMajorForTeacherForm();
+        return view('admin.teachers.form-profil-guru', compact('majors'));
     }
 
     /**
@@ -35,7 +37,7 @@ class TeacherController extends Controller
             'nip' => 'required|string|max:18',
             'position' => 'required|string|max:255',
             'subject' => 'nullable|string|max:255',
-            'major' => 'required|string|max:255',
+            'major_id' => 'nullable|exists:majors,id',
             'photo' => 'required|string',
             'email' => 'nullable|email|max:255',
             'phone' => 'nullable|string|max:18',
@@ -50,7 +52,7 @@ class TeacherController extends Controller
         }
 
 
-        return back()->with('success', 'Guru berhasil ditambahkan');
+        return redirect()->route('admin.profil.index')->with('success', 'Guru berhasil ditambahkan');
     }
 
     /**
@@ -64,9 +66,10 @@ class TeacherController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Teacher $teacher)
     {
-        //
+        $majors = Major::getMajorForTeacherForm();
+        return view('admin.teachers.form-profil-guru', compact('teacher', 'majors')); 
     }
 
     /**
@@ -79,7 +82,7 @@ class TeacherController extends Controller
             'nip' => 'required|string|max:18',
             'position' => 'required|string|max:255',
             'subject' => 'nullable|string|max:255',
-            'major' => 'required|string|max:255',
+            'major_id' => 'nullable|exists:majors,id',
             'photo' => 'required|string',
             'email' => 'nullable|email|max:255',
             'phone' => 'nullable|string|max:18',
@@ -88,7 +91,9 @@ class TeacherController extends Controller
 
         $teacher->update($data);
 
-        return back()->with('success', 'Guru berhasil diubah');
+        return redirect()
+        ->route('admin.profil.index')
+        ->with('success', 'Guru berhasil diubah');
     }
 
     /**

@@ -13,7 +13,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = News::with('category')->latest()->get();
+        $news = News::getNews();
         return view('admin.news.berita', compact('news'));
     }
 
@@ -34,7 +34,7 @@ class NewsController extends Controller
             'title' => 'required|string|max:255',
             'excerpt' => 'required|string|max:255',
             'content' => 'required|string|max:255',
-            'category_id' => 'required|exists:news_categories,id',
+            'category' => 'required|string|max:255',
             'image' => 'required|string',
             'published_at' => 'required|date',
             'meta_title' => 'nullable|string|max:255',
@@ -47,8 +47,8 @@ class NewsController extends Controller
         News::create($data);
 
         return redirect()
-            ->route('berita.admin')
-            ->with('success', 'Hero berhasil ditambahkan');
+            ->route('admin.berita.index')
+            ->with('success', 'Berita berhasil ditambahkan');
     }
 
     /**
@@ -62,9 +62,9 @@ class NewsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(News $news)
     {
-        //
+        return view('admin.news.form-berita', compact('news'));
     }
 
     /**
@@ -76,9 +76,8 @@ class NewsController extends Controller
             'title' => 'required|string|max:255',
             'excerpt' => 'required|string|max:255',
             'content' => 'required|string|max:255',
-            'category_id' => 'required|exists:news_categories,id',
+            'category' => 'required|string|max:255',
             'image' => 'required|string',
-            'author' => 'required|string|max:100',
             'published_at' => 'required|date',
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:255',
@@ -89,8 +88,8 @@ class NewsController extends Controller
         $news->update($data);
 
         return redirect()
-            ->route('berita.admin')
-            ->with('success', 'Hero berhasil ditambahkan');
+            ->route('admin.berita.index')
+            ->with('success', 'Berita berhasil diubah');
     }
 
     /**
@@ -101,7 +100,7 @@ class NewsController extends Controller
         $news->delete();
 
         return redirect()
-            ->route('berita.admin')
-            ->with('success', 'Hero berhasil dihapus');
+            ->route('admin.berita.index')
+            ->with('success', 'Berita berhasil dihapus');
     }
 }

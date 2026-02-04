@@ -6,21 +6,30 @@
     <div class="space-y-6">
 
         <div>
-            <h1 class="text-3xl font-bold">Tambah Berita</h1>
-            <p class="text-gray-500">Tambah berita dan pengumuman.</p>
+            <h1 class="text-3xl font-bold">{{ isset($news) ? 'Edit' : 'Tambah' }} Berita</h1>
+            <p class="text-gray-500 mt-1">{{ isset($news) ? 'Update' : 'Tambah' }} berita dan pengumuman.</p>
         </div>
 
         <div>
             <div class="rounded-xl border border-default bg-neutral-primary-soft shadow-xs  text-card-foreground">
-                <div class="p-6">
+                <form class="p-6"
+                    action="{{ isset($news) ? route('admin.berita.update', $news->id) : route('admin.berita.store') }}"
+                    method="POST" data-delay-submit>
+                    @csrf
+
+                    @if (isset($news))
+                        @method('PUT')
+                    @endif
+
                     <div class="space-y-2">
                         <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Gambar</label>
-                        <x-image-upload name="hero_background" :value="$hero->background_image ?? ''" folder="hero" aspect="video" />
+                        <x-image-upload name="image" :value="$news->image ?? ''" folder="hero" aspect="video" />
                     </div>
                     <div class="mb-5">
                         <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Judul <span
                                 class="text-red-500">*</span></label>
-                        <input id="hero-title" type="text"
+                        <input id="hero-title" type="text" name="title"
+                            value="{{ old('title', $news->title ?? '') }}"
                             class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                             placeholder="Judul berita" required />
                     </div>
@@ -28,11 +37,27 @@
                         <div class="mb-5 col-span-2">
                             <label class="block mb-2.5 text-sm font-medium text-heading">Kategori <span
                                     class="text-red-500">*</span></label>
-                            <select name="" id=""
+                            <select name="category" id="" value="{{ old('category', $news->category ?? '') }}"
                                 class="block w-full px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body">
-                                <option value="">Berita</option>
-                                <option value="">Pengumuman</option>
-                                <option value="">Prestasi</option>
+                                <option value="berita"
+                                    {{ old('category', $news->category ?? '') == 'berita' ? 'selected' : '' }}>
+                                    Berita
+                                </option>
+
+                                <option value="pengumuman"
+                                    {{ old('category', $news->category ?? '') == 'pengumuman' ? 'selected' : '' }}>
+                                    Pengumuman
+                                </option>
+
+                                <option value="prestasi"
+                                    {{ old('category', $news->category ?? '') == 'prestasi' ? 'selected' : '' }}>
+                                    Prestasi
+                                </option>
+
+                                <option value="kegiatan"
+                                    {{ old('category', $news->category ?? '') == 'kegiatan' ? 'selected' : '' }}>
+                                    Kegiatan
+                                </option>
                             </select>
                         </div>
                         <div class="mb-5">
@@ -42,8 +67,13 @@
                                 <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                                     @svg('lucide-calendar', 'w-4 h-4')
                                 </div>
-                                <input type="date" value="{{ now()->format('Y-m-d') }}"
-                                    class="block w-full ps-9 pe-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand px-3 py-2.5 shadow-xs placeholder:text-body"
+                                <input type="date"
+                                    value="{{ old(
+                                        'published_at',
+                                        isset($news) ? \Carbon\Carbon::parse($news->published_at)->format('Y-m-d') : now()->format('Y-m-d'),
+                                    ) }}"
+                                    name="published_at"
+                                    class="block w-full ps-9 pe-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand px-3 shadow-xs placeholder:text-body"
                                     placeholder="Select date" readonly>
                             </div>
 
@@ -52,21 +82,22 @@
                     <div class="mb-5">
                         <label class="block mb-2.5 text-sm font-medium text-heading">Ringkasan <span
                                 class="text-red-500">*</span></label>
-                        <textarea type="text"
+                        <textarea type="text" name="excerpt"
                             class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                            placeholder="Ringkasan singkat berita" rows="3"></textarea>
+                            placeholder="Ringkasan singkat berita" rows="3">{{ old('excerpt', $news->excerpt ?? '') }}</textarea>
                     </div>
                     <div class="mb-5">
                         <label class="block mb-2.5 text-sm font-medium text-heading">Konten</label>
-                        <textarea type="text" id="konten-berita-textarea"
+                        <textarea type="text" id="konten-berita-textarea" name="content"
                             class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                            placeholder="Konten berita" rows="5"></textarea>
+                            placeholder="Konten berita" rows="5">{{ old('content', $news->content ?? '') }}</textarea>
                     </div>
 
-                    <button type="submit"                         class="text-white bg-brand box-border border border-transparent inline-flex items-center  hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+                    <button type="submit"
+                        class="text-white bg-brand box-border border border-transparent inline-flex items-center  hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
                         @svg('lucide-save', 'h-4 w-4 me-1.5')
-                        Simpan Berita</button>
-                </div>
+                        {{ isset($news) ? 'Update' : 'Tambah' }} Berita</button>
+                </form>
             </div>
         </div>
 

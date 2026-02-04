@@ -12,13 +12,13 @@ return new class extends Migration {
     {
         Schema::create('news', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained('news_categories');
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('excerpt');
             $table->longText('content');
             $table->string('image')->nullable();
             $table->string('author');
+            $table->enum('category', ['prestasi', 'berita', 'pengumuman', 'kegiatan']);
             $table->string('meta_title')->nullable();
             $table->text('meta_description')->nullable();
             $table->timestamp('published_at')->nullable();
