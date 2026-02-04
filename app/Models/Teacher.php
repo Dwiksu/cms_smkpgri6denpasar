@@ -31,9 +31,5 @@ class Teacher extends Model
     public static function getTeacher() {
         return self::with('major')->latest()->paginate(10);
     }
-    public static function getTeacher2() {
-        return self::latest()->paginate(10);
-    }
-
     
 }

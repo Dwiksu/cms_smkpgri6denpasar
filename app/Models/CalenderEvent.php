@@ -16,7 +16,6 @@ class CalenderEvent extends Model
         'start_date',
         'end_date',
         'category',
-        'color',
     ];
 
     public static function getEvents() {

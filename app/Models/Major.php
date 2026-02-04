@@ -39,4 +39,8 @@ class Major extends Model
     public static function getMajor() {
         return self::latest()->paginate(10);
     }
+
+    public static function getMajorForTeacherForm() {
+        return self::select('id', 'name')->latest()->get();
+    }
 }
