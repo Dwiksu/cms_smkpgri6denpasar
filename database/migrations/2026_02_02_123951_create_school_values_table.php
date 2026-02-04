@@ -15,8 +15,8 @@ return new class extends Migration {
             $table->foreignId('about_id')
             ->constrained(table: 'abouts', indexName: 'school_values_about_id')
             ->cascadeOnDelete()->onDelete('cascade')->onUpdate('cascade');
-            $table->string('name');
-            $table->text('description');
+            $table->string('name')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
