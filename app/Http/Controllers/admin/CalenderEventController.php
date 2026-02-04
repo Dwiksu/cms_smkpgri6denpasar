@@ -36,7 +36,6 @@ class CalenderEventController extends Controller
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
             'category' => 'required|string|max:255',
-            'color' => 'required|string|max:10',
         ]);
 
         CalenderEvent::create($data);
@@ -57,9 +56,9 @@ class CalenderEventController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(CalenderEvent $event)
     {
-        //
+        return view('admin.calendars.form-kalender', compact('event'));
     }
 
     /**
@@ -73,12 +72,13 @@ class CalenderEventController extends Controller
             'start_date' => 'required|date',
             'end_date' => 'required|date',
             'category' => 'required|string|max:255',
-            'color' => 'required|string|max:255',
         ]);
 
         $event->update($data);
 
-        return back()->with('success', 'Event berhasil diubah');
+        return redirect()
+        ->route('admin.kalender.index')
+        ->with('success', 'Event berhasil diubah');
     }
 
     /**
