@@ -105,9 +105,15 @@
                     @forelse ($events as $event)
                         <div class="flex items-center gap-3 border-b border-gray last:border-0 pb-2">
                             <div
-                                class="flex h-10 w-10 items-center justify-center rounded bg-muted text-sm font-medium">
-                                {{ \Carbon\Carbon::parse($event->start_date)->day }}
+                                class="flex h-10 w-10 flex-col items-center justify-center rounded bg-muted text-sm font-medium leading-none">
+                                <span class="text-base">
+                                    {{ \Carbon\Carbon::parse($event->start_date)->day }}
+                                </span>
+                                <span class="text-[10px] uppercase text-gray-500">
+                                    {{ \Carbon\Carbon::parse($event->start_date)->translatedFormat('M') }}
+                                </span>
                             </div>
+
 
                             <div class="flex-1 min-w-0">
                                 <p class="font-medium truncate">{{ $event->title }}</p>
