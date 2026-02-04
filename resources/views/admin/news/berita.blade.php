@@ -28,58 +28,81 @@
             </div>
         </div>
 
-        {{--  News List  --}}
-        <div class="grid gap-4">
-            @if (count($news) > 0)
-                @foreach ($news as $item)
-                    <div class="rounded-lg border border-default bg-white shadow-sm">
-                        <div class="p-4">
-                            <div class="flex gap-4">
-                                <img src={{ $item->image }} alt={{ $item->title }}
-                                    class="w-24 h-24 object-cover rounded shrink-0" />
-                                <div class="flex-1 min-w-0">
-                                    <div class="flex items-start justify-between gap-2">
-                                        <div>
-                                            <span
-                                                class="text-xs font-bold px-2 py-1 rounded-full {{ NewsCategoryColor($item->category) }}">{{ ucfirst($item->category) }}</span>
-                                            <h3 class="text-xl font-semibold mt-1 line-clamp-1">{{ $item->title }}</h3>
-                                            <p class="text-sm text-gray-500 line-clamp-2">{{ $item->excerpt }}
-                                            </p>
-                                            <p class="text-xs text-gray-500 mt-2">
-                                                {{ \Carbon\Carbon::parse($item->published_at)->translatedFormat('l, d F Y') }}
-                                            </p>
-                                        </div>
-                                        <div class="flex gap-2 shrink-0">
-                                            <a type="button" href="{{ route('admin.berita.edit', $item) }}"
-                                                class="bg-amber-400 box-border border border-amber-200 inline-flex items-center  hover:bg-amber-300 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
-                                                @svg('lucide-pencil', 'h-4 w-4')</a>
-                                            <form action="{{ route('admin.berita.destroy', $item) }}" method="POST" class="delete-form" data-confirm="Hapus berita {{ $item->title }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                    class="text-white bg-red-500 box-border border border-fg-disabled inline-flex items-center  hover:bg-red-400 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
-                                                    @svg('lucide-trash-2', 'h-4 w-4')</button>
-                                            </form>
+        {{-- News Table --}} 
+        <div class="overflow-x-auto rounded-lg border border-default bg-white shadow-sm">
+            <table class="w-full text-sm text-left">
+                <thead class="bg-neutral-secondary-medium text-heading">
+                    <tr>
+                        <th class="px-4 py-3 w-20">Gambar</th>
+                        <th class="px-4 py-3">Judul</th>
+                        <th class="px-4 py-3">Kategori</th>
+                        <th class="px-4 py-3">Tanggal</th>
+                        <th class="px-4 py-3 text-center w-28">Aksi</th>
+                    </tr>
+                </thead>
 
-                                        </div>
-                                    </div>
+                <tbody class="divide-y divide-default">
+                    @forelse ($news as $item)
+                        <tr class="hover:bg-gray-50">
+                            {{-- Image --}}
+                            <td class="px-4 py-3">
+                                <img src="{{ $item->image }}" alt="{{ $item->title }}"
+                                    class="w-16 h-16 object-cover rounded">
+                            </td>
+
+                            {{-- Title & Excerpt --}}
+                            <td class="px-4 py-3">
+                                <p class="font-semibold line-clamp-1">
+                                    {{ $item->title }}
+                                </p>
+                                <p class="text-xs text-gray-500 line-clamp-2">
+                                    {{ $item->excerpt }}
+                                </p>
+                            </td>
+
+                            {{-- Category --}}
+                            <td class="px-4 py-3">
+                                <span
+                                    class="text-xs font-semibold px-2 py-1 rounded-full {{ NewsCategoryColor($item->category) }}">
+                                    {{ ucfirst($item->category) }}
+                                </span>
+                            </td>
+
+                            {{-- Published Date --}}
+                            <td class="px-4 py-3 text-gray-500">
+                                {{ \Carbon\Carbon::parse($item->published_at)->translatedFormat('d F Y') }}
+                            </td>
+
+                            {{-- Action --}}
+                            <td class="px-4 py-3 text-center">
+                                <div class="flex justify-center gap-2">
+                                    <a href="{{ route('admin.berita.edit', $item) }}"
+                                        class="bg-amber-400 hover:bg-amber-300 p-2 rounded shadow-sm">
+                                        @svg('lucide-pencil', 'h-4 w-4')
+                                    </a>
+
+                                    <form action="{{ route('admin.berita.destroy', $item) }}" method="POST"
+                                        class="delete-form" data-confirm="Hapus berita {{ $item->title }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="bg-red-500 hover:bg-red-400 text-white p-2 rounded shadow-sm">
+                                            @svg('lucide-trash-2', 'h-4 w-4')
+                                        </button>
+                                    </form>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            @else
-                <div class="rounded-lg border border-default bg-white shadow-sm">
-                    <div class="p-4 flex items-center gap-4">
-                        <div class="w-14 text-center shrink-0">
-                            <p class="text-2xl font-bold text-blue-600">-</p>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <h3 class="font-semibold mt-1">Tidak ada Berita.</h3>
-                        </div>
-                    </div>
-                </div>
-            @endif
-        </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="5" class="px-4 py-6 text-center text-gray-500">
+                                Tidak ada berita.
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+    </div>
+
     </div>
 </x-app-layout>

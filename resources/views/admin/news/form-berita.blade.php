@@ -21,17 +21,23 @@
                         @method('PUT')
                     @endif
 
-                    <div class="space-y-2">
+                    <div class="space-y-2 mb-5">
                         <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Gambar</label>
                         <x-image-upload name="image" :value="$news->image ?? ''" folder="hero" aspect="video" />
+                        @error('image')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="mb-5">
                         <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Judul <span
                                 class="text-red-500">*</span></label>
-                        <input id="hero-title" type="text" name="title"
+                        <input id="hero-title" type="text" name="title" data-error-input
                             value="{{ old('title', $news->title ?? '') }}"
-                            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                            placeholder="Judul berita" required />
+                            class="bg-neutral-secondary-medium border {{ errorBorder('title') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                            placeholder="Judul berita" />
+                        @error('title')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="grid sm:grid-cols-3 gap-4">
                         <div class="mb-5 col-span-2">
@@ -82,15 +88,21 @@
                     <div class="mb-5">
                         <label class="block mb-2.5 text-sm font-medium text-heading">Ringkasan <span
                                 class="text-red-500">*</span></label>
-                        <textarea type="text" name="excerpt"
-                            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                        <textarea type="text" name="excerpt" data-error-input=""
+                            class="bg-neutral-secondary-medium border {{ errorBorder('excerpt') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                             placeholder="Ringkasan singkat berita" rows="3">{{ old('excerpt', $news->excerpt ?? '') }}</textarea>
+                        @error('excerpt')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="mb-5">
                         <label class="block mb-2.5 text-sm font-medium text-heading">Konten</label>
                         <textarea type="text" id="konten-berita-textarea" name="content"
-                            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                            class="bg-neutral-secondary-medium border {{ errorBorder('content') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                             placeholder="Konten berita" rows="5">{{ old('content', $news->content ?? '') }}</textarea>
+                        @error('content')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <button type="submit"
@@ -107,9 +119,21 @@
     <script>
         ClassicEditor
             .create(document.querySelector('#konten-berita-textarea'))
-            .catch(error => {
-                console.error(error);
-            });
+            .then(editor => {
+                editor.model.document.on('change:data', () => {
+                    const textarea = document.querySelector('#konten-berita-textarea');
+
+                    textarea.classList.remove(
+                        "bg-red-50",
+                        "border-red-100",
+                        "focus:border-red-300",
+                        "focus:ring-red-300"
+                    );
+
+                    textarea.classList.add("border-default-medium");
+                });
+            })
+            .catch(console.error);
     </script>
 
 </x-app-layout>

@@ -21,33 +21,42 @@
                         @method('PUT')
                     @endif
 
-                    <div class="space-y-2">
+                    <div class="space-y-2 mb-5">
                         <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Foto</label>
                         <x-image-upload name="photo" :value="$teacher->photo ?? ''" folder="guru" aspect="video" />
+                        @error('photo')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="mb-5">
                         <label for="teacher-name" class="block mb-2.5 text-sm font-medium text-heading">Nama <span
                                 class="text-red-500">*</span></label>
-                        <input id="teacher-name" name="name" type="text"
+                        <input id="teacher-name" name="name" type="text" data-error-input
                             value="{{ old('name', $teacher->name ?? '') }}"
-                            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                            required />
+                            class="bg-neutral-secondary-medium border {{ errorBorder('name') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" />
+                        @error('name')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="grid sm:grid-cols-2 gap-4">
                         <div class="mb-5">
                             <label for="teacher-nip" class="block mb-2.5 text-sm font-medium text-heading">NIP</label>
-                            <input id="teacher-nip" name="nip" type="text"
+                            <input id="teacher-nip" name="nip" type="text" data-error-input
                                 value="{{ old('nip', $teacher->nip ?? '') }}"
-                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" 
-                                required />
+                                class="bg-neutral-secondary-medium border {{ errorBorder('nip') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" />
+                            @error('nip')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="mb-5">
                             <label for="teacher-jabatan"
                                 class="block mb-2.5 text-sm font-medium text-heading">Jabatan</label>
-                            <input id="teacher-jabatan" name="position" type="text"
+                            <input id="teacher-jabatan" name="position" type="text" data-error-input
                                 value="{{ old('position', $teacher->position ?? '') }}"
-                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" 
-                                required/>
+                                class="bg-neutral-secondary-medium border {{ errorBorder('position') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" />
+                            @error('position')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
                     <div class="grid sm:grid-cols-2 gap-4">
@@ -80,22 +89,30 @@
                         <div class="mb-5">
                             <label for="teacher-email"
                                 class="block mb-2.5 text-sm font-medium text-heading">Email</label>
-                            <input id="teacher-email" name="email" type="email" value="{{ old('email', $teacher->email ?? '') }}"
+                            <input id="teacher-email" name="email" type="email"
+                                value="{{ old('email', $teacher->email ?? '') }}"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" />
+                            @error('email')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="mb-5">
                             <label for="teacher-telepon"
                                 class="block mb-2.5 text-sm font-medium text-heading">Telepon</label>
-                            <input id="teacher-telepon" name="phone" type="text" value="{{ old('phone', $teacher->phone ?? '') }}"
+                            <input id="teacher-telepon" name="phone" type="text"
+                                value="{{ old('phone', $teacher->phone ?? '') }}"
                                 class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" />
                         </div>
                     </div>
                     <div class="mb-5">
                         <label for="teacher-pendidikan" class="block mb-2.5 text-sm font-medium text-heading">Pendidikan
                             <span class="text-red-500">*</span></label>
-                        <input id="teacher-pendidikan" name="education" type="text" value="{{ old('education', $teacher->education ?? '') }}"
-                            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" 
-                            required/>
+                        <input id="teacher-pendidikan" name="education" type="text" data-error-input=""
+                            value="{{ old('education', $teacher->education ?? '') }}"
+                            class="bg-neutral-secondary-medium border {{ errorBorder('education') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" />
+                        @error('education')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <button type="submit"

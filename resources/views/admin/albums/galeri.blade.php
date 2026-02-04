@@ -104,7 +104,7 @@
                         x-text="album.isEdit ? 'Ubah informasi album di bawah ini.' : 'Isi formulir untuk membuat album baru.' ">
                     </p>
                 </div>
-                <form class="p-6 pt-0" :action="album.formAction" method="POST">
+                <form class="p-6 pt-0" :action="album.formAction" method="POST" data-delay-submit>
                     @csrf
                     <template x-if="album.isEdit">
                         <input type="hidden" name="_method" value="PUT">
@@ -115,20 +115,29 @@
                                 class="text-red-500">*</span></label>
                         <x-image-upload name="cover_image" folder="album/cover" aspect="video"
                             x-model="album.form.cover_image" />
+                        @error('cover_image')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="mb-5">
                         <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Nama Album <span
                                 class="text-red-500">*</span></label>
-                        <input id="hero-title" type="text" name="name"
-                            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                            placeholder="Nama Album" :value="album.form.name" required />
+                        <input id="hero-title" type="text" name="name" data-error-input
+                            class="bg-neutral-secondary-medium border {{ errorBorder('name') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                            placeholder="Nama Album" :value="album.form.name" />
+                        @error('name')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mb-5">
                         <label class="block mb-2.5 text-sm font-medium text-heading">Deskripsi</label>
-                        <textarea type="text" name="description"
-                            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                        <textarea type="text" name="description" data-error-input
+                            class="bg-neutral-secondary-medium border {{ errorBorder('description') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                             placeholder="Deskripsi album" rows="3" :value="album.form.description"></textarea>
+                        @error('description')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="flex justify-end gap-2">
@@ -154,13 +163,16 @@
                         Upload foto-foto untuk ditambahkan ke album "<span x-text="photo.album_name"></span>".
                     </p>
                 </div>
-                <form class="p-6 pt-0" :action="photo.formAction" method="POST">
+                <form class="p-6 pt-0" :action="photo.formAction" method="POST" data-delay-submit>
                     @csrf
                     <input type="hidden" name="gallery_album_id" :value="photo.form.gallery_album_id">
                     <div class="space-y-2">
                         <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Foto
                             <span class="text-red-500">*</span></label>
                         <x-multiple-image-upload name="url" folder="album/photo" aspect="video" />
+                        @error('url')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="flex justify-end gap-2">

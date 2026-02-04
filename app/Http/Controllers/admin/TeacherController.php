@@ -42,15 +42,16 @@ class TeacherController extends Controller
             'email' => 'nullable|email|max:255',
             'phone' => 'nullable|string|max:18',
             'education' => 'required|string|max:100',
+        ], [
+            'name.required' => 'Nama guru harus diisi',
+            'nip.required' => 'NIP guru harus diisi',
+            'position.required' => 'Posisi guru harus diisi',
+            'photo.required' => 'Foto guru harus diisi',
+            'education.required' => 'Pendidikan guru harus diisi',
+            'email.email' => 'Format email tidak valid',
         ]);
 
-        try {
-            Teacher::create($data);
-        } catch (\Throwable $e) {
-            // gagal
-            dd($e->getMessage());
-        }
-
+        Teacher::create($data);
 
         return redirect()->route('admin.profil.index')->with('success', 'Guru berhasil ditambahkan');
     }
@@ -69,7 +70,7 @@ class TeacherController extends Controller
     public function edit(Teacher $teacher)
     {
         $majors = Major::getMajorForTeacherForm();
-        return view('admin.teachers.form-profil-guru', compact('teacher', 'majors')); 
+        return view('admin.teachers.form-profil-guru', compact('teacher', 'majors'));
     }
 
     /**
@@ -87,13 +88,19 @@ class TeacherController extends Controller
             'email' => 'nullable|email|max:255',
             'phone' => 'nullable|string|max:18',
             'education' => 'required|string|max:100',
+        ], [
+            'name.required' => 'Nama guru harus diisi',
+            'nip.required' => 'NIP guru harus diisi',
+            'position.required' => 'Posisi guru harus diisi',
+            'photo.required' => 'Foto guru harus diisi',
+            'education.required' => 'Pendidikan guru harus diisi',
         ]);
 
         $teacher->update($data);
 
         return redirect()
-        ->route('admin.profil.index')
-        ->with('success', 'Guru berhasil diubah');
+            ->route('admin.profil.index')
+            ->with('success', 'Guru berhasil diubah');
     }
 
     /**

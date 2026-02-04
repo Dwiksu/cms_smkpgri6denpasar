@@ -35,6 +35,9 @@ class PhotoController extends Controller
             'url' => 'required|array',
             'url.*' => 'required|string|max:255',
             'caption' => 'nullable|string|max:255',
+        ], [
+            'url.required' => 'URL foto harus diisi',
+            'url.*.required' => 'URL foto harus diisi',
         ]);
 
         $photos = collect($data['url'])->map(fn($url) => [

@@ -27,51 +27,78 @@
                     placeholder="Cari jurusan..." required />
             </div>
         </div>
-        {{--  Majors List  --}}
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            @if (count($majors) > 0)
-                @foreach ($majors as $item)
-                    <div class="rounded-lg border border-default bg-white shadow-sm overflow-hidden">
-                        <img src="{{ $item->image }}" alt="{{ $item->name }}" class="w-full h-32 object-cover" />
-                        <div class="p-4">
-                            <div class="flex items-start justify-between gap-2">
-                                <div>
-                                    <Badge variant="secondary" class="mb-2">{{ $item->short_name }}</Badge>
-                                    <h3 class="font-semibold">{{ $item->name }}</h3>
-                                    <p class="text-sm text-gray-500 line-clamp-2 mt-1">{{ $item->description }}</p>
-                                </div>
-                            </div>
-                            <div class="flex gap-2 mt-4">
-                                <a href="{{ route('admin.jurusan.edit', $item) }}" type="button" size="sm"
-                                    class="justify-center flex-1 bg-amber-400 box-border border border-gray-200 inline-flex items-center  hover:bg-amber-300 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
-                                    @svg('lucide-pencil', 'w-4 h-4 mr-1')
-                                    Edit
-                                </a>
 
-                                <form action="{{ route('admin.jurusan.destroy', $item) }}" method="post"
-                                    class="delete-form" data-confirm="Hapus jurusan {{ $item->name }}">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                        class="text-white bg-red-500 box-border border border-fg-disabled inline-flex items-center  hover:bg-red-400 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
-                                        @svg('lucide-trash-2', 'h-4 w-4')</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            @else
-                <div class="rounded-lg border border-default bg-white shadow-sm">
-                    <div class="p-4 flex items-center gap-4">
-                        <div class="w-14 text-center shrink-0">
-                            <p class="text-2xl font-bold text-blue-600">-</p>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <h3 class="font-semibold mt-1">Tidak ada Jurusan.</h3>
-                        </div>
-                    </div>
-                </div>
-            @endif
+        {{--  Majors List  --}}
+        <div class="overflow-x-auto rounded-lg border border-default bg-white shadow-sm">
+            <table class="min-w-full text-sm">
+                <thead class="bg-neutral-secondary-soft border-b border-default">
+                    <tr class="text-left text-heading">
+                        <th class="px-4 py-3">Gambar</th>
+                        <th class="px-4 py-3">Singkatan</th>
+                        <th class="px-4 py-3">Nama Jurusan</th>
+                        <th class="px-4 py-3">Deskripsi</th>
+                        <th class="px-4 py-3 text-center">Aksi</th>
+                    </tr>
+                </thead>
+
+                <tbody class="divide-y divide-default">
+                    @forelse ($majors as $item)
+                        <tr class="hover:bg-neutral-secondary-soft/50 transition">
+                            {{-- Image --}}
+                            <td class="px-4 py-3">
+                                <img src="{{ $item->image }}" alt="{{ $item->name }}"
+                                    class="w-16 h-12 object-cover rounded-md border">
+                            </td>
+
+                            {{-- Short Name --}}
+                            <td class="px-4 py-3">
+                                <span
+                                    class="inline-flex items-center rounded-md bg-blue-100 text-blue-700 px-2 py-1 text-xs font-medium uppercase">
+                                    {{ $item->short_name }}
+                                </span>
+                            </td>
+
+                            {{-- Name --}}
+                            <td class="px-4 py-3 font-semibold capitalize">
+                                {{ $item->name }}
+                            </td>
+
+                            {{-- Description --}}
+                            <td class="px-4 py-3 text-gray-500 max-w-sm">
+                                <p class="line-clamp-2">
+                                    {{ $item->description }}
+                                </p>
+                            </td>
+
+                            {{-- Actions --}}
+                            <td class="px-4 py-3">
+                                <div class="flex justify-center gap-2">
+                                    <a href="{{ route('admin.jurusan.edit', $item) }}"
+                                        class="bg-amber-400 hover:bg-amber-300 text-white p-2 rounded shadow-xs">
+                                        @svg('lucide-pencil', 'w-4 h-4')
+                                    </a>
+
+                                    <form action="{{ route('admin.jurusan.destroy', $item) }}" method="POST"
+                                        class="delete-form" data-confirm="Hapus jurusan {{ $item->name }}?">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="bg-red-500 hover:bg-red-400 text-white p-2 rounded shadow-xs">
+                                            @svg('lucide-trash-2', 'w-4 h-4')
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="5" class="px-4 py-6 text-center text-gray-500">
+                                Tidak ada jurusan.
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
     </div>
 </x-app-layout>

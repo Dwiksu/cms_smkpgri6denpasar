@@ -12,7 +12,7 @@ class MajorController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
+    {  
         $majors = Major::getMajor();
         return view('admin.majors.jurusan', compact('majors'));
     }
@@ -86,6 +86,12 @@ class MajorController extends Controller
             'curriculum' => 'nullable|array',
             'careers' => 'nullable|array',
             'achievements' => 'nullable|array',
+        ], [
+            'name.required' => 'Nama jurusan harus diisi',
+            'description.required' => 'Deskripsi jurusan harus diisi',
+            'short_name.required' => 'Singkatan jurusan harus diisi',
+            'full_description.required' => 'Deskripsi lengkap jurusan harus diisi',
+            'image.required' => 'Gambar jurusan harus diisi',
         ]);
 
         $data['slug'] = str()->slug($data['name']);
