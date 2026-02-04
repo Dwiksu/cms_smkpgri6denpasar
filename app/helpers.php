@@ -16,3 +16,14 @@ function isActiveSidebar($path) {
             default      => 'bg-gray-500 text-white',
         };
     }
+    
+ function CalendarCategoryColor(string $category): string
+    {
+        return match ($category) {
+            'akademik'   => 'bg-brand text-white',
+            'kegiatan'   => 'bg-green-500 text-white',
+            'ujian' => 'bg-red-500 text-white',
+            'libur' => 'bg-yellow-500 text-white',
+            default      => 'bg-gray-500 text-white',
+        };
+    }
