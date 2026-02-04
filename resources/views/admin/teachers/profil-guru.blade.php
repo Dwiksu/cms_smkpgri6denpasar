@@ -28,43 +28,83 @@
         </div>
 
         {{-- Teacher List --}}
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            @forelse ($teachers as $item)
-                <div class="rounded-lg border border-default bg-white shadow-sm">
-                    <div class="p-4 text-center">
-                        <img src="{{ $item->photo }}" alt="{{ $item->name }}"
-                            class="w-20 h-20 rounded-full mx-auto mb-3 object-cover" />
-                        <h3 class="font-semibold">{{ $item->name }}</h3>
-                        <p class="text-sm text-blue-600">{{ $item->position }}</p>
-                        <p class="text-sm text-gray-500">{{ $item->subject }}</p>
-                        <p class="text-sm text-purple-500">{{ $item->major->name ?? 'Umum' }}</p>
-                        <div class="flex gap-2 mt-4 justify-center">
-                            <a type="button" href="{{ route('admin.profil.edit', $item) }}"
-                                class="bg-amber-400 box-border border border-amber-200 inline-flex items-center  hover:bg-amber-300 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
-                                @svg('lucide-pencil', 'h-4 w-4')</a>
-                            <form action="{{ route('admin.profil.destroy', $item) }}" method="POST" class="delete-form"
-                                data-confirm="Hapus guru {{ $item->name }}">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                    class="text-white bg-red-500 box-border border border-fg-disabled inline-flex items-center  hover:bg-red-400 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
-                                    @svg('lucide-trash-2', 'h-4 w-4')</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            @empty
-                <div class="rounded-lg border border-default bg-white shadow-sm">
-                    <div class="p-4 flex items-center gap-4">
-                        <div class="w-14 text-center shrink-0">
-                            <p class="text-2xl font-bold text-blue-600">-</p>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <h3 class="font-semibold mt-1">Tidak ada Guru.</h3>
-                        </div>
-                    </div>
-                </div>
-            @endforelse
+        <div class="overflow-x-auto rounded-xl border border-default bg-white shadow-xs">
+            <table class="w-full text-sm text-left text-heading">
+                <thead class="bg-neutral-primary-soft text-xs uppercase text-gray-600">
+                    <tr>
+                        <th class="px-4 py-3">Foto</th>
+                        <th class="px-4 py-3">Nama Guru</th>
+                        <th class="px-4 py-3">Jabatan</th>
+                        <th class="px-4 py-3">Mata Pelajaran</th>
+                        <th class="px-4 py-3">Pendidikan</th>
+                        <th class="px-4 py-3">Jurusan</th>
+                        <th class="px-4 py-3 text-center">Aksi</th>
+                    </tr>
+                </thead>
+
+                <tbody class="divide-y divide-default">
+                    @forelse ($teachers as $item)
+                        <tr class="hover:bg-neutral-secondary-soft transition">
+                            {{-- Foto --}}
+                            <td class="px-4 py-3">
+                                <img src="{{ $item->photo }}" alt="{{ $item->name }}"
+                                    class="w-10 h-10 rounded-full object-cover border" />
+                            </td>
+
+                            {{-- Nama --}}
+                            <td class="px-4 py-3 font-semibold capitalize">
+                                {{ $item->name }}
+                            </td>
+
+                            {{-- Jabatan --}}
+                            <td class="px-4 py-3 text-gray-600 capitalize">
+                                {{ $item->position }}
+                            </td>
+
+                            {{-- Subject --}}
+                            <td class="px-4 py-3 text-blue-600 capitalize">
+                                {{ $item->subject }}
+                            </td>
+
+                            {{-- Pendidikan --}}
+                            <td class="px-4 py-3 text-green-600 capitalize">
+                                {{ $item->education ?? '—' }}
+                            </td>
+
+                            {{-- Jurusan --}}
+                            <td class="px-4 py-3 text-purple-600 capitalize">
+                                {{ $item->major->name ?? 'Umum' }}
+                            </td>
+
+                            {{-- Aksi --}}
+                            <td class="px-4 py-3">
+                                <div class="flex justify-center gap-2">
+                                    <a href="{{ route('admin.profil.edit', $item) }}"
+                                        class="bg-amber-400 hover:bg-amber-300 text-white rounded-lg p-2">
+                                        @svg('lucide-pencil', 'h-4 w-4')
+                                    </a>
+
+                                    <form action="{{ route('admin.profil.destroy', $item) }}" method="POST"
+                                        class="delete-form" data-confirm="Hapus guru {{ $item->name }}?">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="bg-red-500 hover:bg-red-400 text-white rounded-lg p-2">
+                                            @svg('lucide-trash-2', 'h-4 w-4')
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="7" class="px-4 py-6 text-center text-gray-500">
+                                Tidak ada data guru.
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
     </div>
 </x-app-layout>
