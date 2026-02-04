@@ -21,10 +21,11 @@
         <meta name="swal-success" content="{{ session('success') }}">
     @endif
 
-    @if (session('error'))
-        <meta name="swal-error" content="{{ session('error') }}">
+    @if (session('error') || $errors->any())
+        <meta name="swal-error" content="{{ session('error') ?? 'Terdapat kesalahan pada form' }}">
     @endif
-    
+
+
 </head>
 
 <body class="font-sans">
