@@ -2,9 +2,16 @@
 
 namespace App\Console\Commands;
 
+use App\Models\About;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 use App\Models\GalleryAlbum; // Sesuaikan dengan Model kamu
+use App\Models\Hero;
+use App\Models\Major;
+use App\Models\News;
+use App\Models\Photo;
+use App\Models\PrincipalMessage;
+use App\Models\Teacher;
 use Carbon\Carbon;
 
 class CleanUpOrphanImages extends Command
@@ -18,7 +25,14 @@ class CleanUpOrphanImages extends Command
 
         // 1. Ambil semua path gambar yang RESMI ada di Database
         // Kita ambil kolom thumbnail dan gallery
+        $heroBackround = Hero::pluck('background_image')->filter()->toArray();
+        $aboutBackround = About::pluck('image')->filter()->toArray();
+        $principalProfile = PrincipalMessage::pluck('photo')->filter()->toArray();
+        $newsBackground = News::pluck('image')->filter()->toArray();
+        $majorsBackground = Major::pluck('image')->filter()->toArray();
+        $TeacherPhoto = Teacher::pluck('photo')->filter()->toArray();
         $galleryAlbumCover = GalleryAlbum::pluck('cover_image')->filter()->toArray();
+        $galleryPhotos = Photo::pluck('url')->filter()->toArray();
 
         // Untuk gallery (JSON), kita perlu ratakan array-nya
         // $dbGalleries = [];
@@ -31,10 +45,10 @@ class CleanUpOrphanImages extends Command
 
         // Gabungkan semua file yang VALID (tidak boleh dihapus)
         // Pastikan path-nya relatif (tanpa /storage/)
-        $validFiles = array_merge($galleryAlbumCover);
+        $validFiles = array_merge($galleryAlbumCover, $heroBackround, $aboutBackround, $principalProfile, $newsBackground, $majorsBackground, $TeacherPhoto, $galleryPhotos);
 
         // Bersihkan path agar konsisten (hapus /storage/ di depan jika ada)
-        $validFiles = array_map(function($path) {
+        $validFiles = array_map(function ($path) {
             return str_replace('/storage/', '', $path);
         }, $validFiles);
 
