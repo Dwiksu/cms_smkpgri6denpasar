@@ -195,9 +195,14 @@
         }
     </script>
     <script>
-        ClassicEditor
-            .create(document.querySelector('#major-description-textarea'))
-            .then(editor => {
+        ClassicEditor.create(document.querySelector('#major-description-textarea'), {
+                toolbar: [
+                    'heading', '|',
+                    'bold', 'italic', 'link', '|',
+                    'bulletedList', 'numberedList', 'blockQuote', '|',
+                    'undo', 'redo'
+                ]
+            }).then(editor => {
                 editor.model.document.on('change:data', () => {
                     const textarea = document.querySelector('#major-description-textarea');
 
@@ -211,7 +216,9 @@
                     textarea.classList.add("border-default-medium");
                 });
             })
-            .catch(console.error);
+            .catch(error => {
+                console.error(error);
+            });
     </script>
 
 </x-app-layout>

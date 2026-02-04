@@ -58,6 +58,25 @@ class NewsController extends Controller
             ->with('success', 'Berita berhasil ditambahkan');
     }
 
+    public function storeContentImage(Request $request)
+    {
+        if (!$request->hasFile('upload')) {
+            return response()->json([
+                'uploaded' => 0,
+                'error' => ['message' => 'No file uploaded']
+            ], 400);
+        }
+
+        $path = $request->file('upload')
+            ->store('berita/content', 'public');
+
+        return response()->json([
+            'uploaded' => 1,
+            'fileName' => basename($path),
+            'url' => asset('storage/' . $path),
+        ]);
+    }
+
     /**
      * Display the specified resource.
      */

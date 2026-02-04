@@ -51,6 +51,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/berita', [NewsController::class, 'index'])->name('admin.berita.index');
         Route::get('/berita/create', [NewsController::class, 'create'])->name('admin.berita.create');
         Route::post('/berita/store', [NewsController::class, 'store'])->name('admin.berita.store');
+        Route::post('/berita/upload-image', [NewsController::class, 'storeContentImage'])->name('admin.berita.store.content.image');
         Route::get('/berita/{news}/edit', [NewsController::class, 'edit'])->name('admin.berita.edit');
         Route::put('/berita/{news}/update', [NewsController::class, 'update'])->name('admin.berita.update');
         Route::delete('/berita/{news}/delete', [NewsController::class, 'destroy'])->name('admin.berita.destroy');

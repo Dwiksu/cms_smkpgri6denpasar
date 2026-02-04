@@ -118,8 +118,11 @@
     {{-- CKEditor --}}
     <script>
         ClassicEditor
-            .create(document.querySelector('#konten-berita-textarea'))
-            .then(editor => {
+            .create(document.querySelector('#konten-berita-textarea'), {
+                ckfinder: {
+                    uploadUrl: "{{ route('admin.berita.store.content.image') }}?_token={{ csrf_token() }}"
+                }
+            }).then(editor => {
                 editor.model.document.on('change:data', () => {
                     const textarea = document.querySelector('#konten-berita-textarea');
 
@@ -132,8 +135,7 @@
 
                     textarea.classList.add("border-default-medium");
                 });
-            })
-            .catch(console.error);
+            }).catch(console.error);
     </script>
 
 </x-app-layout>
