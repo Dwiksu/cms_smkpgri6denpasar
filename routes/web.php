@@ -7,8 +7,10 @@ use App\Http\Controllers\admin\MajorController;
 use App\Http\Controllers\admin\GalleryAlbumController;
 use App\Http\Controllers\admin\NewsController;
 use App\Http\Controllers\admin\PhotoController;
+use App\Http\Controllers\admin\SettingController;
 use App\Http\Controllers\admin\TeacherController;
 use App\Http\Controllers\admin\UploadImageController;
+use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\LogoutController;
 use Illuminate\Support\Facades\Route;
@@ -89,7 +91,8 @@ Route::prefix('admin')->group(function () {
 
 
         // PENGATURAN
-        Route::get('/pengaturan', fn() => view('admin.pengaturan'))->name('pengaturan.admin');
+        Route::get('/pengaturan', [SettingController::class, 'index'])->name('pengaturan.admin');
+        Route::put('/pengaturan/{user}/update', [UserController::class, 'update'])->name('admin.pengaturan.user.update');
 
 
         // LOGOUT

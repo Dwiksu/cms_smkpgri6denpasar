@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -55,10 +56,23 @@ class UserController extends Controller
     {
         $data = $request->validate([
             'email' => 'required|email|max:255',
-            'password' => 'required|string|min:6|confirmed',
+            'old_password' => 'required|string',
+            'password' => 'required|string|min:4|confirmed',
         ]);
 
-        $user->update($data);
+        if (!Hash::check($data['old_password'], $user->password)) {
+            return back()->with('error', 'Password lama tidak sesuai');
+        }
+
+        if ($data['password'] ===  $data['old_password']) {
+            return back()->with('error', 'Password baru tidak boleh sama dengan password lama');
+        }
+
+        $user->update([
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+        ]);
+
 
         return back()->with('success', 'Pengaturan berhasil diubah');
     }
