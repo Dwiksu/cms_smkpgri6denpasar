@@ -4,7 +4,9 @@ use App\Http\Controllers\admin\BerandaController;
 use App\Http\Controllers\admin\CalenderEventController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\MajorController;
+use App\Http\Controllers\admin\GalleryAlbumController;
 use App\Http\Controllers\admin\NewsController;
+use App\Http\Controllers\admin\PhotoController;
 use App\Http\Controllers\admin\TeacherController;
 use App\Http\Controllers\admin\UploadImageController;
 use App\Http\Controllers\auth\LoginController;
@@ -69,77 +71,12 @@ Route::prefix('admin')->group(function () {
         Route::put('/profil/{teacher}/update', [TeacherController::class, 'update'])->name('admin.profil.update');
         Route::delete('/profil/{teacher}/destroy', [TeacherController::class, 'destroy'])->name('admin.profil.destroy');
 
-
         // GALERI
-        Route::get('/galeri', function () {
-            $albums = [
-                [
-                    'id' => 1,
-                    'name' => 'Kegiatan Sekolah',
-                    'slug' => 'kegiatan-sekolah',
-                    'description' => 'Dokumentasi berbagai kegiatan yang berlangsung di sekolah',
-                    'cover_image' => 'https://images.unsplash.com/photo-1666533835131-5cd525e9e965?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-                    'photos' => [
-                        [
-                            'id' => 'p1',
-                            'url' => 'https://images.unsplash.com/photo-1666533835131-5cd525e9e965?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-                            'caption' => 'Upacara Bendera',
-                            'created_at' => '2024-01-15 00:00:00',
-                        ],
-                        [
-                            'id' => 'p2',
-                            'url' => 'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=800&q=80',
-                            'caption' => 'Kegiatan Belajar',
-                            'created_at' => '2024-01-15 00:00:00',
-                        ],
-                    ],
-                    'created_at' => '2024-01-01 00:00:00',
-                    'updated_at' => '2024-01-01 00:00:00',
-                ],
-                [
-                    'id' => 2,
-                    'name' => 'Fasilitas Sekolah',
-                    'slug' => 'fasilitas-sekolah',
-                    'description' => 'Fasilitas modern yang tersedia di sekolah kami',
-                    'cover_image' => 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80',
-                    'photos' => [
-                        [
-                            'id' => 'p3',
-                            'url' => 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80',
-                            'caption' => 'Gedung Sekolah',
-                            'created_at' => '2024-01-15 00:00:00',
-                        ],
-                        [
-                            'id' => 'p4',
-                            'url' => 'https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=800&q=80',
-                            'caption' => 'Laboratorium Komputer',
-                            'created_at' => '2024-01-15 00:00:00',
-                        ],
-                    ],
-                    'created_at' => '2024-01-01 00:00:00',
-                    'updated_at' => '2024-01-01 00:00:00',
-                ],
-                [
-                    'id' => 3,
-                    'name' => 'Prestasi Siswa',
-                    'slug' => 'prestasi-siswa',
-                    'description' => 'Prestasi yang diraih oleh siswa-siswi kami',
-                    'cover_image' => 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=800&q=80',
-                    'photos' => [
-                        [
-                            'id' => 'p5',
-                            'url' => 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=800&q=80',
-                            'caption' => 'Lomba Kompetensi Siswa',
-                            'created_at' => '2024-01-15 00:00:00',
-                        ],
-                    ],
-                    'created_at' => '2024-01-01 00:00:00',
-                    'updated_at' => '2024-01-01 00:00:00',
-                ],
-            ];
-
-            return view('admin.galeri', compact('albums'));
-        })->name('galeri.admin');
+        Route::get('/galeri', [GalleryAlbumController::class, 'index'])->name('galeri.admin');
+        Route::post('/galeri/store', [GalleryAlbumController::class, 'store'])->name('admin.galeri.create');
+        Route::put('/galeri/update/{album}', [GalleryAlbumController::class, 'update'])->name('admin.galeri.update');
+        Route::post('/galeri/photo/store', [PhotoController::class, 'store'])->name('admin.photo.create');
+        Route::put('/galeri/photo/update/{photo}', [PhotoController::class, 'update'])->name('admin.photo.update');
 
 
         // CALENDER EVENT
