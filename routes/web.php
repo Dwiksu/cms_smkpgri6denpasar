@@ -55,12 +55,18 @@ Route::prefix('admin')->group(function () {
         Route::get('/jurusan', [MajorController::class, 'index'])->name('admin.jurusan.index');
         Route::get('/jurusan/create', [MajorController::class, 'create'])->name('admin.jurusan.create');
         Route::post('/jurusan/store', [MajorController::class, 'store'])->name('admin.jurusan.store');
+        Route::get('/jurusan/{major}/edit', [MajorController::class, 'edit'])->name('admin.jurusan.edit');
+        Route::put('/jurusan/{major}/update', [MajorController::class, 'update'])->name('admin.jurusan.update');
+        Route::delete('/jurusan/{major}/delete', [MajorController::class, 'destroy'])->name('admin.jurusan.destroy');
 
 
         // PROFIL GURU
         Route::get('/profil', [TeacherController::class, 'index'])->name('admin.profil.index');
         Route::get('/profil/create', [TeacherController::class, 'create'])->name('admin.profil.create');
         Route::post('/profil/store', [TeacherController::class, 'store'])->name('admin.profil.store');
+        Route::get('/profil/{teacher}/edit', [TeacherController::class, 'edit'])->name('admin.profil.edit');
+        Route::put('/profil/{teacher}/update', [TeacherController::class, 'update'])->name('admin.profil.update');
+        Route::delete('/profil/{teacher}/destroy', [TeacherController::class, 'destroy'])->name('admin.profil.destroy');
 
 
         // GALERI
@@ -139,6 +145,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/kalender', [CalenderEventController::class, 'index'])->name('admin.kalender.index');
         Route::get('/kalender/create', [CalenderEventController::class, 'create'])->name('admin.kalender.create');
         Route::post('/kalender/store', [CalenderEventController::class, 'store'])->name('admin.kalender.store');
+        Route::get('/kalender/{event}/edit', [CalenderEventController::class, 'edit'])->name('admin.kalender.edit');
+        Route::put('/kalender/{event}/update', [CalenderEventController::class, 'update'])->name('admin.kalender.update');
+        Route::delete('/kalender/{event}/delete', [CalenderEventController::class, 'destroy'])->name('admin.kalender.destroy');
 
 
         // PENGATURAN
