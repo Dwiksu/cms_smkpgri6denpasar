@@ -14,7 +14,7 @@
             <div class="rounded-xl border border-default bg-neutral-primary-soft shadow-xs  text-card-foreground">
                 <form class="p-6"
                     action="{{ isset($news) ? route('admin.berita.update', $news->id) : route('admin.berita.store') }}"
-                    method="POST">
+                    method="POST" data-delay-submit>
                     @csrf
 
                     @if (isset($news))
