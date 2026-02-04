@@ -21,38 +21,53 @@
                         @method('PUT')
                     @endif
 
-                    <div class="space-y-2">
+                    <div class="space-y-2 mb-5">
                         <label for="background_jurusan" class="block mb-2.5 text-sm font-medium text-heading">Gambar
                             Background</label>
                         <x-image-upload name="image" :value="$major->image ?? ''" folder="jurusan" aspect="video" />
+                        @error('image')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="grid sm:grid-cols-2 gap-4">
                         <div class="mb-5">
                             <label class="block mb-2.5 text-sm font-medium text-heading">Nama Jurusan</label>
                             <input type="text" name="name" value="{{ old('name', $major->name ?? '') }}"
-                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="Teknik Sepeda Motor" required />
+                                class="bg-neutral-secondary-medium border {{ errorBorder('name') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                placeholder="Teknik Sepeda Motor" data-error-input />
+                            @error('name')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="mb-5">
                             <label class="block mb-2.5 text-sm font-medium text-heading">Kode Singkat</label>
-                            <input type="text" name="short_name"
+                            <input type="text" name="short_name" data-error-input
                                 value="{{ old('short_name', $major->short_name ?? '') }}"
-                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="TSM" required />
+                                class="bg-neutral-secondary-medium border {{ errorBorder('short_name') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                placeholder="TSM" />
+                            @error('short_name')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
                     <div class="mb-5">
                         <label class="block mb-2.5 text-sm font-medium text-heading">Deskripsi Singkat</label>
-                        <input type="text" name="description"
+                        <input type="text" name="description" data-error-input
                             value="{{ old('description', $major->description ?? '') }}"
-                            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                            placeholder="Deskripsi singkat jurusan" required/>
+                            class="bg-neutral-secondary-medium border {{ errorBorder('description') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                            placeholder="Deskripsi singkat jurusan" />
+                        @error('description')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="mb-5">
                         <label class="block mb-2.5 text-sm font-medium text-heading">Deskripsi Lengkap</label>
                         <textarea type="text" id="major-description-textarea" name="full_description"
-                            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                            class="bg-neutral-secondary-medium border {{ errorBorder('full_description') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                             placeholder="Deskripsi Lengkap Jurusan">{{ old('full_description', $major->full_description ?? '') }}</textarea>
+                        @error('full_description')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div x-data="curriculumField()" class="mb-5">
                         <label class="block mb-2.5 text-sm font-medium text-heading">Kurikulum</label>
@@ -123,7 +138,7 @@
                     <div class="space-y-2">
                         <label for="background_jurusan"
                             class="block mb-2.5 text-sm font-medium text-heading">Galeri</label>
-                        <x-multiple-image-upload name="gallery" :value="$major->gallery ?? ''" folder="jurusan/gallery"
+                        <x-multiple-image-upload name="gallery" :values="$major->gallery ?? []" folder="jurusan/gallery"
                             aspect="video" />
                     </div>
 
@@ -182,9 +197,21 @@
     <script>
         ClassicEditor
             .create(document.querySelector('#major-description-textarea'))
-            .catch(error => {
-                console.error(error);
-            });
+            .then(editor => {
+                editor.model.document.on('change:data', () => {
+                    const textarea = document.querySelector('#major-description-textarea');
+
+                    textarea.classList.remove(
+                        "bg-red-50",
+                        "border-red-100",
+                        "focus:border-red-300",
+                        "focus:ring-red-300"
+                    );
+
+                    textarea.classList.add("border-default-medium");
+                });
+            })
+            .catch(console.error);
     </script>
 
 </x-app-layout>

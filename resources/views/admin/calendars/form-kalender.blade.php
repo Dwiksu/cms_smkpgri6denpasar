@@ -26,9 +26,13 @@
                                 class="text-red-500">*</span></label>
                         <input id="calender-name" name="title" type="text"
                             value="{{ old('title', $event->title ?? '') }}"
-                            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                            required />
+                            class="bg-neutral-secondary-medium border {{ errorBorder('title') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                            data-error-input />
+                        @error('title')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
+
                     <div class="mb-5">
                         <label for="category-calender"
                             class="block mb-2.5 text-sm font-medium text-heading">Kategori</label>
@@ -55,6 +59,9 @@
                             </option>
 
                         </select>
+                        @error('category')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="grid sm:grid-cols-2 gap-4">
                         <div class="mb-5">
@@ -64,17 +71,24 @@
                             <div class="relative">
                                 <input type="date" name="start_date" id="start_date"
                                     value="{{ old('start_date', isset($event) ? \Carbon\Carbon::parse($event->start_date)->format('Y-m-d') : '') }}"
-                                    class="block w-full pe-3 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand px-3 py-2.5 shadow-xs placeholder:text-body"
-                                    placeholder="Select date">
+                                    class="block w-full pe-3 bg-neutral-secondary-medium border {{ errorBorder('start_date') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand px-3 py-2.5 shadow-xs placeholder:text-body"
+                                    placeholder="Select date" onfocus="this.showPicker()" data-error-input >
+                                @error('start_date')
+                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
                             </div>
-
                         </div>
+
                         <div class="mb-5">
                             <label class="block mb-2.5 text-sm font-medium text-heading">Tanggal Selesai</label>
                             <div class="relative">
-                                <input type="date" name="end_date" id="end_date" value="{{ old('end_date', isset($event) ? \Carbon\Carbon::parse($event->end_date)->format('Y-m-d') : '') }}"
-                                    class="block w-full pe-3 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand px-3 py-2.5 shadow-xs placeholder:text-body"
-                                    placeholder="Select date">
+                                <input type="date" name="end_date" id="end_date"
+                                    value="{{ old('end_date', isset($event) ? \Carbon\Carbon::parse($event->end_date)->format('Y-m-d') : '') }}"
+                                    class="block w-full pe-3 bg-neutral-secondary-medium border {{ errorBorder('end_date') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand px-3 py-2.5 shadow-xs placeholder:text-body"
+                                    placeholder="Select date" onfocus="this.showPicker()" data-error-input >
+                                @error('end_date')
+                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
                             </div>
 
                         </div>
@@ -84,8 +98,11 @@
                         <label for="calender-description"
                             class="block mb-2.5 text-sm font-medium text-heading">Deskripsi</label>
                         <textarea id="description" name="description" rows="4"
-                            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                            required>{{ old('description', $event->description ?? '') }}</textarea>
+                            class="bg-neutral-secondary-medium border {{ errorBorder('description') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                            placeholder="Deskripsi tentang kegiatan" data-error-input>{{ old('description', $event->description ?? '') }}</textarea>
+                        @error('description')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <button type="submit"
