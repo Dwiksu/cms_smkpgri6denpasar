@@ -64,8 +64,26 @@ document.addEventListener("DOMContentLoaded", () => {
             icon: "error",
             title: "Gagal",
             text: error,
+        }).then(() => {
+            document
+                .querySelectorAll("button[disabled]")
+                .forEach((btn) => unlockButton(btn));
         });
     }
+
+    /* ================= ERROR INPUT ================= */
+    document.querySelectorAll("[data-error-input]").forEach((input) => {
+        input.addEventListener("input", () => {
+            input.classList.remove(
+                "bg-red-50",
+                "border-red-100",
+                "focus:border-red-300",
+                "focus:ring-red-300",
+            );
+
+            input.classList.add("border-default-medium");
+        });
+    });
 });
 
 /* ================= HELPER ================= */
