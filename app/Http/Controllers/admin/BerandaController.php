@@ -17,10 +17,11 @@ class BerandaController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
+    {   
+        // dd( About::with('schoolValues')->first());
         return view('admin.konten-beranda', [
             'hero' => Hero::first(),
-            'about' => About::first(),
+            'about' => About::with('schoolValues')->first(),
             'principal' => PrincipalMessage::first(),
             'stats' => Stat::all(),
             'school' => School::first(),
@@ -32,45 +33,58 @@ class BerandaController extends Controller
     public function updateHero(Request $request)
     {
         $data = $request->validate([
-            'title' => 'required|string|max:255',
-            'subtitle' => 'required|string|max:255',
-            'tagline' => 'nullable|string|max:255',
-            'cta_text' => 'required|string|max:100',
-            'cta_link' => 'required|string|max:255',
-            'background_image' => 'required|string',
+            'hero.title' => 'required|string|max:255',
+            'hero.subtitle' => 'required|string|max:255',
+            'hero.tagline' => 'nullable|string|max:255',
+            'hero.cta_text' => 'required|string|max:100',
+            'hero.cta_link' => 'required|string|max:255',
+            'hero.background_image' => 'required|string',
+        ], [
+            'hero.title.required' => 'Judul harus diisi',
+            'hero.subtitle.required' => 'Sub judul harus diisi',
+            'hero.cta_text.required' => 'Teks tombol harus diisi',
+            'hero.cta_link.required' => 'Link tombol harus diisi',
         ]);
 
-        Hero::updateOrCreate(['id' => 1], $data);
+        Hero::updateOrCreate(['id' => 1], $data['hero']);
 
-        return back()->with('success', 'Hero updated');
+        return back()
+        ->with('success', 'Hero berhasil diubah')
+        ->with('tab', 'hero');
     }
 
     /* ================= ABOUT ================= */
     public function updateAbout(Request $request)
     {
         $data = $request->validate([
-            'title' => 'required|string',
-            'description' => 'required|string',
-            'history' => 'required|string',
-            'vision' => 'required|string',
-            'mission' => 'required|array',
-            'mission.*' => 'required|string',
-            'image' => 'nullable|string',
-            'values' => 'nullable|array',
-            'values.*.name' => 'required|string',
-            'values.*.description' => 'nullable|string',
+            'about.title' => 'required|string',
+            'about.description' => 'required|string',
+            'about.history' => 'nullable|string',
+            'about.vision' => 'required|string',
+            'about.mission' => 'required|array',
+            'about.mission.*' => 'required|string',
+            'about.image' => 'nullable|string',
+            'about.values' => 'nullable|array',
+            'about.values.*.name' => 'nullable|string',
+            'about.values.*.description' => 'nullable|string',
+        ], [
+            'about.title.required' => 'Judul harus diisi',
+            'about.description.required' => 'Deskripsi harus diisi',
+            'about.vision.required' => 'Visi harus diisi',
+            'about.mission.required' => 'Misi harus diisi',
+            'about.mission.*.required' => 'Misi harus diisi',
         ]);
 
         $about = About::updateOrCreate(
             ['id' => 1],
-            collect($data)->except('values')->toArray()
+            collect($data['about'])->except('values')->toArray()
         );
 
         // reset values
         SchoolValue::where('about_id', $about->id)->delete();
 
-        if (!empty($data['values'])) {
-            foreach ($data['values'] as $value) {
+        if (!empty($data['about']['values'])) {
+            foreach ($data['about']['values'] as $value) {
                 SchoolValue::create([
                     'about_id' => $about->id,
                     'name' => $value['name'],
@@ -79,7 +93,9 @@ class BerandaController extends Controller
             }
         }
 
-        return back()->with('success', 'About updated');
+        return back()
+        ->with('tab', 'about')
+        ->with('success', 'About berhasil diubah');
     }
 
 
@@ -88,17 +104,26 @@ class BerandaController extends Controller
     public function updatePrincipal(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'nip' => 'required|string|max:18',
-            'photo' => 'required|string',
-            'position' => 'required|string|max:255',
-            'period' => 'required|string|max:255',
-            'message' => 'required|string|max:255',
+            'principal.name' => 'required|string|max:255',
+            'principal.nip' => 'required|string|max:18',
+            'principal.photo' => 'required|string',
+            'principal.position' => 'required|string|max:255',
+            'principal.period' => 'required|string|max:255',
+            'principal.message' => 'required|string',
+        ], [
+            'principal.name.required' => 'Nama harus diisi',
+            'principal.nip.required' => 'NIP harus diisi',
+            'principal.photo.required' => 'Foto harus diisi',
+            'principal.position.required' => 'Posisi harus diisi',
+            'principal.period.required' => 'Periode harus diisi',
+            'principal.message.required' => 'Pesan harus diisi',
         ]);
 
-        PrincipalMessage::updateOrCreate(['id' => 1], $data);
+        PrincipalMessage::updateOrCreate(['id' => 1], $data['principal']);
 
-        return back()->with('success', 'Sambutan updated');
+        return back()
+        ->with('tab', 'principal')
+        ->with('success', 'Sambutan berhasil diubah');
     }
 
 
@@ -109,6 +134,11 @@ class BerandaController extends Controller
             'stats' => 'required|array',
             'stats.*.key' => 'required|string|exists:stats,key',
             'stats.*.value' => 'required|integer|min:0',
+        ], [
+            'stats.required' => 'Statistik harus diisi',
+            'stats.*.key.required' => 'Statistik harus diisi',
+            'stats.*.value.required' => 'Statistik harus diisi',
+            'stats.*.value.integer' => 'Statistik harus berupa angka',
         ]);
 
         foreach ($data['stats'] as $statData) {
@@ -118,7 +148,9 @@ class BerandaController extends Controller
                 ]);
         }
 
-        return back()->with('success', 'Statistik berhasil diperbarui');
+        return back()
+        ->with('tab', 'stats')
+        ->with('success', 'Statistik berhasil diperbarui');
     }
 
 
@@ -138,10 +170,19 @@ class BerandaController extends Controller
             'twitter' => 'nullable|string|max:255',
             'youtube' => 'nullable|string|max:255',
             'map_embed' => 'nullable|string|max:255',
+        ], [
+            'short_name.required' => 'Nama singkat harus diisi',
+            'full_name.required' => 'Nama lengkap harus diisi',
+            'address.required' => 'Alamat harus diisi',
+            'phone.required' => 'Nomor telepon harus diisi',
+            'email.required' => 'Email harus diisi',
+            'email.email' => 'Format email tidak valid',
         ]);
 
         School::updateOrCreate(['id' => 1], $data);
 
-        return back()->with('success', 'Info sekolah updated');
+        return back()
+        ->with('tab', 'info')
+        ->with('success', 'Info sekolah berhasil diubah');
     }
 }

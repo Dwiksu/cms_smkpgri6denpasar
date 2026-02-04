@@ -36,6 +36,10 @@ class GalleryAlbumController extends Controller
             'cover_image' => 'required|string',
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:255',
+        ], [
+            'name.required' => 'Nama galeri harus diisi',
+            'description.required' => 'Deskripsi galeri harus diisi',
+            'cover_image.required' => 'Cover galeri harus diisi',
         ]);
 
         $data['slug'] = str()->slug($data['name']);
@@ -72,6 +76,10 @@ class GalleryAlbumController extends Controller
             'cover_image' => 'required|string',
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:255',
+        ], [
+            'name.required' => 'Nama galeri harus diisi',
+            'description.required' => 'Deskripsi galeri harus diisi',
+            'cover_image.required' => 'Cover galeri harus diisi',
         ]);
 
         $data['slug'] = str()->slug($data['name']);

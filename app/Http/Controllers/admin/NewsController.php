@@ -39,6 +39,13 @@ class NewsController extends Controller
             'published_at' => 'required|date',
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:255',
+        ], [
+            'title.required' => 'Judul berita harus diisi',
+            'excerpt.required' => 'Ringkasan berita harus diisi',
+            'content.required' => 'Isi berita harus diisi',
+            'category.required' => 'Kategori berita harus diisi',
+            'image.required' => 'Gambar berita harus diisi',
+            'published_at.required' => 'Tanggal publikasi harus diisi',
         ]);
 
         $data['slug'] = str()->slug($data['title']);
@@ -81,6 +88,13 @@ class NewsController extends Controller
             'published_at' => 'required|date',
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:255',
+        ], [
+            'title.required' => 'Judul berita harus diisi',
+            'excerpt.required' => 'Ringkasan berita harus diisi',
+            'content.required' => 'Isi berita harus diisi',
+            'category.required' => 'Kategori berita harus diisi',
+            'image.required' => 'Gambar berita harus diisi',
+            'published_at.required' => 'Tanggal publikasi harus diisi',
         ]);
 
         $data['slug'] = str()->slug($data['title']);
