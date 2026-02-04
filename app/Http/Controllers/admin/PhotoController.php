@@ -31,15 +31,25 @@ class PhotoController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'gallery_album_id' => 'exists:gallery_albums,id',
-            'url' => 'required|string|max:255',
-            'caption' => 'required|string|max:255',
+            'gallery_album_id' => 'required|exists:gallery_albums,id',
+            'url' => 'required|array',
+            'url.*' => 'required|string|max:255',
+            'caption' => 'nullable|string|max:255',
         ]);
 
-        Photo::create($data);
+        $photos = collect($data['url'])->map(fn($url) => [
+            'gallery_album_id' => $data['gallery_album_id'],
+            'url' => $url,
+            'caption' => $data['caption'] ?? null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        Photo::insert($photos->toArray());
 
         return back()->with('success', 'Foto berhasil ditambahkan');
     }
+
 
     /**
      * Display the specified resource.
@@ -62,10 +72,10 @@ class PhotoController extends Controller
      */
     public function update(Request $request, Photo $photo)
     {
-         $data = $request->validate([
+        $data = $request->validate([
             'gallery_album_id' => 'exists:gallery_albums,id',
             'url' => 'required|string|max:255',
-            'caption' => 'required|string|max:255',
+            'caption' => 'nullable|string|max:255',
         ]);
 
         $photo->update($data);

@@ -16,7 +16,7 @@ function isActiveSidebar($path) {
             default      => 'bg-gray-500 text-white',
         };
     }
-    
+
  function CalendarCategoryColor(string $category): string
     {
         return match ($category) {

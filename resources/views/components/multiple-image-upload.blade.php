@@ -3,7 +3,7 @@
     'values' => [], // Array URL
     'folder' => 'general',
     'maxFiles' => 10,
-    'maxSize' => 5,
+    'maxSize' => 2,
     'label' => null,
 ])
 
@@ -79,8 +79,10 @@
                 </svg>
                 <p class="text-sm font-medium">Klik untuk tambah gambar</p>
                 <p class="text-xs text-gray-500 mt-1">
-                    <span x-text="values.length"></span>/<span x-text="maxFiles"></span> gambar • Maks <span
-                        x-text="maxSize"></span>MB
+                    @if ($maxFiles > 0)
+                        <span x-text="values.length"></span>/<span x-text="maxFiles"></span> gambar •
+                    @endif
+                    Maks {{ $maxSize }}MB per file
                 </p>
             </div>
         </template>
@@ -109,9 +111,11 @@
 
             async uploadFiles(files) {
                 this.error = null;
-                if (this.values.length + files.length > this.maxFiles) {
-                    this.error = `Maksimal ${this.maxFiles} gambar`;
-                    return;
+                if (this.maxFiles > 0) {
+                    if (this.values.length + files.length > this.maxFiles) {
+                        this.error = `Maksimal ${this.maxFiles} gambar`;
+                        return;
+                    }
                 }
 
                 this.isUploading = true;

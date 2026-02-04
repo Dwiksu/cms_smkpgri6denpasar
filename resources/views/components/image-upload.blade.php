@@ -3,7 +3,7 @@
     'value' => '',
     'folder' => 'general', // Folder tujuan di storage
     'accept' => 'image/*',
-    'maxSize' => 5, // MB
+    'maxSize' => 2, // MB
     'aspectRatio' => 'auto',
     'label' => null,
 ])
@@ -22,7 +22,8 @@
     folder: '{{ $folder }}',
     maxSize: {{ $maxSize }},
     csrfToken: '{{ csrf_token() }}'
-})" class="{{ $attributes->get('class') }} space-y-2">
+})" x-modelable="value" class="{{ $attributes->get('class') }} space-y-2"
+    {{ $attributes->except(['name', 'value', 'folder', 'class']) }}>
     @if ($label)
         <label class="text-sm font-medium leading-none">{{ $label }}</label>
     @endif

@@ -14,7 +14,7 @@ class GalleryAlbumController extends Controller
     public function index()
     {
         $albums = GalleryAlbum::with('photos')->latest()->get();
-        return view('admin.galeri', compact('albums'));
+        return view('admin.albums.galeri', compact('albums'));
     }
 
     /**
@@ -77,7 +77,7 @@ class GalleryAlbumController extends Controller
         $data['slug'] = str()->slug($data['name']);
 
         $album->update($data);
-        
+
         return back()->with('success', 'Galeri berhasil diubah');
     }
 
