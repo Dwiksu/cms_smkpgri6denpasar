@@ -1,6 +1,4 @@
 <x-app-layout>
-    <x-slot:metaTitle>Halaman Kalender</x-slot:metaTitle>
-    <x-slot:metaDesc>Ini halaman cuma buat kalender aja</x-slot:metaDesc>
     <x-slot:title>Kalender</x-slot:title>
 
     <div class="space-y-6">

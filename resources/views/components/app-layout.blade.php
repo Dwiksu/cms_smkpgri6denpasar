@@ -1,6 +1,4 @@
 <x-header>
-    <x-slot:metaDesc>{{ $metaDesc }}</x-slot:metaDesc>
-    <x-slot:metaTitle>{{ $metaTitle }}</x-slot:metaTitle>
     {{ $title }}
 </x-header>
 

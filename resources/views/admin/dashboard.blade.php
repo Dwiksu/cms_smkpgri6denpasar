@@ -1,6 +1,4 @@
 <x-app-layout>
-    <x-slot:metaTitle>Halaman Dashboard</x-slot:metaTitle>
-    <x-slot:metaDesc>Ini halaman cuma buat Dashboard aja</x-slot:metaDesc>
     <x-slot:title>Dashboard</x-slot:title>
 
     <div class="space-y-8">
