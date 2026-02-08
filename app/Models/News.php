@@ -23,7 +23,21 @@ class News extends Model
         'meta_description',
     ];
 
-    public static function getNews() {
+    protected $casts = [
+        'published_at' => 'datetime',
+    ];
+
+    protected $appends = ['published_at_formatted'];
+
+    public function getPublishedAtFormattedAttribute()
+    {
+        return $this->published_at
+            ? $this->published_at->translatedFormat('d F Y')
+            : null;
+    }
+
+    public static function getNews()
+    {
         return self::where('published_at', '<=', now())
             ->orderByDesc('published_at')
             ->latest('published_at')

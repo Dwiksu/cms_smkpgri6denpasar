@@ -5,16 +5,26 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\News;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $news = News::getNews();
-        return view('admin.news.berita', compact('news'));
+        $perPage = $request->get('per_page', 10);
+
+        $news = News::when($request->search, function ($q) use ($request) {
+            $q->where('title', 'like', "%{$request->search}%");
+        })
+            ->latest()
+            ->paginate($perPage);
+
+        return $request->ajax()
+            ? response()->json($news)
+            : view('admin.news.berita', compact('news'));
     }
 
     /**
@@ -88,8 +98,10 @@ class NewsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(News $news)
+    public function edit($id)
     {
+        $news = News::findOrFail($id);
+
         return view('admin.news.form-berita', compact('news'));
     }
 
@@ -128,12 +140,18 @@ class NewsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(News $news)
+    public function destroy($id)
     {
+        $news = News::findOrFail($id);
+
+        if ($news->image) {
+            Storage::disk('public')->delete($news->image);
+        }
         $news->delete();
 
-        return redirect()
-            ->route('admin.berita.index')
-            ->with('success', 'Berita berhasil dihapus');
+        return response()->json([
+            'success' => true,
+            'message' => 'Berita berhasil dihapus'
+        ]);
     }
 }
