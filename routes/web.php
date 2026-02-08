@@ -70,9 +70,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/profil', [TeacherController::class, 'index'])->name('admin.profil.index');
         Route::get('/profil/create', [TeacherController::class, 'create'])->name('admin.profil.create');
         Route::post('/profil/store', [TeacherController::class, 'store'])->name('admin.profil.store');
-        Route::get('/profil/{teacher}/edit', [TeacherController::class, 'edit'])->name('admin.profil.edit');
+        Route::get('/profil/{id}/edit', [TeacherController::class, 'edit'])->name('admin.profil.edit');
         Route::put('/profil/{teacher}/update', [TeacherController::class, 'update'])->name('admin.profil.update');
-        Route::delete('/profil/{teacher}/destroy', [TeacherController::class, 'destroy'])->name('admin.profil.destroy');
+        Route::delete('/profil/{id}', [TeacherController::class, 'destroy'])->name('admin.profil.destroy');
 
         // GALERI
         Route::get('/galeri', [GalleryAlbumController::class, 'index'])->name('galeri.admin');
