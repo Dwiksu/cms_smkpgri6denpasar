@@ -84,6 +84,7 @@ Route::prefix('admin')->group(function () {
 
         // CALENDER EVENT
         Route::get('/kalender', [CalenderEventController::class, 'index'])->name('admin.kalender.index');
+        Route::get('/calendar-events', [CalenderEventController::class, 'getEvents'])->name('admin.kalender.getevents');
         Route::get('/kalender/create', [CalenderEventController::class, 'create'])->name('admin.kalender.create');
         Route::post('/kalender/store', [CalenderEventController::class, 'store'])->name('admin.kalender.store');
         Route::get('/kalender/{event}/edit', [CalenderEventController::class, 'edit'])->name('admin.kalender.edit');

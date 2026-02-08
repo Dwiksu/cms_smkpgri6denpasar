@@ -237,7 +237,6 @@
                                 .then(r => r.json())
                                 .then(r => {
                                     if (r.success) {
-                                        console.log(r)
                                         Swal.fire("Terhapus!", r.message, "success")
 
                                         // jika halaman jadi kosong, mundur 1 page
