@@ -23,6 +23,7 @@
   }
 }
 
+/* CALENDAR */
 /* Toolbar container */
 
 /* Title */
@@ -59,6 +60,7 @@
 
 /* Today button */
 .fc .fc-today-button {
+    text-transform: capitalize !important;
     background-color: var(--color-brand) !important;
     color: var(--color-white) !important;
     border-style: var(--tw-border-style) !important;
