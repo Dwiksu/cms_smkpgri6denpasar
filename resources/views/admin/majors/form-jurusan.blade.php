@@ -1,6 +1,4 @@
 <x-app-layout>
-    <x-slot:metaTitle>Halaman Jurusan</x-slot:metaTitle>
-    <x-slot:metaDesc>Ini halaman cuma buat jurusan aja</x-slot:metaDesc>
     <x-slot:title>Jurusan</x-slot:title>
 
     <div class="space-y-6">

@@ -52,9 +52,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/berita/create', [NewsController::class, 'create'])->name('admin.berita.create');
         Route::post('/berita/store', [NewsController::class, 'store'])->name('admin.berita.store');
         Route::post('/berita/upload-image', [NewsController::class, 'storeContentImage'])->name('admin.berita.store.content.image');
-        Route::get('/berita/{news}/edit', [NewsController::class, 'edit'])->name('admin.berita.edit');
+        Route::get('/berita/{id}/edit', [NewsController::class, 'edit'])->name('admin.berita.edit');
         Route::put('/berita/{news}/update', [NewsController::class, 'update'])->name('admin.berita.update');
-        Route::delete('/berita/{news}/delete', [NewsController::class, 'destroy'])->name('admin.berita.destroy');
+        Route::delete('/berita/{id}', [NewsController::class, 'destroy'])->name('admin.berita.destroy');
 
 
         // JURUSAN
@@ -70,9 +70,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/profil', [TeacherController::class, 'index'])->name('admin.profil.index');
         Route::get('/profil/create', [TeacherController::class, 'create'])->name('admin.profil.create');
         Route::post('/profil/store', [TeacherController::class, 'store'])->name('admin.profil.store');
-        Route::get('/profil/{teacher}/edit', [TeacherController::class, 'edit'])->name('admin.profil.edit');
+        Route::get('/profil/{id}/edit', [TeacherController::class, 'edit'])->name('admin.profil.edit');
         Route::put('/profil/{teacher}/update', [TeacherController::class, 'update'])->name('admin.profil.update');
-        Route::delete('/profil/{teacher}/destroy', [TeacherController::class, 'destroy'])->name('admin.profil.destroy');
+        Route::delete('/profil/{id}', [TeacherController::class, 'destroy'])->name('admin.profil.destroy');
 
         // GALERI
         Route::get('/galeri', [GalleryAlbumController::class, 'index'])->name('galeri.admin');
@@ -86,6 +86,7 @@ Route::prefix('admin')->group(function () {
 
         // CALENDER EVENT
         Route::get('/kalender', [CalenderEventController::class, 'index'])->name('admin.kalender.index');
+        Route::get('/calendar-events', [CalenderEventController::class, 'getEvents'])->name('admin.kalender.getevents');
         Route::get('/kalender/create', [CalenderEventController::class, 'create'])->name('admin.kalender.create');
         Route::post('/kalender/store', [CalenderEventController::class, 'store'])->name('admin.kalender.store');
         Route::get('/kalender/{event}/edit', [CalenderEventController::class, 'edit'])->name('admin.kalender.edit');

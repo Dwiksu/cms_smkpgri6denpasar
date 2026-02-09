@@ -1,6 +1,4 @@
 <x-app-layout>
-    <x-slot:metaTitle>Halaman Konten Beranda</x-slot:metaTitle>
-    <x-slot:metaDesc>Ini halaman cuma buat konten beranda aja</x-slot:metaDesc>
     <x-slot:title>Konten Beranda</x-slot:title>
 
     <div class="space-y-6" x-data="{ tab: '{{ session('tab') ?? 'hero' }}' }">
@@ -387,7 +385,7 @@
                         </div>
                         <div class="mb-5">
                             <label class="block mb-2.5 text-sm font-medium text-heading">Nama Lengkap</label>
-                            <input type="text" name="full_name" data-error-input 
+                            <input type="text" name="full_name" data-error-input
                                 value="{{ old('full_name', $school->full_name ?? '') }}"
                                 class="bg-neutral-secondary-medium border {{ errorBorder('full_name') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="Sekolah Menengah Kejuruan PGRI 6 Denpasar" />
@@ -398,7 +396,7 @@
                     </div>
                     <div class="mb-5">
                         <label class="block mb-2.5 text-sm font-medium text-heading">Alamat</label>
-                        <textarea type="text" name="address" data-error-input 
+                        <textarea type="text" name="address" data-error-input
                             class="bg-neutral-secondary-medium border {{ errorBorder('address') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                             placeholder="Alamat..." rows="3">{{ old('address', $school->address ?? '') }}</textarea>
                         @error('address')
@@ -408,14 +406,14 @@
                     <div class="grid sm:grid-cols-2 gap-4">
                         <div class="mb-5">
                             <label class="block mb-2.5 text-sm font-medium text-heading">Telepon</label>
-                            <input type="text" name="phone" data-error-input 
+                            <input type="text" name="phone" data-error-input
                             value="{{ old('phone', $school->phone ?? '') }}"
                                 class="bg-neutral-secondary-medium read-only:bg-neutral-secondary border {{ errorBorder('phone') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="0361-123456" />
                         </div>
                         <div class="mb-5">
                             <label class="block mb-2.5 text-sm font-medium text-heading">Email</label>
-                            <input type="text" name="email" data-error-input 
+                            <input type="text" name="email" data-error-input
                             value="{{ old('email', $school->email ?? '') }}"
                                 class="bg-neutral-secondary-medium border {{ errorBorder('email') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="email@smkpgri6denpasar.sch.id" />

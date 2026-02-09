@@ -1,6 +1,4 @@
 <x-app-layout>
-    <x-slot:metaTitle>Halaman Pengaturan</x-slot:metaTitle>
-    <x-slot:metaDesc>Ini halaman cuma buat pengaturan aja</x-slot:metaDesc>
     <x-slot:title>Pengaturan</x-slot:title>
 
     <div class="space-y-6">

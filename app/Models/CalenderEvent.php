@@ -19,7 +19,7 @@ class CalenderEvent extends Model
     ];
 
     public static function getEvents() {
-        return self::where('start_date', '>=', now())
+        return self::where('end_date', '>=', now())
             ->orderBy('start_date', 'asc')
             ->latest('start_date')
             ->paginate(5);
