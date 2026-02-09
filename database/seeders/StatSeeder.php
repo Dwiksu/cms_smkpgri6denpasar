@@ -17,21 +17,21 @@ class StatSeeder extends Seeder
             [
                 'key' => 'siswa',
                 'label' => 'Siswa Aktif',
-                'value' => 0
+                'value' => 204
             ]
         );
         Stat::factory()->create(
             [
-                'key' => 'guru',
-                'label' => 'Tenaga Pendidik',
-                'value' => 0
+                'key' => 'ptk',
+                'label' => 'Guru & Tenaga Pendidik',
+                'value' => 13
             ]
         );
         Stat::factory()->create(
             [
                 'key' => 'jurusan',
                 'label' => 'Program Keahlian',
-                'value' => 0
+                'value' => 4
             ]
         );
         Stat::factory()->create(

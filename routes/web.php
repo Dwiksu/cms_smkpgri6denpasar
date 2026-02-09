@@ -13,9 +13,13 @@ use App\Http\Controllers\admin\UploadImageController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\LogoutController;
+use App\Http\Controllers\public\HomeController;
 use Illuminate\Support\Facades\Route;
 
 
+/* HALAMAN PUBLIK */
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 /* HALAMAN ADMIN */
 
@@ -78,8 +82,10 @@ Route::prefix('admin')->group(function () {
         Route::get('/galeri', [GalleryAlbumController::class, 'index'])->name('galeri.admin');
         Route::post('/galeri/store', [GalleryAlbumController::class, 'store'])->name('admin.galeri.create');
         Route::put('/galeri/update/{album}', [GalleryAlbumController::class, 'update'])->name('admin.galeri.update');
+        Route::delete('/galeri/delete/{album}', [GalleryAlbumController::class, 'destroy'])->name('admin.galeri.destroy');
         Route::post('/galeri/photo/store', [PhotoController::class, 'store'])->name('admin.photo.create');
         Route::put('/galeri/photo/update/{photo}', [PhotoController::class, 'update'])->name('admin.photo.update');
+        Route::delete('/galeri/photo/delete/{photo}', [PhotoController::class, 'destroy'])->name('admin.photo.destroy');
 
 
         // CALENDER EVENT
@@ -100,8 +106,4 @@ Route::prefix('admin')->group(function () {
         // LOGOUT
         Route::post('/logout', LogoutController::class)->name('logout');
     });
-});
-
-Route::get('/', function () {
-    return view('welcome');
 });

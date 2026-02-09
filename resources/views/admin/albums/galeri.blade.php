@@ -51,9 +51,15 @@
                                 <button type="button" @click="album.openEdit({{ json_encode($album) }})"
                                     class="bg-disabled box-border border border-gray-200 inline-flex items-center  hover:bg-amber-400 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
                                     @svg('lucide-pencil', 'h-4 w-4')</button>
-                                <button type="button"
-                                    class="text-white bg-red-500 box-border border border-fg-disabled inline-flex items-center  hover:bg-red-400 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
-                                    @svg('lucide-trash-2', 'h-4 w-4')</button>
+
+                                <form action="{{ route('admin.galeri.destroy', $album) }}" method="POST"
+                                    class="delete-form" data-confirm="Hapus galeri {{ $album->name }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        class="text-white bg-red-500 box-border border border-fg-disabled inline-flex items-center  hover:bg-red-400 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
+                                        @svg('lucide-trash-2', 'h-4 w-4')</button>
+                                </form>
                             </div>
                         </div>
                         <div class="p-6 pt-0">
@@ -70,9 +76,16 @@
                                                     @click="caption.openEdit({{ json_encode($photo) }})"
                                                     class="bg-disabled box-border border border-gray-200 inline-flex items-center  hover:bg-disabled/90 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
                                                     @svg('lucide-pencil', 'h-3 w-3')</button>
-                                                <button type="button"
-                                                    class="text-white bg-red-500 box-border border border-fg-disabled inline-flex items-center  hover:bg-red-500/90 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
-                                                    @svg('lucide-trash-2', 'h-3 w-3')</button>
+
+                                                <form action="{{ route('admin.photo.destroy', $photo) }}"
+                                                    method="POST" class="delete-form"
+                                                    data-confirm="Hapus foto pada album {{ $photo->album->name }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="text-white bg-red-500 box-border border border-fg-disabled inline-flex items-center  hover:bg-red-500/90 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-sm p-3 focus:outline-none">
+                                                        @svg('lucide-trash-2', 'h-3 w-3')</button>
+                                                </form>
                                             </div>
                                             @if ($index === 5 && count($album['photos']) > 6)
                                                 <div x-show="!showAll" @click="showAll = true"
