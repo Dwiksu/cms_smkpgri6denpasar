@@ -12,7 +12,9 @@
         <meta name="description" content="{{ $metaDesc }}">
     @endif
 
-    <title>{{ $slot }} | SADGRISKA</title>
+    <title>{{ $slot }} - SMK PGRI 6 Denpasar</title>
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/logo_smk_pgri_6.png') }}">
 
     <!-- Styles / Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
