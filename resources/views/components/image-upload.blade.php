@@ -34,7 +34,7 @@
 
     <template x-if="value">
         <div class="relative rounded-lg overflow-hidden border {{ $aspectClass }}">
-            <img :src="value" alt="Preview" class="w-full h-full object-cover">
+            <img :src="value" alt="Preview" class="w-full max-h-96 object-contain">
 
             <div
                 class="absolute inset-0 bg-black/0 hover:bg-black/30 transition-colors flex items-center justify-center opacity-0 hover:opacity-100">

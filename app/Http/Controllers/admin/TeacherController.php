@@ -6,16 +6,27 @@ use App\Http\Controllers\Controller;
 use App\Models\Major;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TeacherController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $teachers = Teacher::getTeacher();
-        return view('admin.teachers.profil-guru', compact('teachers'));
+        $perPage = $request->get('per_page', 5);
+
+        $teachers = Teacher::when($request->search, function ($q) use ($request) {
+            $q->where('name', 'like', "%{$request->search}%")->orWhere('subject', 'like', "%{$request->search}%");
+        })
+            ->with('major')
+            ->latest()
+            ->paginate($perPage);
+
+        return $request->ajax()
+            ? response()->json($teachers)
+            : view('admin.teachers.profil-guru', compact('teachers'));
     }
 
     /**
@@ -67,8 +78,9 @@ class TeacherController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Teacher $teacher)
+    public function edit($id)
     {
+        $teacher = Teacher::findOrFail($id);
         $majors = Major::getMajorForTeacherForm();
         return view('admin.teachers.form-profil-guru', compact('teacher', 'majors'));
     }
@@ -106,9 +118,16 @@ class TeacherController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Teacher $teacher)
+    public function destroy($id)
     {
+        $teacher = Teacher::findOrFail($id);
+        if($teacher->photo) {
+            Storage::disk('public')->delete($teacher->photo);
+        }
         $teacher->delete();
-        return back()->with('success', 'Guru berhasil dihapus');
+        return response()->json([
+            'success' => true,
+            'message' => 'Profil Guru berhasil dihapus'
+        ]);
     }
 }

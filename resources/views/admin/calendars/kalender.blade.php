@@ -1,6 +1,4 @@
 <x-app-layout>
-    <x-slot:metaTitle>Halaman Kalender</x-slot:metaTitle>
-    <x-slot:metaDesc>Ini halaman cuma buat kalender aja</x-slot:metaDesc>
     <x-slot:title>Kalender</x-slot:title>
 
     <div class="space-y-6">
@@ -16,7 +14,7 @@
         </div>
 
         {{-- Calendar Table --}}
-        <div class="overflow-x-auto rounded-lg border border-default bg-white shadow-sm">
+        {{-- <div class="overflow-x-auto rounded-lg border border-default bg-white shadow-sm">
             <table class="w-full text-sm text-left">
                 <thead class="bg-neutral-secondary-medium text-heading">
                     <tr>
@@ -30,37 +28,37 @@
 
                 <tbody class="divide-y divide-default">
                     @forelse ($events as $e)
-                        <tr class="hover:bg-gray-50">
-                            {{-- Date --}}
-                            <td class="px-4 py-3 text-center">
+                        <tr class="hover:bg-gray-50"> --}}
+        {{-- Date --}}
+        {{-- <td class="px-4 py-3 text-center">
                                 <p class="text-lg font-bold text-blue-600">
                                     {{ \Carbon\Carbon::parse($e->start_date)->format('d') }}
                                 </p>
                                 <p class="text-xs text-gray-500 uppercase">
                                     {{ \Carbon\Carbon::parse($e->start_date)->format('M') }}
                                 </p>
-                            </td>
+                            </td> --}}
 
-                            {{-- Title & Description --}}
-                            <td class="px-4 py-3">
+        {{-- Title & Description --}}
+        {{-- <td class="px-4 py-3">
                                 <p class="font-semibold">
                                     {{ $e->title }}
                                 </p>
                                 <p class="text-xs text-gray-500 line-clamp-2">
                                     {{ $e->description }}
                                 </p>
-                            </td>
+                            </td> --}}
 
-                            {{-- Category --}}
-                            <td class="px-4 py-3">
+        {{-- Category --}}
+        {{-- <td class="px-4 py-3">
                                 <span
                                     class="{{ CalendarCategoryColor($e->category) }} text-white text-xs font-semibold px-2 py-1 rounded-full">
                                     {{ ucfirst($e->category) }}
                                 </span>
-                            </td>
+                            </td> --}}
 
-                            {{-- Date Range --}}
-                            <td class="px-4 py-3 text-gray-500">
+        {{-- Date Range --}}
+        {{-- <td class="px-4 py-3 text-gray-500">
                                 {{ \Carbon\Carbon::parse($e->start_date)->translatedFormat('d M Y') }}
                                 @if ($e->end_date)
                                     <br>
@@ -68,10 +66,10 @@
                                         s/d {{ \Carbon\Carbon::parse($e->end_date)->translatedFormat('d M Y') }}
                                     </span>
                                 @endif
-                            </td>
+                            </td> --}}
 
-                            {{-- Action --}}
-                            <td class="px-4 py-3 text-center">
+        {{-- Action --}}
+        {{-- <td class="px-4 py-3 text-center">
                                 <div class="flex justify-center gap-2">
                                     <a href="{{ route('admin.kalender.edit', $e) }}"
                                         class="bg-amber-400 hover:bg-amber-300 p-2 rounded shadow-sm">
@@ -99,7 +97,138 @@
                     @endforelse
                 </tbody>
             </table>
+        </div> --}}
+        <div x-data="calendarPage()" x-init="initCalendar()" class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            <!-- KIRI: KALENDER -->
+            <div class="lg:col-span-2 border-default bg-white shadow-sm rounded-lg p-4">
+                <div id="calendar"></div>
+            </div>
+
+            <!-- KANAN: DETAIL -->
+            <div class="border-default bg-white shadow-sm rounded-lg p-4 border h-fit">
+                <template x-if="selectedEvent">
+                    <div class="space-y-4">
+                        <div>
+                            <h2 class="text-lg font-bold" x-text="selectedEvent.title"></h2>
+                            <p class="text-white text-xs font-semibold px-2 py-1 rounded-full w-fit"
+                                :style="{ backgroundColor: selectedEvent.color }"
+                                x-text="selectedEvent.category.charAt(0).toUpperCase() + selectedEvent.category.slice(1)">
+                            </p>
+                        </div>
+
+                        <div class="text-sm">
+                            <p>
+                                <strong>Mulai:</strong>
+                                <span x-text="formatDate(selectedEvent.start)"></span>
+                            </p>
+                            <p>
+                                <strong>Selesai:</strong>
+                                <span x-text="formatDate(selectedEvent.end)"></span>
+                            </p>
+                        </div>
+
+                        <p class="text-sm text-gray-600" x-text="selectedEvent.description"></p>
+
+                        <!-- ACTION -->
+                        <div class="flex gap-2 pt-4">
+                            <a :href="`/admin/kalender/${selectedEvent.id}/edit`"
+                                class="bg-amber-400 hover:bg-amber-300 p-2 rounded shadow-sm text-white">
+                                @svg('lucide-pencil', 'h-4 w-4')
+                            </a>
+
+                            <button @click="deleteEvent(selectedEvent.id)"
+                                class="bg-red-500 hover:bg-red-400 text-white p-2 rounded shadow-sm">
+                                @svg('lucide-trash-2', 'h-4 w-4')
+                            </button>
+                        </div>
+                    </div>
+                </template>
+
+                <template x-if="!selectedEvent">
+                    <p class="text-sm text-gray-500 text-center min-h-32 flex items-center justify-center">
+                        Klik event di kalender untuk melihat detail
+                    </p>
+                </template>
+            </div>
         </div>
     </div>
+
+    <script>
+        function calendarPage() {
+            return {
+                calendar: null,
+                selectedEvent: null,
+
+                initCalendar() {
+                    const el = document.getElementById('calendar')
+
+                    this.calendar = new FullCalendar.Calendar(el, {
+                        initialView: 'dayGridMonth',
+                        height: 'auto',
+                        events: '/admin/calendar-events',
+
+                        eventClick: (info) => {
+                            this.selectedEvent = {
+                                id: info.event.id,
+                                title: info.event.title,
+                                start: info.event.start,
+                                end: info.event.end,
+                                description: info.event.extendedProps.description,
+                                category: info.event.extendedProps.category,
+                                color: info.event.backgroundColor
+                            }
+                        }
+                    })
+
+                    this.calendar.render()
+                },
+
+                deleteEvent(id) {
+                    Swal.fire({
+                        title: 'Hapus event?',
+                        text: 'Data tidak bisa dikembalikan',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Hapus'
+                    }).then(r => {
+                        if (!r.isConfirmed) return
+
+                        fetch(`/admin/kalender/${id}/delete`, {
+                                method: 'DELETE',
+                                headers: {
+                                    'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content,
+                                    'Accept': 'application/json'
+                                }
+                            })
+                            .then(r => r.json())
+                            .then(r => {
+                                if (r.success) {
+                                    Swal.fire("Terhapus!", r.message, "success")
+                                    this.calendar.refetchEvents()
+                                    this.selectedEvent = null
+                                } else {
+                                    Swal.fire("Gagal!", r.message ?? "Terjadi kesalahan", "error")
+                                }
+                            })
+                            .catch(() => {
+                                Swal.fire("Error!", "Gagal menghapus data", "error")
+                            })
+
+                    })
+                },
+
+                formatDate(date) {
+                    return new Date(date).toLocaleDateString('id-ID', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric'
+                    })
+                }
+            }
+        }
+    </script>
+
+
 
 </x-app-layout>

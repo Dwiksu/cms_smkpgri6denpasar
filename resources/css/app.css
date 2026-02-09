@@ -15,6 +15,7 @@
 @source '../**/*.js';
 @source "../../node_modules/flowbite";
 
+@variant dark (false);
 
 @layer theme {
   html {
@@ -22,3 +23,49 @@
   }
 }
 
+/* CALENDAR */
+/* Toolbar container */
+
+/* Title */
+.fc .fc-toolbar-title {
+    color: black;
+    font-weight: 600;
+}
+
+/* Buttons */
+.fc .fc-button {
+    background-color: var(--color-brand);
+    color: var(--color-white);
+    border-style: var(--tw-border-style) !important;
+    border-width: 1px !important;
+    border-color: var(--color-default) !important;
+    box-shadow: none;
+}
+
+.fc-prev-button {
+    border-radius: var(--radius-base) 0 0 var(--radius-base) !important;
+}
+.fc-next-button {
+    border-radius: 0 var(--radius-base) var(--radius-base) 0 !important;
+}
+
+.fc .fc-button:hover:not(:disabled) {
+    background-color: var(--color-brand-strong) !important;
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active {
+    background-color: var(--color-brand);
+    color: var(--color-white);
+}
+
+/* Today button */
+.fc .fc-today-button {
+    text-transform: capitalize !important;
+    background-color: var(--color-brand) !important;
+    color: var(--color-white) !important;
+    border-style: var(--tw-border-style) !important;
+    border-width: 1px !important;
+    border-color: var(--color-default) !important;
+    border-radius: var(--radius-base) !important;
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+}

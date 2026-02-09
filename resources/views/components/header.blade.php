@@ -5,16 +5,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="{{ $metaDesc }}">
     <meta name="author" content="sudarma putra & dwiksu">
     <meta name="keywords" content="SMK, PGRI, DENPASAR, SMK PGRI 6 DENPASAR">
-    <meta name="application-name" content="{{ $metaTitle }}">
+    @if (isset($metaTitle) && isset($metaDesc) && $metaTitle && $metaDesc)
+        <meta name="application-name" content="{{ $metaTitle }}">
+        <meta name="description" content="{{ $metaDesc }}">
+    @endif
 
     <title>{{ $slot }} | SADGRISKA</title>
 
     <!-- Styles / Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://cdn.ckeditor.com/ckeditor5/35.1.0/classic/ckeditor.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+
 
 
     @if (session('success'))
