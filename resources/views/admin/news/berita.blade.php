@@ -3,7 +3,7 @@
     <x-slot:metaDesc>Ini halaman cuma buat berita aja</x-slot:metaDesc>
     <x-slot:title>Berita</x-slot:title>
 
-    <div class="space-y-6">
+    <div class="space-y-6" x-data="{ search: '' }">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
                 <h1 class="font-display text-3xl font-bold">Kelola Berita</h1>
@@ -22,13 +22,13 @@
                 <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                     @svg('lucide-search', 'w-4 h-4 text-body')
                 </div>
-                <input type="search" id="search"
+                <input type="search" id="search" x-model.debounce.300ms="search"
                     class="block w-full p-3 ps-9 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
                     placeholder="Cari berita..." />
             </div>
         </div>
 
-        {{-- News Table --}} 
+        {{-- News Table --}}
         <div class="overflow-x-auto rounded-lg border border-default bg-white shadow-sm">
             <table class="w-full text-sm text-left">
                 <thead class="bg-neutral-secondary-medium text-heading">
@@ -43,7 +43,13 @@
 
                 <tbody class="divide-y divide-default">
                     @forelse ($news as $item)
-                        <tr class="hover:bg-gray-50">
+                        <tr class="hover:bg-gray-50"
+                            x-show="
+                                search === '' ||
+                                '{{ strtolower($item->title) }}'.includes(search.toLowerCase()) ||
+                                '{{ strtolower($item->excerpt) }}'.includes(search.toLowerCase()) ||
+                                '{{ strtolower($item->category) }}'.includes(search.toLowerCase())
+                            ">
                             {{-- Image --}}
                             <td class="px-4 py-3">
                                 <img src="{{ $item->image }}" alt="{{ $item->title }}"
@@ -102,7 +108,7 @@
                     @endforelse
                 </tbody>
             </table>
-    </div>
+        </div>
 
     </div>
 </x-app-layout>

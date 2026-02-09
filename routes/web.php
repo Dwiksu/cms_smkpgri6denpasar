@@ -78,8 +78,10 @@ Route::prefix('admin')->group(function () {
         Route::get('/galeri', [GalleryAlbumController::class, 'index'])->name('galeri.admin');
         Route::post('/galeri/store', [GalleryAlbumController::class, 'store'])->name('admin.galeri.create');
         Route::put('/galeri/update/{album}', [GalleryAlbumController::class, 'update'])->name('admin.galeri.update');
+        Route::delete('/galeri/delete/{album}', [GalleryAlbumController::class, 'destroy'])->name('admin.galeri.destroy');
         Route::post('/galeri/photo/store', [PhotoController::class, 'store'])->name('admin.photo.create');
         Route::put('/galeri/photo/update/{photo}', [PhotoController::class, 'update'])->name('admin.photo.update');
+        Route::delete('/galeri/photo/delete/{photo}', [PhotoController::class, 'destroy'])->name('admin.photo.destroy');
 
 
         // CALENDER EVENT

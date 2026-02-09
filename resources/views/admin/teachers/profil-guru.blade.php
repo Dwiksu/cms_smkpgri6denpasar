@@ -3,7 +3,7 @@
     <x-slot:metaDesc>Ini halaman cuma buat profil guru aja</x-slot:metaDesc>
     <x-slot:title>Profil Guru</x-slot:title>
 
-    <div class="space-y-6">
+    <div class="space-y-6" x-data="{ search: '' }">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
                 <h1 class="font-display text-3xl font-bold">Kelola Guru</h1>
@@ -21,7 +21,7 @@
                 <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                     @svg('lucide-search', 'w-4 h-4 text-body')
                 </div>
-                <input type="search" id="search"
+                <input type="search" id="search" x-model.debounce.300ms="search"
                     class="block w-full p-3 ps-9 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
                     placeholder="Cari guru..." />
             </div>
@@ -44,7 +44,16 @@
 
                 <tbody class="divide-y divide-default">
                     @forelse ($teachers as $item)
-                        <tr class="hover:bg-neutral-secondary-soft transition">
+                        <tr class="hover:bg-neutral-secondary-soft transition"
+                            x-show="
+                                search === '' ||
+                                '{{ strtolower($item->name) }}'.includes(search.toLowerCase()) ||
+                                '{{ strtolower($item->position) }}'.includes(search.toLowerCase()) ||
+                                '{{ strtolower($item->major->name ?? 'Umum') }}'.includes(search.toLowerCase()) || 
+                                '{{ strtolower($item->subject) }}'.includes(search.toLowerCase()) || 
+                                '{{ strtolower($item->education) }}'.includes(search.toLowerCase())
+                            ">
+
                             {{-- Foto --}}
                             <td class="px-4 py-3">
                                 <img src="{{ $item->photo }}" alt="{{ $item->name }}"
