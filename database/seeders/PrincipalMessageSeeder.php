@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\PrincipalMessage;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,13 @@ class PrincipalMessageSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        PrincipalMessage::insert([
+           'name' => 'Drs. I Wayan Sukarta',
+           'nip' => '-',
+           'photo' => '/storage/images/beranda/principal/foto-kepsek.jpeg',
+           'period' => '-',
+           'message' => '-',
+           'position' => 'Kepala Sekolah'
+        ]);
     }
 }
