@@ -13,9 +13,13 @@ use App\Http\Controllers\admin\UploadImageController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\LogoutController;
+use App\Http\Controllers\public\HomeController;
 use Illuminate\Support\Facades\Route;
 
 
+/* HALAMAN PUBLIK */
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 /* HALAMAN ADMIN */
 
@@ -102,8 +106,4 @@ Route::prefix('admin')->group(function () {
         // LOGOUT
         Route::post('/logout', LogoutController::class)->name('logout');
     });
-});
-
-Route::get('/', function () {
-    return view('welcome');
 });

@@ -1,18 +1,14 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<x-header>
+    <x-slot:metaTitle>{{ $metaTitle ?? '' }}</x-slot:metaTitle>
+    <x-slot:metaDesc>{{ $metaDesc ?? '' }}</x-slot:metaDesc>
+    {{ $title ?? '' }}
+</x-header>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<x-navbar></x-navbar>
 
-    <title>{{ $title ?? 'HOME' }}</title>
-
-    <!-- Styles / Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-
-<body>
-    {{ $slot }}
-</body>
-
-</html>
+<main class="flex-1 h-[800rem] bg-gray-50 min-h-screen">
+    <div class="space-y-8">
+        {{ $slot }}
+    </div>
+</main>
+<x-footer></x-footer>
