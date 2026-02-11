@@ -50,10 +50,9 @@
                     </div>
                     <div class="mb-5">
                         <label class="block mb-2.5 text-sm font-medium text-heading">Deskripsi Singkat</label>
-                        <input type="text" name="description" data-error-input
-                            value="{{ old('description', $major->description ?? '') }}"
+                        <textarea type="text" name="description" data-error-input
                             class="bg-neutral-secondary-medium border {{ errorBorder('description') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                            placeholder="Deskripsi singkat jurusan" />
+                            placeholder="Deskripsi singkat jurusan">{{ old('description', $major->description ?? '') }}</textarea>
                         @error('description')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
