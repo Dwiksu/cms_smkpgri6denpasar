@@ -140,30 +140,27 @@
                     </div>
                     <div class="mb-5">
                         <label class="block mb-2.5 text-sm font-medium text-heading">Deskripsi</label>
-                        <input type="text" name="about[description]" data-error-input
-                            value="{{ old('about.description', $about->description ?? '') }}"
+                        <textarea rows="4" name="about[description]" data-error-input
                             class="bg-neutral-secondary-medium border {{ errorBorder('about.description') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                            placeholder="Deskripsi tentang sekolah" />
+                            placeholder="Deskripsi tentang sekolah">{{ old('about.description', $about->description ?? '') }}</textarea>
                         @error('about.description')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="mb-5">
                         <label class="block mb-2.5 text-sm font-medium text-heading">Sejarah Sekolah</label>
-                        <input type="text" name="about[history]" data-error-input
-                            value="{{ old('about.history', $about->history ?? '') }}"
+                        <textarea rows="4" name="about[history]" data-error-input
                             class="bg-neutral-secondary-medium border {{ errorBorder('about.history') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                            placeholder="Sejarah sekolah" />
+                            placeholder="Sejarah sekolah">{{ old('about.history', $about->history ?? '') }}</textarea>
                         @error('about.history')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="mb-5">
                         <label class="block mb-2.5 text-sm font-medium text-heading">Visi</label>
-                        <input type="text" name="about[vision]" data-error-input
-                            value="{{ old('about.vision', $about->vision ?? '') }}"
+                        <textarea rows="4" name="about[vision]" data-error-input
                             class="bg-neutral-secondary-medium border {{ errorBorder('about.vision') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                            placeholder="Visi sekolah" />
+                            placeholder="Visi sekolah">{{ old('about.vision', $about->vision ?? '') }}</textarea>
                         @error('about.vision')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
@@ -407,14 +404,14 @@
                         <div class="mb-5">
                             <label class="block mb-2.5 text-sm font-medium text-heading">Telepon</label>
                             <input type="text" name="phone" data-error-input
-                            value="{{ old('phone', $school->phone ?? '') }}"
+                                value="{{ old('phone', $school->phone ?? '') }}"
                                 class="bg-neutral-secondary-medium read-only:bg-neutral-secondary border {{ errorBorder('phone') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="0361-123456" />
                         </div>
                         <div class="mb-5">
                             <label class="block mb-2.5 text-sm font-medium text-heading">Email</label>
                             <input type="text" name="email" data-error-input
-                            value="{{ old('email', $school->email ?? '') }}"
+                                value="{{ old('email', $school->email ?? '') }}"
                                 class="bg-neutral-secondary-medium border {{ errorBorder('email') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="email@smkpgri6denpasar.sch.id" />
                             @error('email')

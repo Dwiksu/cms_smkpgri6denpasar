@@ -85,8 +85,8 @@
 
                                 {{-- Category --}}
                                 <td class="px-4 py-3">
-                                    <span class="text-xs font-semibold px-2 py-1 rounded-full"
-                                        :class="categoryColor(item.category)" x-text="item.category">
+                                    <span class="text-xs font-semibold px-2 py-1 rounded-full""
+                                        :class="item.category_color"" x-text="item.category">
                                     </span>
                                 </td>
 
@@ -280,21 +280,6 @@
                         this.fetchData()
                     }
                 },
-
-                categoryColor(category) {
-                    switch (category) {
-                        case 'berita':
-                            return 'bg-green-100 text-green-800'
-                        case 'pengumuman':
-                            return 'bg-amber-100 text-amber-800'
-                        case 'prestasi':
-                            return 'bg-red-100 text-red-800'
-                        case 'kegiatan':
-                            return 'bg-blue-100 text-blue-800'
-                        default:
-                            return 'bg-gray-100 text-gray-800'
-                    }
-                }
             }
         }
     </script>

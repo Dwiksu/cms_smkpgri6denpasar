@@ -27,7 +27,8 @@ class News extends Model
         'published_at' => 'datetime',
     ];
 
-    protected $appends = ['published_at_formatted'];
+    protected $appends = ['published_at_formatted', 'category_color'];
+
 
     public function getPublishedAtFormattedAttribute()
     {
@@ -57,3 +58,13 @@ class News extends Model
         return self::latest()->limit(3);
     }
 }
+    function getCategoryColorAttribute(): string
+    {
+        return match ($this->category) {
+            'berita' => 'bg-green-100 text-green-800',
+            'kegiatan' => 'bg-amber-100 text-amber-800',
+            'pengumuman' => 'bg-red-100 text-red-800',
+            'prestasi' => 'bg-blue-100 text-blue-800',
+            default => 'bg-gray-100 text-gray-800',
+        };
+    }
