@@ -29,14 +29,14 @@
                 <ul
                     class="flex flex-col text-sm font-small p-4 md:p-0 mt-4 border border-default rounded-base md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
                     <li>
-                        <a href="#"
+                        <a href="{{ route('public.home.index') }}"
                             class="block py-2 px-3 text-white bg-sky-600 rounded md:bg-transparent md:text-fg-brand md:p-0"
-                            aria-current="page">Home</a>
+                            aria-current="page">Beranda</a>
                     </li>
                     <li>
                         <button id="dropdownNvbarButton" data-dropdown-toggle="dropdownNavbar"
                             class="flex items-center justify-between w-full py-2 px-3 rounded font-small text-heading md:w-auto hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0">
-                            Dropdown
+                            Tentang Kami
                             <svg class="w-4 h-4 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -48,36 +48,31 @@
                             class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44">
                             <ul class="p-2 text-sm text-body font-small" aria-labelledby="dropdownNvbarButton">
                                 <li>
-                                    <a href="#"
-                                        class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Dashboard</a>
+                                    <a href="{{ route('public.sambutan.index') }}"
+                                        class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Sambutan Kepala Sekolah</a>
                                 </li>
                                 <li>
-                                    <a href="#"
-                                        class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Settings</a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Earnings</a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Sign
-                                        out</a>
+                                    <a href="{{ route('public.sejarah.index') }}"
+                                        class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Sejarah Kami</a>
                                 </li>
                             </ul>
                         </div>
                     </li>
                     <li>
-                        <a href="#"
-                            class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Services</a>
+                        <a href="{{ route('public.berita.index') }}"
+                            class="block py-2 px-3 text-body rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Berita & Pengumuman</a>
                     </li>
                     <li>
-                        <a href="#"
-                            class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Pricing</a>
+                        <a href="{{ route('public.jurusan.index') }}"
+                            class="block py-2 px-3 text-body rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Jurusan</a>
                     </li>
                     <li>
-                        <a href="#"
-                            class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Contact</a>
+                        <a href="{{ route('public.guru.index') }}"
+                            class="block py-2 px-3 text-body  rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Profil Guru</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('public.kalender.index') }}"
+                            class="block py-2 px-3 text-body rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Kalender</a>
                     </li>
                 </ul>
             </div>
