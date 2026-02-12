@@ -173,7 +173,7 @@
                                 id: info.event.id,
                                 title: info.event.title,
                                 start: info.event.start,
-                                end: info.event.end,
+                                end: info.event.end ?? info.event.start,
                                 description: info.event.extendedProps.description,
                                 category: info.event.extendedProps.category,
                                 color: info.event.backgroundColor
