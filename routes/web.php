@@ -13,16 +13,58 @@ use App\Http\Controllers\admin\UploadImageController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\LogoutController;
+use App\Http\Controllers\public\AboutController;
+use App\Http\Controllers\public\BeritaController;
+use App\Http\Controllers\public\GuruController;
 use App\Http\Controllers\public\HomeController;
+use App\Http\Controllers\public\JurusanController;
+use App\Http\Controllers\public\SambutanController;
 use Illuminate\Support\Facades\Route;
 
 
 /* HALAMAN PUBLIK */
+Route::name('public.')->group(function () {
+    
+    // BERANDA
+    Route::get('/', [HomeController::class, 'index'])->name('home.index');
+    Route::get('/beranda', [HomeController::class, 'index'])->name('home.index');
+    
+    
+    // SAMBUTAN KEPSEK
+    Route::get('/sambutan', [SambutanController::class, 'index'])->name('sambutan.index');
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+    
+    // SEJARAH SEKOLAH
+    Route::get('/sejarah', [AboutController::class, 'index'])->name('sejarah.index');
+
+    
+    // BERITA
+    Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
+    Route::get('/berita/{news}', [BeritaController::class, 'show'])->name('berita.show');
+
+    
+    // JURUSAN
+    Route::get('/jurusan', [JurusanController::class, 'index'])->name('jurusan.index');
+    Route::get('/jurusan/{major}', [JurusanController::class, 'show'])->name('jurusan.show');
+
+    
+    // PROFIL GURU
+    Route::get('/guru', [GuruController::class, 'index'])->name('guru.index');
+    
+    
+    // GALERI
+    Route::get('/galeri', [GalleryAlbumController::class, 'index'])->name('galeri.index');
+    Route::get('/galeri/{album}', [GalleryAlbumController::class, 'show'])->name('galeri.show');
+
+    
+    // CALENDER EVENT
+    Route::get('/kalender', [CalenderEventController::class, 'index'])->name('kalender.index');
+    Route::get('/kalender-event', [CalenderEventController::class, 'show'])->name('kalender.show');
+});
+
+
 
 /* HALAMAN ADMIN */
-
 Route::prefix('admin')->group(function () {
 
     // LOGIN GUEST ONLY
