@@ -13,32 +13,14 @@ class CalenderEventController extends Controller
      */
     public function index()
     {
-        $events = CalenderEvent::getEvents();
-        return view('admin.calendars.kalender', compact('events'));
+        return view('admin.calendars.kalender');
     }
 
     public function getEvents()
     {
-        $events = CalenderEvent::all()->map(function ($e) {
-            return [
-                'id'            => $e->id,
-                'title'         => $e->title,
-                'start'         => $e->start_date,
-                'end'           => $e->end_date,
-                'allDay'        => true,
-                'description'   => $e->description,
-                'category'      => $e->category,
-                'color'         => match ($e->category) {
-                    'libur' => '#efb100',
-                    'ujian' => '#fb2c36',
-                    'akademik' => '#1447e6',
-                    'kegiatan' => '#00c951',
-                    default => '#2563eb',
-                }
-            ];
-        });
-
-        return response()->json($events);
+        return response()->json(
+            CalenderEvent::getEventsData()
+        );
     }
 
     /**
