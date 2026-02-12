@@ -25,9 +25,10 @@ class About extends Model
     protected $casts = [
         'mission' => 'array',
     ];
+    
 
-    public function schoolValues(): HasMany
-    {
-        return $this->hasMany(SchoolValue::class);
+    // PUBLIC
+    public static function getAboutDesc() {
+        return self::select('description')->first();
     }
 }

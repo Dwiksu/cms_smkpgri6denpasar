@@ -41,7 +41,7 @@ class News extends Model
         return self::where('published_at', '<=', now())
             ->orderByDesc('published_at')
             ->latest('published_at')
-            ->paginate(5);
+            ->paginate(6);
     }
 
     public static function getNewsForDashboard()
@@ -51,5 +51,9 @@ class News extends Model
             ->orderByDesc('published_at')
             ->limit(3)
             ->get();
+    }
+
+    public static function getNewsForHome() {
+        return self::latest()->limit(3);
     }
 }
