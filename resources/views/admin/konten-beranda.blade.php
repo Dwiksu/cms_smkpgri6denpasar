@@ -460,13 +460,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mb-5">
-                        <label class="block mb-2.5 text-sm font-medium text-heading">Link Map</label>
-                        <input type="text" name="map_embed"
-                            value="{{ old('map_embed', $school->map_embed ?? '') }}"
-                            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                            placeholder="https://maps.google.com/..." />
-                    </div>
                     <button type="submit"
                         class="text-white bg-brand box-border border border-transparent inline-flex items-center  hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
                         @svg('lucide-save', 'h-4 w-4 me-1.5')

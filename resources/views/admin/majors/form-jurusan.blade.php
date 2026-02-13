@@ -67,26 +67,51 @@
                         @enderror
                     </div>
                     <div x-data="curriculumField()" class="mb-5">
-                        <label class="block mb-2.5 text-sm font-medium text-heading">Kurikulum</label>
-                        <template x-for="(k, index) in kurikulum" :key="index">
-                            <div class="flex gap-2 mb-2">
-                                <input type="text" :name="'curriculum[' + index + ']'" x-model="kurikulum[index]"
-                                    class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                    :placeholder="'Kurikulum ' + (index + 1)">
+                        <label class="block mb-2.5 text-sm font-medium text-heading">
+                            Mata Pelajaran
+                        </label>
 
-                                <button type="button" @click="removeKurikulum(index)"
-                                    class="bg-red-500 text-white px-3 rounded">
-                                    @svg('lucide-trash-2', 'h-4 w-4')
-                                </button>
+                        {{-- ERROR GROUP --}}
+                        @error('subjects')
+                            <p class="text-sm text-red-600 mb-2">{{ $message }}</p>
+                        @enderror
+                        @error('subjects.*.name')
+                            <p class="text-sm text-red-600 mb-2">{{ $message }}</p>
+                        @enderror
+                        @error('subjects.*.description')
+                            <p class="text-sm text-red-600 mb-2">{{ $message }}</p>
+                        @enderror
+
+                        <template x-for="(item, index) in mapel" :key="index">
+                            <div class="flex flex-col gap-1 mb-3">
+
+                                <div class="flex gap-2">
+                                    {{-- NAMA MAPEL --}}
+                                    <input type="text" :name="`subjects[${index}][name]`" x-model="item.name"
+                                        placeholder="Nama mata pelajaran"
+                                        class="w-1/3 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block px-3 py-2.5 shadow-xs placeholder:text-body">
+
+                                    {{-- DESKRIPSI MAPEL --}}
+                                    <input type="text" :name="`subjects[${index}][description]`"
+                                        x-model="item.description" placeholder="Deskripsi mata pelajaran"
+                                        class="flex-1 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+
+                                    <button type="button" @click="removeMapel(index)"
+                                        class="bg-red-500 text-white px-3 rounded">
+                                        @svg('lucide-trash-2', 'h-4 w-4')
+                                    </button>
+                                </div>
                             </div>
                         </template>
 
-                        <button type="button" @click="addKurikulum"
-                            class="bg-gray-200 box-border border border-transparent inline-flex items-center  hover:bg-gray-300 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+                        <button type="button" @click="addMapel"
+                            class="bg-gray-200 box-border border border-transparent inline-flex items-center hover:bg-gray-300 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
                             @svg('lucide-plus', 'h-4 w-4 me-2')
-                            Tambah Kurikulum
+                            Tambah Mata Pelajaran
                         </button>
                     </div>
+
+
                     <div x-data="prospectusField()" class="mb-5">
                         <label class="block mb-2.5 text-sm font-medium text-heading">Prospek Karir</label>
                         <template x-for="(p, index) in prospek" :key="index">
@@ -179,14 +204,17 @@
 
         function curriculumField() {
             return {
-                kurikulum: @json(old('kurikulum', $major->curriculum ?? [''])),
+                mapel: @json(old('subjects', $major->subjects ?? [['name' => '', 'description' => '']])),
 
-                addKurikulum() {
-                    this.kurikulum.push('');
+                addMapel() {
+                    this.mapel.push({
+                        name: '',
+                        description: ''
+                    });
                 },
 
-                removeKurikulum(index) {
-                    this.kurikulum.splice(index, 1);
+                removeMapel(index) {
+                    this.mapel.splice(index, 1);
                 }
             }
         }
