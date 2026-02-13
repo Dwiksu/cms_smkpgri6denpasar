@@ -21,7 +21,7 @@ class BerandaController extends Controller
         // dd( About::with('schoolValues')->first());
         return view('admin.konten-beranda', [
             'hero' => Hero::first(),
-            'about' => About::with('schoolValues')->first(),
+            'about' => About::first(),
             'principal' => PrincipalMessage::first(),
             'stats' => Stat::all(),
             'school' => School::first(),
@@ -169,7 +169,6 @@ class BerandaController extends Controller
             'instagram' => 'nullable|string|max:255',
             'twitter' => 'nullable|string|max:255',
             'youtube' => 'nullable|string|max:255',
-            'map_embed' => 'nullable|string|max:255',
         ], [
             'short_name.required' => 'Nama singkat harus diisi',
             'full_name.required' => 'Nama lengkap harus diisi',

@@ -10,7 +10,7 @@ class JurusanController extends Controller
 {
     public function show(Major $major)
     {
-        $teachers = $major->getTeacherByMajor($major->id);
-        return view('public.jurusan.detail', compact('major', 'teachers'));
+        $teachers = $major->teachers;
+        return view('public.jurusan.index', compact('major', 'teachers'));
     }
 }

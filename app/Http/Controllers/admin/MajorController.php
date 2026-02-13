@@ -12,7 +12,7 @@ class MajorController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {  
+    {
         $majors = Major::getMajor();
         return view('admin.majors.jurusan', compact('majors'));
     }
@@ -37,7 +37,9 @@ class MajorController extends Controller
             'full_description' => 'required|string',
             'image' => 'required|string',
             'gallery' => 'nullable|array',
-            'curriculum' => 'nullable|array',
+            'subjects' => 'required|array|min:1',
+            'subjects.*.name' => 'required|string|min:3',
+            'subjects.*.description' => 'required|string|min:5',
             'careers' => 'nullable|array',
             'achievements' => 'nullable|array',
         ], [
@@ -46,6 +48,12 @@ class MajorController extends Controller
             'short_name.required' => 'Singkatan jurusan harus diisi',
             'full_description.required' => 'Deskripsi lengkap jurusan harus diisi',
             'image.required' => 'Gambar jurusan harus diisi',
+            'subjects.required' => 'Jurusan harus memiliki beberapa mata pelajaran',
+            'subjects.min' => 'Minimal harus ada 1 mata pelajaran',
+            'subjects.*.name.required' => 'Nama mata pelajaran harus diisi',
+            'subjects.*.name.min' => 'Minimal harus ada 3 huruf',
+            'subjects.*.description.required' => 'Deskripsi mata pelajaran harus diisi',
+            'subjects.*.description.min' => 'Minimal harus ada 5 huruf',
         ]);
 
         $data['slug'] = str()->slug($data['name']);
@@ -83,7 +91,9 @@ class MajorController extends Controller
             'full_description' => 'required|string',
             'image' => 'required|string',
             'gallery' => 'nullable|array',
-            'curriculum' => 'nullable|array',
+            'subjects' => 'required|array|min:1',
+            'subjects.*.name' => 'required|string|min:3',
+            'subjects.*.description' => 'required|string|min:5',
             'careers' => 'nullable|array',
             'achievements' => 'nullable|array',
         ], [
@@ -92,6 +102,12 @@ class MajorController extends Controller
             'short_name.required' => 'Singkatan jurusan harus diisi',
             'full_description.required' => 'Deskripsi lengkap jurusan harus diisi',
             'image.required' => 'Gambar jurusan harus diisi',
+            'subjects.required' => 'Jurusan harus memiliki beberapa mata pelajaran',
+            'subjects.min' => 'Minimal harus ada 1 mata pelajaran',
+            'subjects.*.name.required' => 'Nama mata pelajaran harus diisi',
+            'subjects.*.name.min' => 'Minimal harus ada 3 huruf',
+            'subjects.*.description.required' => 'Deskripsi mata pelajaran harus diisi',
+            'subjects.*.description.min' => 'Minimal harus ada 5 huruf',
         ]);
 
         $data['slug'] = str()->slug($data['name']);
