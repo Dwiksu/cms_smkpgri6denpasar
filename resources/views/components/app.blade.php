@@ -10,116 +10,143 @@
     {{ $slot }}
 </main>
 
-<footer class="bg-gray-800 antialiased pt-14 relative overlay-top">
+<footer class="bg-gray-800 antialiased pt-32 relative overlay-top">
     <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
-        <div class="border-b py-6 border-gray-700 md:py-8 lg:py-16">
-            <div class="items-start gap-6 md:gap-8 lg:flex 2xl:gap-24">
-                <div class="grid min-w-0 flex-1 grid-cols-2 gap-6 md:gap-8 xl:grid-cols-3">
+
+        <div class="border-b border-gray-700 pb-14">
+            <div class="grid gap-10 lg:grid-cols-2">
+                
+                <div class="space-y-10">
+
+                    <!-- INFO SEKOLAH -->
                     <div>
-                        <h6 class="mb-4 text-sm font-semibold uppercase text-white">Company</h6>
-                        <ul class="space-y-3">
-                            <li>
-                                <a href="#" title="" class=" text-gray-400 hover:text-white">
-                                    About </a>
-                            </li>
+                        <!-- NAMA SEKOLAH (FOCUS) -->
+                        <h4 class="text-3xl font-bold text-white leading-tight">
+                            {{ $info->short_name }}
+                        </h4>
 
-                            <li>
-                                <a href="#" title="" class="text-gray-400 hover:text-white">
-                                    Premium </a>
-                            </li>
+                        <p class="mt-3 text-sm text-gray-400 leading-relaxed max-w-xl">
+                            Sekolah Menengah Kejuruan yang berkomitmen mencetak lulusan
+                            berkarakter, kompeten, dan siap bersaing di dunia kerja.
+                        </p>
 
-                            <li>
-                                <a href="#" title="" class=" text-gray-400 hover:text-white">
-                                    Blog </a>
+                        <ul class="mt-4 space-y-2 text-sm text-gray-400">
+                            <li class="flex items-center gap-2">
+                                @svg('lucide-map-pin', 'w-4 h-4 text-sky-600')
+                                <span>{{ $info->address }}</span>
                             </li>
-
-                            <li>
-                                <a href="#" title="" class=" text-gray-400 hover:text-white">
-                                    Affiliate Program </a>
+                            <li class="flex items-center gap-2">
+                                @svg('lucide-phone', 'w-4 h-4 text-sky-600')
+                                <span>{{ $info->phone ?? '-' }}</span>
                             </li>
-
-                            <li>
-                                <a href="#" title="" class=" text-gray-400 hover:text-white">
-                                    Get Coupon </a>
+                            <li class="flex items-center gap-2">
+                                @svg('lucide-mail', 'w-4 h-4 text-sky-600')
+                                <span>{{ $info->email ?? '-' }}</span>
                             </li>
                         </ul>
+
+                        {{-- <a href="{{ route('public.tentang.kontak') }}">
+                            <button
+                                class="mt-5 inline-flex items-center gap-2 rounded-md
+                   bg-sky-600 px-5 py-2.5 text-sm font-medium text-white
+                   hover:bg-sky-700 transition focus:outline-none focus:ring-2
+                   focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-gray-800">
+                                @svg('lucide-mail', 'h-4 w-4')
+                                Kontak Kami
+                            </button>
+                        </a> --}}
                     </div>
 
-                    <div>
-                        <h6 class="mb-4 text-sm font-semibold uppercase text-gray-900 text-white">Order &
-                            Purchases</h6>
-                        <ul class="space-y-3">
-                            <li>
-                                <a href="#" title="" class=" text-gray-400 hover:text-white">Order
-                                    Status</a>
-                            </li>
-                            <li>
-                                <a href="#" title="" class=" text-gray-400 hover:text-white">Track
-                                    Your Order</a>
-                            </li>
-                            <li>
-                                <a href="#" title="" class=" text-gray-400 hover:text-white">Purchase
-                                    History</a>
-                            </li>
-                            <li>
-                                <a href="#" title="" class=" text-gray-400 hover:text-white">Returns
-                                    & Refunds</a>
-                            </li>
-                            <li>
-                                <a href="#" title="" class=" text-gray-400 hover:text-white">Payment
-                                    Methods</a>
-                            </li>
-                        </ul>
-                    </div>
 
-                    <div>
-                        <h6 class="mb-4 text-sm font-semibold uppercase text-gray-900 text-white">Support &
-                            Services</h6>
-                        <ul class="space-y-3">
-                            <li>
-                                <a href="#" title="" class=" text-gray-400 hover:text-white">Contact
-                                    Support</a>
-                            </li>
-                            <li>
-                                <a href="#" title="" class=" text-gray-400 hover:text-white">FAQs</a>
-                            </li>
-                            <li>
-                                <a href="#" title="" class=" text-gray-400 hover:text-white">Service
-                                    Centers</a>
-                            </li>
-                            <li>
-                                <a href="#" title="" class=" text-gray-400 hover:text-white">Warranty
-                                    Information</a>
-                            </li>
-                            <li>
-                                <a href="#" title="" class=" text-gray-400 hover:text-white">Product
-                                    Manuals</a>
-                            </li>
-                        </ul>
+                    <div class="grid gap-8 sm:grid-cols-2">
+
+                        <!-- JURUSAN -->
+                        <div>
+                            <h6 class="mb-3 text-sm font-semibold uppercase tracking-wider text-white">
+                                Jurusan
+                            </h6>
+
+                            <ul class="space-y-2 text-sm">
+                                @forelse ($majors as $major)
+                                    <li>
+                                        <a href="{{ route('public.jurusan.show', $major->slug) }}"
+                                            class="text-gray-400 hover:text-white transition">
+                                            {{ $major->name }}
+                                        </a>
+                                    </li>
+                                @empty
+                                    <li class="text-gray-500">Jurusan belum tersedia</li>
+                                @endforelse
+                            </ul>
+                        </div>
+
+                        <!-- SOSIAL MEDIA -->
+                        <div>
+                            <h6 class="mb-3 text-sm font-semibold uppercase tracking-wider text-white">
+                                Ikuti Kami
+                            </h6>
+
+                            <div class="flex gap-4">
+                                <a href="{{ $info->instagram ?? '#' }}"
+                                    class="flex h-11 w-11 items-center justify-center rounded-full
+           bg-white/10 text-gray-300
+           hover:bg-sky-600 hover:text-white
+           transition hover:scale-110"
+                                    aria-label="Instagram">
+                                    @svg('lucide-instagram', 'h-5 w-5')
+                                </a>
+                                <a href="{{ $info->facebook ?? '#' }}"
+                                    class="flex h-11 w-11 items-center justify-center rounded-full
+           bg-white/10 text-gray-300
+           hover:bg-sky-600 hover:text-white
+           transition hover:scale-110"
+                                    aria-label="Facebook">
+                                    @svg('lucide-facebook', 'h-5 w-5')
+                                </a>
+                                <a href="{{ $info->youtube ?? '#' }}"
+                                    class="flex h-11 w-11 items-center justify-center rounded-full
+           bg-white/10 text-gray-300
+           hover:bg-sky-600 hover:text-white
+           transition hover:scale-110"
+                                    aria-label="YouTube">
+                                    @svg('lucide-youtube', 'h-5 w-5')
+                                </a>
+                            </div>
+
+                            <p class="mt-3 text-xs text-gray-400">
+                                Ikuti kami untuk info & kegiatan terbaru
+                            </p>
+                        </div>
+
                     </div>
                 </div>
 
-                <div class="mt-6 w-full md:mt-8 lg:mt-0 lg:max-w-lg">
-                    <div class="space-y-5 rounded-lg bg-gray-50 p-6 shadow-sm shadow-gray-400">
-                        <div class="text-base font-medium border-b-2 border-dashed text-primary-700 w-fit"> Lokasi
-                            Kami </div>
+                <!-- ================= KANAN ================= -->
+                <div class="rounded-xl bg-gray-50 p-3 shadow-md h-fit">
+                    <p class="mb-2 text-sm font-semibold text-primary-700">
+                        Lokasi Kami
+                    </p>
 
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3944.155001235972!2d115.21844697592086!3d-8.67680598834165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd240eeec312863%3A0x7cffa04e5587c843!2sSMK%20PGRI%206%20Denpasar!5e0!3m2!1sen!2sid!4v1770903262851!5m2!1sen!2sid"
-                            width="464" height="300" style="border:0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
+                    <iframe class="w-full h-75 rounded-lg"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3944.155001235972!2d115.21844697592086!3d-8.67680598834165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd240eeec312863%3A0x7cffa04e5587c843!2sSMK%20PGRI%206%20Denpasar!5e0!3m2!1sen!2sid!4v1770903262851!5m2!1sen!2sid"
+                        loading="lazy">
+                    </iframe>
                 </div>
+
+
             </div>
         </div>
 
-        <div class="py-6 md:py-8">
-            <div class="gap-4 space-y-5 xl:flex xl:items-center xl:justify-between xl:space-y-0">
-                <p class="text-sm text-gray-500 text-gray-400">© 2026 <span class="hover:underline">SMK PGRI 6
-                        Denpasar</span>. All rights reserved.</p>
-            </div>
+        <!-- COPYRIGHT -->
+        <div class="py-6 text-center">
+            <p class="text-sm text-gray-400">
+                © 2026 <span class="font-medium text-white">{{ $info->short_name }}</span>.
+                All rights reserved.
+            </p>
         </div>
+
     </div>
 </footer>
+
 
 <x-footer></x-footer>
