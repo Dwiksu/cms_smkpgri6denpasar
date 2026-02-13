@@ -21,14 +21,14 @@ class Major extends Model
         'full_description',
         'image',
         'gallery',
-        'curriculum',
+        'subjects',
         'careers',
         'achievements'
     ];
 
     protected $casts = [
         'gallery' => 'array',
-        'curriculum' => 'array',
+        'subjects' => 'array',
         'careers' => 'array',
         'achievements' => 'array'
     ];
@@ -51,15 +51,5 @@ class Major extends Model
     public static function getMajorForHome()
     {
         return self::latest()->get();
-    }
-
-    public static function getTeacherByMajor($major)
-    {
-        return self::withWhereHas(
-            'teachers',
-            fn($query)
-            => $query->where('major_id', $major)
-        )
-            ->get();
     }
 }
