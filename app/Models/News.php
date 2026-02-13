@@ -55,7 +55,10 @@ class News extends Model
     }
 
     public static function getNewsForHome() {
-        return self::latest()->limit(3);
+         return self::where('published_at', '<=', now())
+            ->orderByDesc('published_at')
+            ->latest('published_at')
+            ->paginate(3);
     }
 }
     function getCategoryColorAttribute(): string

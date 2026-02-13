@@ -50,7 +50,7 @@ class Major extends Model
 
     public static function getMajorForHome()
     {
-        return self::latest()->limit(3);
+        return self::latest()->get();
     }
 
     public static function getTeacherByMajor($major)

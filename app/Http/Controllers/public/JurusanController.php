@@ -8,12 +8,6 @@ use Illuminate\Http\Request;
 
 class JurusanController extends Controller
 {
-    public function index()
-    {
-        $majors = Major::getMajor();
-        return view('public.jurusan.index', compact('majors'));
-    }
-
     public function show(Major $major)
     {
         $teachers = $major->getTeacherByMajor($major->id);

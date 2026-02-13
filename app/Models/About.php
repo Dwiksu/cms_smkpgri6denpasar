@@ -28,7 +28,7 @@ class About extends Model
     
 
     // PUBLIC
-    public static function getAboutDesc() {
-        return self::select('description')->first();
+    public static function getAboutForHome() {
+        return self::select('image', 'description',  'title')->first();
     }
 }
