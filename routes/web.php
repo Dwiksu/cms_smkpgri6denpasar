@@ -32,15 +32,15 @@ Route::name('public.')->group(function () {
     
     
     // SAMBUTAN KEPSEK
-    Route::get('/sambutan', [SambutanController::class, 'index'])->name('sambutan.index');
+    Route::get('/sambutan', [SambutanController::class, 'index'])->name('tentang.sambutan');
 
     
     // SEJARAH SEKOLAH
-    Route::get('/sejarah', [AboutController::class, 'index'])->name('sejarah.index');
+    Route::get('/sejarah', [AboutController::class, 'index'])->name('tentang.sejarah');
 
     
     // KONTAK
-    Route::get('/kontak', [KontakController::class, 'index'])->name('kontak.index');
+    Route::get('/kontak', [KontakController::class, 'index'])->name('tentang.kontak');
     
     
     // BERITA
@@ -49,7 +49,7 @@ Route::name('public.')->group(function () {
 
     
     // JURUSAN
-    Route::get('/jurusan/{major}', [JurusanController::class, 'show'])->name('jurusan.show');
+    Route::get('/jurusan/{major:slug}', [JurusanController::class, 'show'])->name('jurusan.show');
 
     
     // PROFIL GURU
