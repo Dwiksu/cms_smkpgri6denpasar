@@ -18,6 +18,7 @@ use App\Http\Controllers\public\BeritaController;
 use App\Http\Controllers\public\GuruController;
 use App\Http\Controllers\public\HomeController;
 use App\Http\Controllers\public\JurusanController;
+use App\Http\Controllers\public\KontakController;
 use App\Http\Controllers\public\SambutanController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,13 +39,16 @@ Route::name('public.')->group(function () {
     Route::get('/sejarah', [AboutController::class, 'index'])->name('sejarah.index');
 
     
+    // KONTAK
+    Route::get('/kontak', [KontakController::class, 'index'])->name('kontak.index');
+    
+    
     // BERITA
     Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
     Route::get('/berita/{news}', [BeritaController::class, 'show'])->name('berita.show');
 
     
     // JURUSAN
-    Route::get('/jurusan', [JurusanController::class, 'index'])->name('jurusan.index');
     Route::get('/jurusan/{major}', [JurusanController::class, 'show'])->name('jurusan.show');
 
     
@@ -54,7 +58,7 @@ Route::name('public.')->group(function () {
     
     // GALERI
     Route::get('/galeri', [GalleryAlbumController::class, 'index'])->name('galeri.index');
-    Route::get('/galeri/{album}', [GalleryAlbumController::class, 'show'])->name('galeri.show');
+    Route::get('/galeri/{gallery}', [GalleryAlbumController::class, 'show'])->name('galeri.show');
 
     
     // CALENDER EVENT
