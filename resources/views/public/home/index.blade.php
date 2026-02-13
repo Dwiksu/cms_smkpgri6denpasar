@@ -42,7 +42,7 @@
                     <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-sky-600">{{ $about->title }}</h2>
                 </div>
                 <p class="mb-6 font-light text-gray-500 md:text-lg">{{ $about->description }}</p>
-                <a href="{{ route('public.sejarah.index') }}"
+                <a href="{{ route('public.tentang.sejarah') }}"
                     class="inline-flex justify-center gap-2 items-center py-3 px-7 text-base font-medium text-center bg-sky-600 text-white rounded-full border border-sky-600 hover:bg-transparent hover:text-sky-600 focus:ring-4 focus:ring-gray-100 transition-all duration-300">
                     Selengkapnya
                     @svg('lucide-arrow-right', 'w-5 h-5')
