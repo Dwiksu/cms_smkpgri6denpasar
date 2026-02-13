@@ -11,6 +11,6 @@ class SambutanController extends Controller
     public function index()
     {
         $principal = PrincipalMessage::first();
-        return view('public.sambutan.index', compact('principal'));
+        return view('public.tentang-kami.sambutan', compact('principal'));
     }
 }
