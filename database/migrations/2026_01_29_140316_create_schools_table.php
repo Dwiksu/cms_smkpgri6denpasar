@@ -24,7 +24,6 @@ return new class extends Migration {
             $table->string('youtube')->nullable();
             $table->string('twitter')->nullable();
 
-            $table->text('map_embed')->nullable();
             $table->timestamps();
         });
     }

@@ -7,12 +7,31 @@ function isActiveSidebar($path)
         : 'text-neutral-tertiary hover:bg-gray-200 hover:text-cyan-600';
 }
 
-function isActiveNavbar($path)
+function isActiveNavbar($routeName, $params = [])
 {
-    return request()->routeIs($path)
-        ? 'text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0'
-        : 'text-body rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-sky-700 md:p-0 md:dark:hover:bg-transparent';
+    if (!request()->routeIs($routeName)) {
+        return 'text-body rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-sky-700 md:p-0 md:dark:hover:bg-transparent';
+    }
+
+    foreach ($params as $key => $value) {
+        $param = request()->route($key);
+
+        // kalau hasil binding object (Major)
+        if (is_object($param) && isset($param->slug)) {
+            if ($param->slug !== $value) {
+                return 'text-body rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-sky-700 md:p-0 md:dark:hover:bg-transparent';
+            }
+        }
+        // kalau bukan object
+        elseif ($param != $value) {
+            return 'text-body rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-sky-700 md:p-0 md:dark:hover:bg-transparent';
+        }
+    }
+
+    return 'text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0';
 }
+
+
 
 function CalendarCategoryColor(string $category): string
 {

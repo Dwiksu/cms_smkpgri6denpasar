@@ -38,7 +38,7 @@
 
                         <button
                             class="flex items-center justify-between w-full py-2 px-3 font-small md:w-auto
-               text-body rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-sky-700 md:p-0 md:dark:hover:bg-transparent">
+               {{ isActiveNavbar('public.tentang.*') }}">
                             Tentang Kami
                             <svg class="w-4 h-4 ms-1.5 transition-transform duration-200"
                                 :class="open ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -54,27 +54,26 @@
                                 class="w-55 bg-neutral-primary-medium border border-default-medium
                    rounded-base shadow-lg">
 
-                                <ul class="text-sm text-body font-small divide-y divide-default/60">
-                                    <li class="flex items-center w-full px-4 py-3">
-                                        <a href="{{ route('public.sambutan.index') }}"
-                                            class="{{ isActiveNavbar('public.sambutan.index') }}">
-                                            Sambutan Kepala Sekolah
-                                        </a>
-                                    </li>
-                                    <li class="flex items-center w-full px-4 py-3">
-                                        <a href="{{ route('public.sejarah.index') }}"
-                                            class="{{ isActiveNavbar('public.sejarah.index') }}">
-                                            Sejarah Kami
-                                        </a>
-                                    </li>
-                                    <li class="flex items-center w-full px-4 py-3">
-                                        <a href="{{ route('public.kontak.index') }}"
-                                            class="{{ isActiveNavbar('public.kontak.index') }}">
-                                            Kontak Kami
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                            <ul class="text-sm text-body font-small divide-y divide-default/60">
+                                <li class="flex items-center w-full px-4 py-3">
+                                    <a href="{{ route('public.tentang.sambutan') }}"
+                                        class="{{ isActiveNavbar('public.tentang.sambutan') }}">
+                                        Sambutan Kepala Sekolah
+                                    </a>
+                                </li>
+                                <li class="flex items-center w-full px-4 py-3">
+                                    <a href="{{ route('public.tentang.sejarah') }}"
+                                        class="{{ isActiveNavbar('public.tentang.sejarah') }}">
+                                        Sejarah Kami
+                                    </a>
+                                </li>
+                                <li class="flex items-center w-full px-4 py-3">
+                                    <a href="{{ route('public.tentang.kontak') }}"
+                                        class="{{ isActiveNavbar('public.tentang.kontak') }}">
+                                        Kontak Kami
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </li>
 
@@ -87,7 +86,7 @@
 
                         <button
                             class="flex items-center justify-between w-full py-2 px-3 font-small md:w-auto
-               text-body rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-sky-700 md:p-0 md:dark:hover:bg-transparent">
+               {{ isActiveNavbar('public.jurusan.show') }}">
                             Jurusan
                             <svg class="w-4 h-4 ms-1.5 transition-transform duration-200"
                                 :class="open ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -104,19 +103,18 @@
                    bg-neutral-primary-medium border border-default-medium
                    rounded-base shadow-lg">
 
-                                <ul class="text-sm text-body font-small divide-y divide-default/60">
-                                    @forelse ($majors as $major)
-                                        <li class="flex items-center w-full px-4 py-3">
-                                            <a href="{{ route('public.jurusan.show', $major->slug) }}"
-                                                class="{{ isActiveNavbar('public.jurusan.show') }}">
-                                                {{ $major->name }}
-                                            </a>
-                                        </li>
-                                    @empty
-                                        <p>Jurusan belum tersedia</p>
-                                    @endforelse
-                                </ul>
-                            </div>
+                            <ul class="text-sm text-body font-small divide-y divide-default/60">
+                                @forelse ($majors as $major)
+                                    <li class="flex items-center w-full px-4 py-3">
+                                        <a href="{{ route('public.jurusan.show', $major->slug) }}"
+                                            class="{{ isActiveNavbar('public.jurusan.show', ['major' => $major->slug]) }}">
+                                            {{ $major->name }}
+                                        </a>
+                                    </li>
+                                @empty
+                                <p>Jurusan belum tersedia</p>
+                                @endforelse
+                            </ul>
                         </div>
                     </li>
                     <li>

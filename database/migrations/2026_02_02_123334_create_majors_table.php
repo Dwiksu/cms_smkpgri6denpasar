@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('image');
 
             $table->json('gallery')->nullable();
-            $table->json('curriculum')->nullable();
+            $table->json('subjects')->nullable();
             $table->json('careers')->nullable();
             $table->json('achievements')->nullable();
             $table->timestamps();
