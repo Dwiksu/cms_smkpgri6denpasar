@@ -49,31 +49,32 @@
                         </button>
 
                         <!-- Dropdown -->
-                        <div x-show="open" x-transition x-cloak
-                            class="absolute left-0 mt-3 z-20 w-55
-               bg-neutral-primary-medium border border-default-medium
-               rounded-base shadow-lg">
+                        <div x-show="open" x-transition x-cloak class="pt-3 absolute left-0 z-20">
+                            <div
+                                class="w-55 bg-neutral-primary-medium border border-default-medium
+                   rounded-base shadow-lg">
 
-                            <ul class="text-sm text-body font-small divide-y divide-default/60">
-                                <li class="flex items-center w-full px-4 py-3">
-                                    <a href="{{ route('public.sambutan.index') }}"
-                                        class="{{ isActiveNavbar('public.sambutan.index') }}">
-                                        Sambutan Kepala Sekolah
-                                    </a>
-                                </li>
-                                <li class="flex items-center w-full px-4 py-3">
-                                    <a href="{{ route('public.sejarah.index') }}"
-                                        class="{{ isActiveNavbar('public.sejarah.index') }}">
-                                        Sejarah Kami
-                                    </a>
-                                </li>
-                                <li class="flex items-center w-full px-4 py-3">
-                                    <a href="{{ route('public.kontak.index') }}"
-                                        class="{{ isActiveNavbar('public.kontak.index') }}">
-                                        Kontak Kami
-                                    </a>
-                                </li>
-                            </ul>
+                                <ul class="text-sm text-body font-small divide-y divide-default/60">
+                                    <li class="flex items-center w-full px-4 py-3">
+                                        <a href="{{ route('public.sambutan.index') }}"
+                                            class="{{ isActiveNavbar('public.sambutan.index') }}">
+                                            Sambutan Kepala Sekolah
+                                        </a>
+                                    </li>
+                                    <li class="flex items-center w-full px-4 py-3">
+                                        <a href="{{ route('public.sejarah.index') }}"
+                                            class="{{ isActiveNavbar('public.sejarah.index') }}">
+                                            Sejarah Kami
+                                        </a>
+                                    </li>
+                                    <li class="flex items-center w-full px-4 py-3">
+                                        <a href="{{ route('public.kontak.index') }}"
+                                            class="{{ isActiveNavbar('public.kontak.index') }}">
+                                            Kontak Kami
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </li>
 
@@ -97,23 +98,25 @@
                         </button>
 
                         <!-- Dropdown -->
-                        <div x-show="open" x-transition x-cloak
-                            class="absolute left-0 mt-3 z-20 w-55
-               bg-neutral-primary-medium border border-default-medium
-               rounded-base shadow-lg">
+                        <div x-show="open" x-transition x-cloak class="pt-3 absolute left-0 z-20">
+                            <div
+                                class="w-55
+                   bg-neutral-primary-medium border border-default-medium
+                   rounded-base shadow-lg">
 
-                            <ul class="text-sm text-body font-small divide-y divide-default/60">
-                                @forelse ($majors as $major)
-                                    <li class="flex items-center w-full px-4 py-3">
-                                        <a href="{{ route('public.jurusan.show', $major->slug) }}"
-                                            class="{{ isActiveNavbar('public.sambutan.index') }}">
-                                            {{ $major->name }}
-                                        </a>
-                                    </li>
-                                @empty
-                                <p>Jurusan belum tersedia</p>
-                                @endforelse
-                            </ul>
+                                <ul class="text-sm text-body font-small divide-y divide-default/60">
+                                    @forelse ($majors as $major)
+                                        <li class="flex items-center w-full px-4 py-3">
+                                            <a href="{{ route('public.jurusan.show', $major->slug) }}"
+                                                class="{{ isActiveNavbar('public.jurusan.show') }}">
+                                                {{ $major->name }}
+                                            </a>
+                                        </li>
+                                    @empty
+                                        <p>Jurusan belum tersedia</p>
+                                    @endforelse
+                                </ul>
+                            </div>
                         </div>
                     </li>
                     <li>
@@ -140,7 +143,7 @@
     }
 </style>
 
-{{-- 
+{{--
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const header = document.getElementById('header');
