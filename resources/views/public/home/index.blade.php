@@ -1,5 +1,5 @@
 <x-app>
-    <x-slot:title>Home</x-slot:title>
+    <x-slot:title>Beranda</x-slot:title>
 
     <section id="hero"
         class="bg-white aspect-5/2 pb-10 w-full relative flex items-center justify-center overflow-hidden overlay-bottom">
@@ -42,7 +42,7 @@
                     <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-sky-600">{{ $about->title }}</h2>
                 </div>
                 <p class="mb-6 font-light text-gray-500 md:text-lg">{{ $about->description }}</p>
-                <a href="#"
+                <a href="{{ route('public.sejarah.index') }}"
                     class="inline-flex justify-center gap-2 items-center py-3 px-7 text-base font-medium text-center bg-sky-600 text-white rounded-full border border-sky-600 hover:bg-transparent hover:text-sky-600 focus:ring-4 focus:ring-gray-100 transition-all duration-300">
                     Selengkapnya
                     @svg('lucide-arrow-right', 'w-5 h-5')
@@ -110,8 +110,9 @@
                                 box-shadow: 0 0 #0000, 0 0 #0000, var(--tw-shadow);
                             }
                         </style>
+                        {{-- {{ dd($majors) }} --}}
                         @foreach ($majors as $major)
-                            <a href="#" class="swiper-slide mb-1">
+                            <a href="{{ route('public.jurusan.show', $major->slug) }}" class="swiper-slide mb-1">
                                 <article class="bg-white rounded-lg shadow c-hover group">
                                     <div class="w-full h-48 rounded-t-lg overflow-hidden">
                                         <img src="{{ asset($major->image) }}" alt="{{ $major->name }}" loading="lazy"
@@ -222,7 +223,7 @@
                     <div class="flex justify-between items-center">
                         <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-sky-600">Berita terkini</h2>
                         <div>
-                            <a href="#"
+                            <a href="{{ route('public.berita.index') }}"
                                 class="inline-flex justify-center gap-2 items-center py-3 px-7 text-base font-medium text-center bg-transparent text-sky-600 rounded-full border border-sky-600 hover:bg-sky-600 hover:text-white focus:ring-4 focus:ring-gray-100 transition-all duration-300">
                                 Lihat Semua
                                 @svg('lucide-arrow-right', 'w-5 h-5')
@@ -231,7 +232,7 @@
                     </div>
                     <div class="mt-8 grid grid-cols-3 gap-4">
                         @foreach ($news as $n)
-                            <a href="/berita/{{ $n->slug }}">
+                            <a href="{{ route('public.berita.show', $n->slug) }}">
                                 <article class="bg-white rounded-lg shadow c-hover group">
                                     <div class="aspect-video rounded-t-lg overflow-hidden relative">
                                         <img src="{{ asset($n->image) }}" alt="{{ $n->title }}" loading="lazy"
@@ -374,7 +375,7 @@
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]">
                 @foreach ($galleries as $gallery)
-                    <a href="galeri/{{ $gallery->slug }}"
+                    <a href="{{ route('public.galeri.show', $gallery) }}"
                         class="relative overflow-hidden rounded-xl {{ $loop->first ? 'col-span-2 row-span-2' : '' }} group cursor-pointer">
                         <img src="{{ $gallery->cover_image }}" alt="Kegiatan"
                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
@@ -387,7 +388,7 @@
                 @endforeach
             </div>
             <div class="text-center mt-8">
-                <a href="galeri"
+                <a href="{{ route('public.galeri.index') }}"
                     class="inline-flex justify-center gap-2 items-center py-3 px-7 text-base font-medium text-center bg-transparent text-sky-600 rounded-full border border-sky-600 hover:bg-sky-600 hover:text-white focus:ring-4 focus:ring-gray-100 transition-all duration-300">
                     Lihat Galeri Lengkap
                     @svg('lucide-arrow-right', 'w-5 h-5')
