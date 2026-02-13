@@ -123,7 +123,7 @@
         </ul>
         <ul class="mt-auto space-y-2 font-medium border-t border-white/30 pt-4 pb-2">
             <li>
-                <a href="#" class="flex items-center px-2 py-1.5 rounded-base {{ isActiveSidebar('#') }}">
+                <a href="{{ route('public.home.index') }}" class="flex items-center px-2 py-1.5 rounded-base {{ isActiveSidebar('#') }}">
                     <svg class="shrink-0 w-5 h-5 transition duration-75 group-hover:text-cyan-600" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                         viewBox="0 0 24 24">
