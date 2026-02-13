@@ -42,7 +42,7 @@ class News extends Model
         return self::where('published_at', '<=', now())
             ->orderByDesc('published_at')
             ->latest('published_at')
-            ->paginate(5);
+            ->paginate(6);
     }
 
     public static function getNewsForDashboard()
@@ -54,6 +54,13 @@ class News extends Model
             ->get();
     }
 
+    public static function getNewsForHome() {
+         return self::where('published_at', '<=', now())
+            ->orderByDesc('published_at')
+            ->latest('published_at')
+            ->paginate(3);
+    }
+}
     function getCategoryColorAttribute(): string
     {
         return match ($this->category) {
@@ -64,4 +71,3 @@ class News extends Model
             default => 'bg-gray-100 text-gray-800',
         };
     }
-}

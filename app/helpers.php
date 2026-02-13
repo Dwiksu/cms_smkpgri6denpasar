@@ -7,6 +7,13 @@ function isActiveSidebar($path)
         : 'text-neutral-tertiary hover:bg-gray-200 hover:text-cyan-600';
 }
 
+function isActiveNavbar($path)
+{
+    return request()->routeIs($path)
+        ? 'text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0'
+        : 'text-body rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-sky-700 md:p-0 md:dark:hover:bg-transparent';
+}
+
 function CalendarCategoryColor(string $category): string
 {
     return match ($category) {

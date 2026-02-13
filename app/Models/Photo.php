@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+use App\Models\GalleryAlbum;
+
 class Photo extends Model
 {
     /** @use HasFactory<\Database\Factories\PhotoFactory> */
@@ -20,5 +22,9 @@ class Photo extends Model
     public function album(): BelongsTo
     {
         return $this->belongsTo(GalleryAlbum::class, 'gallery_album_id');
+    }
+
+    public static function getPhotoByAlbum($album_id) {
+        return self::where('gallery_album_id', $album_id)->get();
     }
 }

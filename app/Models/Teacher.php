@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+use App\Models\Major;
+
 class Teacher extends Model
 {
     /** @use HasFactory<\Database\Factories\TeacherFactory> */
@@ -31,5 +33,4 @@ class Teacher extends Model
     public static function getTeacher() {
         return self::with('major')->latest()->paginate(10);
     }
-    
 }

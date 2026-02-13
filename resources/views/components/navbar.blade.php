@@ -27,63 +27,119 @@
             </div>
             <div class="hidden w-full md:block md:w-auto" id="navbar-dropdown">
                 <ul
-                    class="flex flex-col text-sm font-small p-4 md:p-0 mt-4 border border-default rounded-base md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
+                    class="flex flex-col text-sm font-small p-4 md:p-0 mt-4 border border-default rounded-base md:space-x-4 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
                     <li>
-                        <a href="#"
-                            class="block py-2 px-3 text-white bg-sky-600 rounded md:bg-transparent md:text-fg-brand md:p-0"
-                            aria-current="page">Home</a>
+                        <a href="{{ route('public.home.index') }}"
+                            class="block py-2 px-3 {{ isActiveNavbar('public.home.index') }}"
+                            aria-current="page">Beranda</a>
                     </li>
-                    <li>
-                        <button id="dropdownNvbarButton" data-dropdown-toggle="dropdownNavbar"
-                            class="flex items-center justify-between w-full py-2 px-3 rounded font-small text-heading md:w-auto hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0">
-                            Dropdown
-                            <svg class="w-4 h-4 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <li class="relative" x-data="{ open: false }" @mouseenter="setTimeout(() => open = true, 100)"
+                        @mouseleave="setTimeout(() => open = false, 100)">
+
+                        <button
+                            class="flex items-center justify-between w-full py-2 px-3 font-small md:w-auto
+               text-body rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-sky-700 md:p-0 md:dark:hover:bg-transparent">
+                            Tentang Kami
+                            <svg class="w-4 h-4 ms-1.5 transition-transform duration-200"
+                                :class="open ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="2" d="m19 9-7 7-7-7" />
                             </svg>
                         </button>
-                        <!-- Dropdown menu -->
-                        <div id="dropdownNavbar"
-                            class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44">
-                            <ul class="p-2 text-sm text-body font-small" aria-labelledby="dropdownNvbarButton">
-                                <li>
-                                    <a href="#"
-                                        class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Dashboard</a>
+
+                        <!-- Dropdown -->
+                        <div x-show="open" x-transition x-cloak
+                            class="absolute left-0 mt-3 z-20 w-55
+               bg-neutral-primary-medium border border-default-medium
+               rounded-base shadow-lg">
+
+                            <ul class="text-sm text-body font-small divide-y divide-default/60">
+                                <li class="flex items-center w-full px-4 py-3">
+                                    <a href="{{ route('public.sambutan.index') }}"
+                                        class="{{ isActiveNavbar('public.sambutan.index') }}">
+                                        Sambutan Kepala Sekolah
+                                    </a>
                                 </li>
-                                <li>
-                                    <a href="#"
-                                        class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Settings</a>
+                                <li class="flex items-center w-full px-4 py-3">
+                                    <a href="{{ route('public.sejarah.index') }}"
+                                        class="{{ isActiveNavbar('public.sejarah.index') }}">
+                                        Sejarah Kami
+                                    </a>
                                 </li>
-                                <li>
-                                    <a href="#"
-                                        class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Earnings</a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                        class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Sign
-                                        out</a>
+                                <li class="flex items-center w-full px-4 py-3">
+                                    <a href="{{ route('public.kontak.index') }}"
+                                        class="{{ isActiveNavbar('public.kontak.index') }}">
+                                        Kontak Kami
+                                    </a>
                                 </li>
                             </ul>
                         </div>
                     </li>
+
                     <li>
-                        <a href="#"
-                            class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Services</a>
+                        <a href="{{ route('public.berita.index') }}"
+                            class="block py-2 px-3 {{ isActiveNavbar('public.berita.index') }}">Berita & Pengumuman</a>
+                    </li>
+                    <li class="relative" x-data="{ open: false }" @mouseenter="setTimeout(() => open = true, 100)"
+                        @mouseleave="setTimeout(() => open = false, 100)">
+
+                        <button
+                            class="flex items-center justify-between w-full py-2 px-3 font-small md:w-auto
+               text-body rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-sky-700 md:p-0 md:dark:hover:bg-transparent">
+                            Jurusan
+                            <svg class="w-4 h-4 ms-1.5 transition-transform duration-200"
+                                :class="open ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m19 9-7 7-7-7" />
+                            </svg>
+                        </button>
+
+                        <!-- Dropdown -->
+                        <div x-show="open" x-transition x-cloak
+                            class="absolute left-0 mt-3 z-20 w-55
+               bg-neutral-primary-medium border border-default-medium
+               rounded-base shadow-lg">
+
+                            <ul class="text-sm text-body font-small divide-y divide-default/60">
+                                @forelse ($majors as $major)
+                                    <li class="flex items-center w-full px-4 py-3">
+                                        <a href="{{ route('public.jurusan.show', $major->slug) }}"
+                                            class="{{ isActiveNavbar('public.sambutan.index') }}">
+                                            {{ $major->name }}
+                                        </a>
+                                    </li>
+                                @empty
+                                <p>Jurusan belum tersedia</p>
+                                @endforelse
+                            </ul>
+                        </div>
                     </li>
                     <li>
-                        <a href="#"
-                            class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Pricing</a>
+                        <a href="{{ route('public.galeri.index') }}"
+                            class="block py-2 px-3 {{ isActiveNavbar('public.galeri.index') }}">Galeri</a>
                     </li>
                     <li>
-                        <a href="#"
-                            class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Contact</a>
+                        <a href="{{ route('public.guru.index') }}"
+                            class="block py-2 px-3 {{ isActiveNavbar('public.guru.index') }}">Profil Guru</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('public.kalender.index') }}"
+                            class="block py-2 px-3 {{ isActiveNavbar('public.kalender.index') }}">Kalender</a>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
 </nav>
+
+<style>
+    [x-cloak] {
+        display: none;
+    }
+</style>
+
 {{-- 
 <script>
     document.addEventListener('DOMContentLoaded', () => {

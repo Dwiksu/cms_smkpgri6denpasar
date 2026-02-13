@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+use App\Models\Photo;
+
 class GalleryAlbum extends Model
 {
     /** @use HasFactory<\Database\Factories\GalleryAlbumFactory> */
@@ -23,5 +25,13 @@ class GalleryAlbum extends Model
     public function photos(): HasMany
     {
         return $this->hasMany(Photo::class);
+    }
+
+    public static function getGalleryForHome() {
+        return self::orderBy('created_at', 'desc')->limit(3)->get();
+    }
+
+    public static function getGallery() {
+        return self::latest()->paginate(6);
     }
 }
