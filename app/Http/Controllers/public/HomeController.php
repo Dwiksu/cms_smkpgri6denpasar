@@ -16,12 +16,12 @@ class HomeController extends Controller
     public function index()
     {
         $hero = Hero::firstOrFail();
-        $stat = Stat::firstOrFail();
-        $aboutDesc = About::getAboutDesc();
+        $stats = Stat::all();
+        $about = About::getAboutForHome();
         $majors = Major::getMajorForHome();
         $news = News::getNewsForHome();
         $galleries = GalleryAlbum::getGalleryForHome();
 
-        return view('public.home.index', compact('hero', 'stat', 'aboutDesc', 'majors', 'news', 'galleries'));
+        return view('public.home.index', compact('hero', 'stats', 'about', 'majors', 'news', 'galleries'));
     }    
 }
