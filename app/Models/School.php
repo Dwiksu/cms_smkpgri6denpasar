@@ -14,13 +14,14 @@ class School extends Model
         'short_name',
         'full_name',
         'address',
-        'phone',
+        'office_phone',
+        'whatsapp_phone',
         'email',
         'website',
         'facebook',
         'instagram',
         'youtube',
-        'twitter',
-        'map_embed',
+        'tiktok',
+        'ppdb_link',
     ];
 }
