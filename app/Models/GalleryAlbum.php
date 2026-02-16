@@ -28,7 +28,7 @@ class GalleryAlbum extends Model
     }
 
     public static function getGalleryForHome() {
-        return self::orderBy('created_at', 'desc')->limit(3)->get();
+        return self::orderBy('created_at', 'desc')->limit(5)->get();
     }
 
     public static function getGallery() {
