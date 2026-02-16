@@ -15,7 +15,7 @@
 
         <div class="border-b border-gray-700 pb-14">
             <div class="grid gap-10 lg:grid-cols-2">
-                
+
                 <div class="space-y-10">
 
                     <!-- INFO SEKOLAH -->
@@ -37,8 +37,23 @@
                             </li>
                             <li class="flex items-center gap-2">
                                 @svg('lucide-phone', 'w-4 h-4 text-sky-600')
-                                <span>{{ $info->phone ?? '-' }}</span>
+                                <span> Office: {{ $info->office_phone ?? '-' }}</span>
                             </li>
+                            <li class="flex items-center gap-2">
+                                <!-- ICON WHATSAPP -->
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
+                                    class="w-4 h-4 text-sky-600 fill-current">
+                                    <path
+                                        d="M19.11 17.38c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.13-.42-2.15-1.35-.79-.71-1.33-1.59-1.49-1.86-.16-.27-.02-.41.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.47-.16-.01-.34-.01-.52-.01-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29s.98 2.65 1.12 2.84c.14.18 1.93 2.95 4.68 4.14.65.28 1.16.45 1.56.57.65.21 1.25.18 1.72.11.52-.08 1.6-.65 1.82-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32z" />
+                                    <path
+                                        d="M16.01 3C9.38 3 4 8.38 4 15.01c0 2.65.86 5.09 2.32 7.07L4 29l7.12-2.28c1.92 1.05 4.12 1.65 6.89 1.65 6.63 0 12.01-5.38 12.01-12.01S22.64 3 16.01 3zm0 21.75c-2.42 0-4.67-.73-6.54-1.98l-.47-.31-4.22 1.35 1.38-4.1-.33-.49c-1.29-1.9-1.98-4.12-1.98-6.21 0-6.36 5.18-11.54 11.54-11.54 6.36 0 11.54 5.18 11.54 11.54 0 6.36-5.18 11.54-11.54 11.54z" />
+                                </svg>
+
+                                <span>
+                                    WhatsApp: {{ $info->whatsapp_phone ?? '-' }}
+                                </span>
+                            </li>
+
                             <li class="flex items-center gap-2">
                                 @svg('lucide-mail', 'w-4 h-4 text-sky-600')
                                 <span>{{ $info->email ?? '-' }}</span>
@@ -87,29 +102,48 @@
                             </h6>
 
                             <div class="flex gap-4">
+                                <!-- INSTAGRAM -->
                                 <a href="{{ $info->instagram ?? '#' }}"
                                     class="flex h-11 w-11 items-center justify-center rounded-full
-           bg-white/10 text-gray-300
-           hover:bg-sky-600 hover:text-white
-           transition hover:scale-110"
+                   bg-white/10 text-gray-300
+                   hover:bg-sky-600 hover:text-white
+                   transition hover:scale-110"
                                     aria-label="Instagram">
                                     @svg('lucide-instagram', 'h-5 w-5')
                                 </a>
+
+                                <!-- FACEBOOK -->
                                 <a href="{{ $info->facebook ?? '#' }}"
                                     class="flex h-11 w-11 items-center justify-center rounded-full
-           bg-white/10 text-gray-300
-           hover:bg-sky-600 hover:text-white
-           transition hover:scale-110"
+                   bg-white/10 text-gray-300
+                   hover:bg-sky-600 hover:text-white
+                   transition hover:scale-110"
                                     aria-label="Facebook">
                                     @svg('lucide-facebook', 'h-5 w-5')
                                 </a>
+
+                                <!-- YOUTUBE -->
                                 <a href="{{ $info->youtube ?? '#' }}"
                                     class="flex h-11 w-11 items-center justify-center rounded-full
-           bg-white/10 text-gray-300
-           hover:bg-sky-600 hover:text-white
-           transition hover:scale-110"
+                   bg-white/10 text-gray-300
+                   hover:bg-sky-600 hover:text-white
+                   transition hover:scale-110"
                                     aria-label="YouTube">
                                     @svg('lucide-youtube', 'h-5 w-5')
+                                </a>
+
+                                <!-- TIKTOK -->
+                                <a href="{{ $info->tiktok ?? '#' }}"
+                                    class="flex h-11 w-11 items-center justify-center rounded-full
+                   bg-white/10 text-gray-300
+                   hover:bg-sky-600 hover:text-white
+                   transition hover:scale-110"
+                                    aria-label="TikTok">
+                                    <svg viewBox="0 0 24 24" class="h-5 w-5 fill-current"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M16.5 1c.9 2.6 2.9 4.6 5.5 5.5v3.3c-2.1 0-4.1-.7-5.5-1.9V15a6 6 0 1 1-6-6c.4 0 .8 0 1.2.1v3.4a2.7 2.7 0 1 0 1.8 2.5V1h3z" />
+                                    </svg>
                                 </a>
                             </div>
 
@@ -117,6 +151,7 @@
                                 Ikuti kami untuk info & kegiatan terbaru
                             </p>
                         </div>
+
 
                     </div>
                 </div>
