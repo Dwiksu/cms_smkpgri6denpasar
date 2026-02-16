@@ -15,11 +15,8 @@ class PrincipalMessageSeeder extends Seeder
     {
         PrincipalMessage::insert([
            'name' => 'Drs. I Wayan Sukarta',
-           'nip' => '-',
            'photo' => '/storage/images/beranda/principal/foto-kepsek.jpeg',
-           'period' => '-',
            'message' => '-',
-           'position' => 'Kepala Sekolah'
         ]);
     }
 }

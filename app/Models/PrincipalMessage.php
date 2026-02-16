@@ -12,10 +12,7 @@ class PrincipalMessage extends Model
 
     protected $fillable = [
         'name',
-        'nip',
         'photo',
-        'position',
-        'period',
         'message',
     ];
 }

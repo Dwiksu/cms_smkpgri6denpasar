@@ -11,6 +11,6 @@ class KontakController extends Controller
     public function index()
     {
         $info = School::firstOrFail();
-        return view('public.kontak.index', $info);
+        return view('public.tentang-kami.kontak', compact('info'));
     }
 }
