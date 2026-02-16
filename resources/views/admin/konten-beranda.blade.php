@@ -486,7 +486,7 @@
 
         function schoolValues() {
             return {
-                values: @json(old('about.values', $about->schoolValues ?? [['name' => '', 'description' => '']])),
+                values: @json(old('values', $values ?? [['name' => '', 'description' => '']])),
 
                 addValue() {
                     this.values.push({

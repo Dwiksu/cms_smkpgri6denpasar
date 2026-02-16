@@ -31,7 +31,7 @@
     <section id="tentang-kami" class="bg-white py-16">
         <div
             class="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
-            <div class="relative">
+            <div class="relative h-fit">
                 <div class="absolute -inset-4 bg-sky-600/5 rounded-3xl -rotate-3"></div>
                 <img class="relative rounded-2xl shadow-2xl w-full object-cover aspect-4/3 z-10"
                     src="{{ asset($about->image) }}" alt="dashboard image">
