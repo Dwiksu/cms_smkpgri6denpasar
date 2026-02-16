@@ -105,17 +105,11 @@ class BerandaController extends Controller
     {
         $data = $request->validate([
             'principal.name' => 'required|string|max:255',
-            'principal.nip' => 'required|string|max:18',
             'principal.photo' => 'required|string',
-            'principal.position' => 'required|string|max:255',
-            'principal.period' => 'required|string|max:255',
             'principal.message' => 'required|string',
         ], [
             'principal.name.required' => 'Nama harus diisi',
-            'principal.nip.required' => 'NIP harus diisi',
             'principal.photo.required' => 'Foto harus diisi',
-            'principal.position.required' => 'Posisi harus diisi',
-            'principal.period.required' => 'Periode harus diisi',
             'principal.message.required' => 'Pesan harus diisi',
         ]);
 
@@ -162,20 +156,23 @@ class BerandaController extends Controller
             'short_name' => 'required|string|max:100',
             'full_name' => 'required|string|max:100',
             'address' => 'required|string|max:255',
-            'phone' => 'required|string|max:18',
-            'email' => 'required|email|max:255',
+            'office_phone' => 'nullable|string|max:18',
+            'whatsapp_phone' => 'nullable|string|max:18',
+            'email' => 'nullable|email|max:255',
             'website' => 'nullable|string|max:255',
+            'ppdb_link' => 'nullable|string|max:255',
+            'whatsapp_link' => 'nullable|string|max:255',
             'facebook' => 'nullable|string|max:255',
             'instagram' => 'nullable|string|max:255',
-            'twitter' => 'nullable|string|max:255',
             'youtube' => 'nullable|string|max:255',
+            'tiktok' => 'nullable|string|max:255',
         ], [
             'short_name.required' => 'Nama singkat harus diisi',
             'full_name.required' => 'Nama lengkap harus diisi',
             'address.required' => 'Alamat harus diisi',
-            'phone.required' => 'Nomor telepon harus diisi',
-            'email.required' => 'Email harus diisi',
             'email.email' => 'Format email tidak valid',
+            'office_phone.max' => 'Nomor telepon maksimal 18 karakter',
+            'whatsapp_phone.max' => 'Nomor telepon maksimal 18 karakter',
         ]);
 
         School::updateOrCreate(['id' => 1], $data);
