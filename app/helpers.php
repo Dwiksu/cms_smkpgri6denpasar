@@ -10,7 +10,7 @@ function isActiveSidebar($path)
 function isActiveNavbar($routeName, $params = [])
 {
     if (!request()->routeIs($routeName)) {
-        return 'text-body rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-sky-700 md:p-0 md:dark:hover:bg-transparent';
+        return 'text-body rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-sky-700 md:p-0';
     }
 
     foreach ($params as $key => $value) {
@@ -19,12 +19,12 @@ function isActiveNavbar($routeName, $params = [])
         // kalau hasil binding object (Major)
         if (is_object($param) && isset($param->slug)) {
             if ($param->slug !== $value) {
-                return 'text-body rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-sky-700 md:p-0 md:dark:hover:bg-transparent';
+                return 'text-body rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-sky-700 md:p-0';
             }
         }
         // kalau bukan object
         elseif ($param != $value) {
-            return 'text-body rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-sky-700 md:p-0 md:dark:hover:bg-transparent';
+            return 'text-body rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-sky-700 md:p-0';
         }
     }
 

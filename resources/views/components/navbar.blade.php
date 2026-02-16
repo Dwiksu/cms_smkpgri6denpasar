@@ -57,19 +57,19 @@
                             <ul class="text-sm text-body font-small divide-y divide-default/60">
                                 <li class="flex items-center w-full px-4 py-3">
                                     <a href="{{ route('public.tentang.sambutan') }}"
-                                        class="{{ isActiveNavbar('public.tentang.sambutan') }}">
+                                        class="{{ isActiveNavbar('public.tentang.sambutan') }} w-full">
                                         Sambutan Kepala Sekolah
                                     </a>
                                 </li>
                                 <li class="flex items-center w-full px-4 py-3">
                                     <a href="{{ route('public.tentang.sejarah') }}"
-                                        class="{{ isActiveNavbar('public.tentang.sejarah') }}">
+                                        class="{{ isActiveNavbar('public.tentang.sejarah') }} w-full">
                                         Sejarah Kami
                                     </a>
                                 </li>
                                 <li class="flex items-center w-full px-4 py-3">
                                     <a href="{{ route('public.tentang.kontak') }}"
-                                        class="{{ isActiveNavbar('public.tentang.kontak') }}">
+                                        class="{{ isActiveNavbar('public.tentang.kontak') }} w-full">
                                         Kontak Kami
                                     </a>
                                 </li>
@@ -107,7 +107,7 @@
                                 @forelse ($majors as $major)
                                     <li class="flex items-center w-full px-4 py-3">
                                         <a href="{{ route('public.jurusan.show', $major->slug) }}"
-                                            class="{{ isActiveNavbar('public.jurusan.show', ['major' => $major->slug]) }}">
+                                            class="{{ isActiveNavbar('public.jurusan.show', ['major' => $major->slug]) }} w-full">
                                             {{ $major->name }}
                                         </a>
                                     </li>
