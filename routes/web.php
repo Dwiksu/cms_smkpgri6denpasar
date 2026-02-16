@@ -25,42 +25,41 @@ use Illuminate\Support\Facades\Route;
 
 /* HALAMAN PUBLIK */
 Route::name('public.')->group(function () {
-    
+
     // BERANDA
     Route::get('/', [HomeController::class, 'index'])->name('home.index');
-    Route::get('/beranda', [HomeController::class, 'index'])->name('home.index');
-    
-    
+
+
     // SAMBUTAN KEPSEK
     Route::get('/sambutan', [SambutanController::class, 'index'])->name('tentang.sambutan');
 
-    
+
     // SEJARAH SEKOLAH
     Route::get('/sejarah', [AboutController::class, 'index'])->name('tentang.sejarah');
 
-    
+
     // KONTAK
     Route::get('/kontak', [KontakController::class, 'index'])->name('tentang.kontak');
-    
-    
+
+
     // BERITA
     Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
     Route::get('/berita/{news}', [BeritaController::class, 'show'])->name('berita.show');
 
-    
+
     // JURUSAN
     Route::get('/jurusan/{major:slug}', [JurusanController::class, 'show'])->name('jurusan.show');
 
-    
+
     // PROFIL GURU
     Route::get('/guru', [GuruController::class, 'index'])->name('guru.index');
-    
-    
+
+
     // GALERI
     Route::get('/galeri', [GalleryAlbumController::class, 'index'])->name('galeri.index');
     Route::get('/galeri/{gallery}', [GalleryAlbumController::class, 'show'])->name('galeri.show');
 
-    
+
     // CALENDER EVENT
     Route::get('/kalender', [CalenderEventController::class, 'index'])->name('kalender.index');
     Route::get('/kalender-event', [CalenderEventController::class, 'show'])->name('kalender.show');
