@@ -13,10 +13,7 @@ return new class extends Migration {
         Schema::create('principal_messages', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('nip');
             $table->string('photo');
-            $table->string('position');
-            $table->string('period');
             $table->longText('message');
             $table->timestamps();
         });

@@ -15,14 +15,17 @@ return new class extends Migration {
             $table->string('short_name');
             $table->string('full_name');
             $table->text('address');
-            $table->string('phone');
-            $table->string('email');
+            $table->string('office_phone')->nullable();
+            $table->string('whatsapp_phone')->nullable();
+            
+            $table->string('email')->nullable();
             $table->string('website')->nullable();
+            $table->string('ppdb_link')->nullable();
 
             $table->string('facebook')->nullable();
             $table->string('instagram')->nullable();
             $table->string('youtube')->nullable();
-            $table->string('twitter')->nullable();
+            $table->string('tiktok')->nullable();
 
             $table->timestamps();
         });
