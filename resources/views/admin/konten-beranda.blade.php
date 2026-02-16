@@ -244,7 +244,6 @@
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div class="grid sm:grid-cols-2 gap-4">
                         <div class="mb-5">
                             <label class="block mb-2.5 text-sm font-medium text-heading">Nama Kepala Sekolah</label>
                             <input type="text" name="principal[name]" data-error-input
@@ -255,46 +254,6 @@
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div class="mb-5">
-                            <label class="block mb-2.5 text-sm font-medium text-heading">NIP</label>
-                            <input type="text" name="principal[nip]" data-error-input
-                                value="{{ old('principal.nip', $principal->nip ?? '') }}"
-                                class="bg-neutral-secondary-medium border {{ errorBorder('principal.nip') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="1965051..." />
-                            @error('principal.nip')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="grid sm:grid-cols-2 gap-4">
-                        <div class="mb-5">
-                            <label class="block mb-2.5 text-sm font-medium text-heading">Jabatan</label>
-                            <input type="text" name="principal[position]" data-error-input value="Kepala Sekolah"
-                                class="bg-neutral-secondary-medium border {{ errorBorder('principal.position') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="Kepala Sekolah" readonly />
-                        </div>
-                        <div class="mb-5">
-                            <label class="block mb-2.5 text-sm font-medium text-heading">Periode</label>
-                            <input type="text" name="principal[period]" data-error-input
-                                value="{{ old('principal.period', $principal->period ?? '') }}"
-                                class="bg-neutral-secondary-medium border {{ errorBorder('principal.period') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="2020 - Sekarang" />
-                            @error('principal.period')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
-                    </div>
-                    {{-- <div class="mb-5" x-data="{ principalProfile: @js($principal->photo ?? '') }">
-                        <label class="block mb-2.5 text-sm font-medium text-heading">URL Foto</label>
-                        <input type="text" x-model="principalProfile"
-                            class="bg-neutral-secondary-medium border {{ errorBorder('principal.position') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                            placeholder="https://..." />
-                        <div class="mt-2" x-show="principalProfile" x-transition>
-                            <img :src="principalProfile" alt="Preview"
-                                class="mt-2 w-32 h-32 object-cover rounded-full"
-                                x-on:error="$el.style.display = 'none'" x-on:load="$el.style.display = 'block'" />
-                        </div>
-                    </div> --}}
                     <div class="mb-5">
                         <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Teks
                             Sambutan</label>
@@ -403,11 +362,21 @@
                     <div class="grid sm:grid-cols-2 gap-4">
                         <div class="mb-5">
                             <label class="block mb-2.5 text-sm font-medium text-heading">Telepon</label>
-                            <input type="text" name="phone" data-error-input
-                                value="{{ old('phone', $school->phone ?? '') }}"
-                                class="bg-neutral-secondary-medium read-only:bg-neutral-secondary border {{ errorBorder('phone') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                            <input type="text" name="office_phone" data-error-input
+                                value="{{ old('office_phone', $school->office_phone ?? '') }}"
+                                class="bg-neutral-secondary-medium read-only:bg-neutral-secondary border {{ errorBorder('office_phone') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="0361-123456" />
                         </div>
+                        <div class="mb-5">
+                            <label class="block mb-2.5 text-sm font-medium text-heading">WhatsApp Phone</label>
+                            <input type="text" name="whatsapp_phone"
+                                value="{{ old('whatsapp_phone', $school->whatsapp_phone ?? '') }}"
+                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base
+                       focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs"
+                                placeholder="6281234567890" />
+                        </div>
+                    </div>
+                    <div class="grid sm:grid-cols-2 gap-4">
                         <div class="mb-5">
                             <label class="block mb-2.5 text-sm font-medium text-heading">Email</label>
                             <input type="text" name="email" data-error-input
@@ -418,48 +387,71 @@
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
+                        <div class="mb-5">
+                            <label class="block mb-2.5 text-sm font-medium text-heading">Website</label>
+                            <input type="text" name="website"
+                                value="{{ old('website', $school->website ?? '') }}"
+                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                placeholder="https://..." />
+                        </div>
                     </div>
-                    <div class="mb-5">
-                        <label class="block mb-2.5 text-sm font-medium text-heading">Website</label>
-                        <input type="text" name="website" value="{{ old('website', $school->website ?? '') }}"
-                            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                            placeholder="https://..." />
-                    </div>
+
                     <div class="border-t border-default pt-4">
                         <h4 class="font-medium mb-4">Sosial Media</h4>
+
+                        <!-- FACEBOOK & INSTAGRAM -->
                         <div class="grid sm:grid-cols-2 gap-4">
                             <div class="mb-5">
                                 <label class="block mb-2.5 text-sm font-medium text-heading">Facebook</label>
                                 <input type="text" name="facebook"
                                     value="{{ old('facebook', $school->facebook ?? '') }}"
-                                    class="bg-neutral-secondary-medium read-only:bg-neutral-secondary border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                    class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base
+                       focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs"
                                     placeholder="https://www.facebook.com/..." />
                             </div>
+
                             <div class="mb-5">
                                 <label class="block mb-2.5 text-sm font-medium text-heading">Instagram</label>
                                 <input type="text" name="instagram"
                                     value="{{ old('instagram', $school->instagram ?? '') }}"
-                                    class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                    class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base
+                       focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs"
                                     placeholder="https://www.instagram.com/..." />
                             </div>
                         </div>
+
+                        <!-- YOUTUBE & TIKTOK -->
                         <div class="grid sm:grid-cols-2 gap-4">
                             <div class="mb-5">
-                                <label class="block mb-2.5 text-sm font-medium text-heading">YoutTube</label>
+                                <label class="block mb-2.5 text-sm font-medium text-heading">YouTube</label>
                                 <input type="text" name="youtube"
                                     value="{{ old('youtube', $school->youtube ?? '') }}"
-                                    class="bg-neutral-secondary-medium read-only:bg-neutral-secondary border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                    class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base
+                       focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs"
                                     placeholder="https://www.youtube.com/..." />
                             </div>
+
                             <div class="mb-5">
-                                <label class="block mb-2.5 text-sm font-medium text-heading">Twitter</label>
-                                <input type="text" name="twitter"
-                                    value="{{ old('twitter', $school->twitter ?? '') }}"
-                                    class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                    placeholder="https://www.twitter.com/..." />
+                                <label class="block mb-2.5 text-sm font-medium text-heading">TikTok</label>
+                                <input type="text" name="tiktok"
+                                    value="{{ old('tiktok', $school->tiktok ?? '') }}"
+                                    class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base
+                       focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs"
+                                    placeholder="https://www.tiktok.com/@..." />
                             </div>
                         </div>
+
+                        <!-- PPDB -->
+                        <div class="mb-5">
+                            <label class="block mb-2.5 text-sm font-medium text-heading">Link PPDB</label>
+                            <input type="text" name="ppdb_link"
+                                value="{{ old('ppdb_link', $school->ppdb_link ?? '') }}"
+                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base
+                   focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs"
+                                placeholder="https://ppdb.smkpgri6denpasar.sch.id" />
+                        </div>
                     </div>
+
                     <button type="submit"
                         class="text-white bg-brand box-border border border-transparent inline-flex items-center  hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
                         @svg('lucide-save', 'h-4 w-4 me-1.5')
