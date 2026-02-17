@@ -46,7 +46,7 @@ Route::name('public.')->group(function () {
 
     // BERITA
     Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
-    Route::get('/berita/{news}', [BeritaController::class, 'show'])->name('berita.show');
+    Route::get('/berita/{detail:slug}', [BeritaController::class, 'show'])->name('berita.show');
 
 
     // JURUSAN

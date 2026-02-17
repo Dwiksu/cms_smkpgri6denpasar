@@ -42,8 +42,8 @@ class NewsController extends Controller
     {
         $data = $request->validate([
             'title' => 'required|string|max:255',
-            'excerpt' => 'required|string|max:255',
-            'content' => 'required|string|max:255',
+            'excerpt' => 'required|string',
+            'content' => 'required|string',
             'category' => 'required|string|max:255',
             'image' => 'required|string',
             'published_at' => 'required|date',
@@ -112,8 +112,8 @@ class NewsController extends Controller
     {
         $data = $request->validate([
             'title' => 'required|string|max:255',
-            'excerpt' => 'required|string|max:255',
-            'content' => 'required|string|max:255',
+            'excerpt' => 'required|string',
+            'content' => 'required|string',
             'category' => 'required|string|max:255',
             'image' => 'required|string',
             'published_at' => 'required|date',
