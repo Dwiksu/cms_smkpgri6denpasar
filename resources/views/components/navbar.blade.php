@@ -1,6 +1,6 @@
 <nav class="bg-transparent backdrop-blur-sm sticky w-full z-20 top-0 start-0 shadow-sm" id="header">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+        <a href="{{ route('public.home.index') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="{{ asset('assets/logo_smk_pgri_6.png') }}" class="h-12" alt="Logo" />
             <div class="flex flex-col justify-center">
                 <p class="text-sm md:text-md font-semibold whitespace-nowrap text-sky-600">SMK PGRI 6 DENPASAR</p>
