@@ -11,6 +11,7 @@ class JurusanController extends Controller
     public function show(Major $major)
     {
         $teachers = $major->teachers;
-        return view('public.jurusan.detail', compact('major', 'teachers'));
+        $otherMajors = Major::where('id', '!=', $major->id)->get();
+        return view('public.jurusan.detail', compact('major', 'teachers', 'otherMajors'));
     }
 }
