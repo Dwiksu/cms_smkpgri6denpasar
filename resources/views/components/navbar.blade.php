@@ -119,7 +119,7 @@
                     </li>
                     <li>
                         <a href="{{ route('public.galeri.index') }}"
-                            class="block py-2 px-3 {{ isActiveNavbar('public.galeri.index') }}">Galeri</a>
+                            class="block py-2 px-3 {{ isActiveNavbar('public.galeri.*') }}">Galeri</a>
                     </li>
                     <li>
                         <a href="{{ route('public.guru.index') }}"

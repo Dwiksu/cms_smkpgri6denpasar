@@ -15,6 +15,7 @@ use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\LogoutController;
 use App\Http\Controllers\public\AboutController;
 use App\Http\Controllers\public\BeritaController;
+use App\Http\Controllers\public\GaleriController;
 use App\Http\Controllers\public\GuruController;
 use App\Http\Controllers\public\HomeController;
 use App\Http\Controllers\public\JurusanController;
@@ -56,8 +57,8 @@ Route::name('public.')->group(function () {
 
 
     // GALERI
-    Route::get('/galeri', [GalleryAlbumController::class, 'index'])->name('galeri.index');
-    Route::get('/galeri/{gallery}', [GalleryAlbumController::class, 'show'])->name('galeri.show');
+    Route::get('/galeri', [GaleriController::class, 'index'])->name('galeri.index');
+    Route::get('/galeri/{album:slug}', [GaleriController::class, 'show'])->name('galeri.show');
 
 
     // CALENDER EVENT

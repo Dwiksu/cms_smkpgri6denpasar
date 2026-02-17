@@ -13,6 +13,6 @@ class AboutController extends Controller
     {
         $about = About::first();
         $schoolValues = SchoolValue::all();
-        return view('public.about.index', compact('about', 'schoolValues'));
+        return view('public.tentang-kami.index', compact('about', 'schoolValues'));
     }
 }
