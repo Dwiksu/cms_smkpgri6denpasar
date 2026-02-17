@@ -79,7 +79,7 @@
 
                     <li>
                         <a href="{{ route('public.berita.index') }}"
-                            class="block py-2 px-3 {{ isActiveNavbar('public.berita.index') }}">Berita & Pengumuman</a>
+                            class="block py-2 px-3 {{ isActiveNavbar('public.berita.*') }}">Berita & Pengumuman</a>
                     </li>
                     <li class="relative" x-data="{ open: false }" @mouseenter="setTimeout(() => open = true, 100)"
                         @mouseleave="setTimeout(() => open = false, 100)">

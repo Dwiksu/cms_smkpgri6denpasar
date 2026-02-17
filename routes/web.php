@@ -19,6 +19,7 @@ use App\Http\Controllers\public\GaleriController;
 use App\Http\Controllers\public\GuruController;
 use App\Http\Controllers\public\HomeController;
 use App\Http\Controllers\public\JurusanController;
+use App\Http\Controllers\public\KalenderController;
 use App\Http\Controllers\public\KontakController;
 use App\Http\Controllers\public\SambutanController;
 use Illuminate\Support\Facades\Route;
@@ -45,7 +46,7 @@ Route::name('public.')->group(function () {
 
     // BERITA
     Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
-    Route::get('/berita/{news}', [BeritaController::class, 'show'])->name('berita.show');
+    Route::get('/berita/{detail:slug}', [BeritaController::class, 'show'])->name('berita.show');
 
 
     // JURUSAN
@@ -62,8 +63,8 @@ Route::name('public.')->group(function () {
 
 
     // CALENDER EVENT
-    Route::get('/kalender', [CalenderEventController::class, 'index'])->name('kalender.index');
-    Route::get('/kalender-event', [CalenderEventController::class, 'show'])->name('kalender.show');
+    Route::get('/kalender', [KalenderController::class, 'index'])->name('kalender.index');
+    // Route::get('/kalender-event', [KalenderController::class, 'show'])->name('kalender.show');
 });
 
 
