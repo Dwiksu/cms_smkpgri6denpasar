@@ -10,7 +10,8 @@ class KalenderController extends Controller
 {
     public function index()
     {
-        return view('public.kalender.index');
+        $events = CalenderEvent::all();
+        return view('public.kalender.index', compact('events'));
     }
 
     public function show()
