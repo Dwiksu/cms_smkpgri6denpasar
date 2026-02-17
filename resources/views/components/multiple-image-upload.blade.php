@@ -94,86 +94,121 @@
 </div>
 
 <script>
-    document.addEventListener('alpine:init', () => {
-        Alpine.data('multipleImageUploadLocal', ({
-            initialValues,
-            endpoint,
-            folder,
-            maxFiles,
-            maxSize,
-            csrfToken
-        }) => ({
-            values: initialValues || [],
-            isUploading: false,
-            error: null,
-            isDragging: false,
-            maxFiles: maxFiles,
+document.addEventListener('alpine:init', () => {
+    Alpine.data('multipleImageUploadLocal', ({
+        initialValues,
+        endpoint,
+        folder,
+        maxFiles,
+        maxSize,
+        csrfToken
+    }) => ({
+        values: initialValues || [],
+        isUploading: false,
+        error: null,
+        isDragging: false,
+        maxFiles: maxFiles,
 
-            async uploadFiles(files) {
-                this.error = null;
-                if (this.maxFiles > 0) {
-                    if (this.values.length + files.length > this.maxFiles) {
-                        this.error = `Maksimal ${this.maxFiles} gambar`;
-                        return;
-                    }
+        async uploadFiles(files) {
+            this.error = null;
+
+            // 1. Cek Limit Jumlah File (jika ada limit)
+            if (this.maxFiles > 0) {
+                if (this.values.length + files.length > this.maxFiles) {
+                    this.error = `Maksimal hanya boleh ${this.maxFiles} gambar.`;
+                    return;
+                }
+            }
+
+            this.isUploading = true;
+            let failedFiles = []; // <--- Penampung error
+
+            // Upload parallel
+            const uploadPromises = Array.from(files).map(async (file) => {
+                // 2. Validasi Ukuran Client-Side
+                if (file.size > maxSize * 1024 * 1024) {
+                    failedFiles.push(`${file.name} (Terlalu Besar > ${maxSize}MB)`);
+                    return null; // Tetap return null agar tidak masuk ke list sukses
                 }
 
-                this.isUploading = true;
+                // 3. Validasi Tipe Client-Side
+                if (!file.type.startsWith('image/')) {
+                    failedFiles.push(`${file.name} (Bukan Gambar)`);
+                    return null;
+                }
 
-                // Upload parallel
-                const uploadPromises = Array.from(files).map(async (file) => {
-                    if (file.size > maxSize * 1024 * 1024) return null;
-                    if (!file.type.startsWith('image/')) return null;
-
-                    const formData = new FormData();
-                    formData.append('file', file);
-                    formData.append('folder', folder);
-
-                    try {
-                        const response = await fetch(endpoint, {
-                            method: 'POST',
-                            headers: {
-                                'X-CSRF-TOKEN': csrfToken,
-                                'Accept': 'application/json',
-                            },
-                            body: formData
-                        });
-                        if (!response.ok) throw new Error();
-                        const data = await response.json();
-                        return data.url;
-                    } catch (e) {
-                        console.error(e);
-                        return null;
-                    }
-                });
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('folder', folder);
 
                 try {
-                    const results = await Promise.all(uploadPromises);
-                    const successfulUploads = results.filter(url => url !== null);
+                    const response = await fetch(endpoint, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': csrfToken,
+                            'Accept': 'application/json',
+                        },
+                        body: formData
+                    });
 
-                    if (successfulUploads.length > 0) {
-                        this.values = [...this.values, ...successfulUploads];
-                    } else if (files.length > 0) {
-                        this.error = "Gagal mengupload gambar";
+                    // Cek error server (misal 413 Payload Too Large / 500)
+                    if (!response.ok) {
+                        failedFiles.push(`${file.name} (Gagal Upload: ${response.status})`);
+                        return null;
                     }
-                } finally {
-                    this.isUploading = false;
+
+                    const data = await response.json();
+                    return data.url;
+
+                } catch (e) {
+                    console.error(e);
+                    failedFiles.push(`${file.name} (Error Server)`);
+                    return null;
                 }
-            },
+            });
 
-            handleFileSelect(e) {
-                if (e.target.files.length > 0) this.uploadFiles(e.target.files);
-                e.target.value = '';
-            },
+            try {
+                // Tunggu semua proses selesai
+                const results = await Promise.all(uploadPromises);
 
-            handleDrop(e) {
-                this.isDragging = false;
-                if (e.dataTransfer.files.length > 0) this.uploadFiles(e.dataTransfer.files);
-            },
+                // Ambil yang sukses saja (tidak null)
+                const successfulUploads = results.filter(url => url !== null);
 
-            removeImage(index) {
-                this.values = this.values.filter((_, i) => i !== index);
+                // Masukkan yang sukses ke tampilan
+                if (successfulUploads.length > 0) {
+                    this.values = [...this.values, ...successfulUploads];
+                }
+
+                // 4. TAMPILKAN ERROR JIKA ADA YANG GAGAL
+                if (failedFiles.length > 0) {
+                    // Jika semua gagal
+                    if (successfulUploads.length === 0) {
+                         this.error = `Gagal semua. ${failedFiles.join(', ')}`;
+                    }
+                    // Jika sebagian gagal
+                    else {
+                        this.error = `Beberapa file gagal: ${failedFiles.join(', ')}`;
+                    }
+                }
+
+            } finally {
+                this.isUploading = false;
             }
-        }));
-    });
+        },
+
+        handleFileSelect(e) {
+            if (e.target.files.length > 0) this.uploadFiles(e.target.files);
+            e.target.value = '';
+        },
+
+        handleDrop(e) {
+            this.isDragging = false;
+            if (e.dataTransfer.files.length > 0) this.uploadFiles(e.dataTransfer.files);
+        },
+
+        removeImage(index) {
+            this.values = this.values.filter((_, i) => i !== index);
+        }
+    }));
+});
 </script>
