@@ -15,8 +15,8 @@
         </div>
     </section>
 
-    <section class="py-16 flex-grow">
-        <div class="container mx-auto px-6 lg:px-12">
+    <section class="bg-white py-16 flex-grow">
+        <div class="px-4 max-w-screen-xl mx-auto w-full lg:px-8">
             <div class="grid lg:grid-cols-2 gap-12 lg:gap-20">
 
                 <!-- Contact Info (Left Column) -->

@@ -6,7 +6,7 @@
 
 <x-navbar></x-navbar>
 
-<main class="flex-1 bg-gray-50 min-h-screen">
+<main class="flex-1 bg-white min-h-screen">
     {{ $slot }}
 </main>
 

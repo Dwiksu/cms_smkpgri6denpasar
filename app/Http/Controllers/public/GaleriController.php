@@ -11,13 +11,13 @@ class GaleriController extends Controller
 {
     public function index()
     {
-        $galleries = GalleryAlbum::getGallery();
-        return view('public.galeri.index', compact('galleries'));
+        $albums = GalleryAlbum::getGallery();
+        return view('public.galeri.index', compact('albums'));
     }
 
     public function show(GalleryAlbum $album)
     {
-        $photos = Photo::getPhotoByAlbum($album->id);
+        $photos = $album->photos();
         return view('public.galeri.detail', compact('album', 'photos'));
     }
 }
