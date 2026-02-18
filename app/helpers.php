@@ -31,6 +31,30 @@ function isActiveNavbar($routeName, $params = [])
     return 'text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0';
 }
 
+function isActiveHamburgerMenu($routeName, $params = [])
+{
+    if (!request()->routeIs($routeName)) {
+        return 'text-gray-600';
+    }
+
+    foreach ($params as $key => $value) {
+        $param = request()->route($key);
+
+        // kalau hasil binding object (Major)
+        if (is_object($param) && isset($param->slug)) {
+            if ($param->slug !== $value) {
+                return 'text-gray-600';
+            }
+        }
+        // kalau bukan object
+        elseif ($param != $value) {
+            return 'text-gray-600';
+        }
+    }
+
+    return 'bg-sky-50 text-sky-600 font-bold';
+}
+
 
 
 function CalendarCategoryColor(string $category): string
