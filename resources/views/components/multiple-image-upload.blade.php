@@ -3,7 +3,7 @@
     'values' => [], // Array URL
     'folder' => 'general',
     'maxFiles' => 10,
-    'maxSize' => 2,
+    'maxSize' => 5,
     'label' => null,
 ])
 

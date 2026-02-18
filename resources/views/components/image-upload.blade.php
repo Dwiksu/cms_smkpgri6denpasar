@@ -3,7 +3,7 @@
     'value' => '',
     'folder' => 'general', // Folder tujuan di storage
     'accept' => 'image/*',
-    'maxSize' => 2, // MB
+    'maxSize' => 5, // MB
     'aspectRatio' => 'auto',
     'label' => null,
 ])

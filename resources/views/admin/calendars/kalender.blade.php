@@ -110,7 +110,7 @@
                 <template x-if="selectedEvent">
                     <div class="space-y-4">
                         <div>
-                            <h2 class="text-lg font-bold" x-text="selectedEvent.title"></h2>
+                            <h2 class="text-lg font-bold" x-text="selectedEvent.title.charAt(0).toUpperCase() + selectedEvent.title.slice(1)"></h2>
                             <p class="text-white text-xs font-semibold px-2 py-1 rounded-full w-fit"
                                 :style="{ backgroundColor: selectedEvent.color }"
                                 x-text="selectedEvent.category.charAt(0).toUpperCase() + selectedEvent.category.slice(1)">

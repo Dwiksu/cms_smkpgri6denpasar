@@ -34,7 +34,6 @@
                         <th class="px-4 py-3">Nama Guru</th>
                         <th class="px-4 py-3">Jabatan</th>
                         <th class="px-4 py-3">Mata Pelajaran</th>
-                        <th class="px-4 py-3">Pendidikan</th>
                         <th class="px-4 py-3">Jurusan</th>
                         <th class="px-4 py-3 text-center">Aksi</th>
                     </tr>
@@ -88,11 +87,6 @@
 
                                 {{-- Subject --}}
                                 <td class="px-4 py-3 text-blue-600 capitalize" x-text="item.subject">
-                                </td>
-
-                                {{-- Pendidikan --}}
-                                <td class="px-4 py-3 text-green-600 capitalize" x-text="item.education">
-                                    {{-- {{ $item->education ?? '—' }} --}}
                                 </td>
 
                                 {{-- Jurusan --}}
