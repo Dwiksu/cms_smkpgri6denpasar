@@ -14,8 +14,6 @@ class Hero extends Model
         'title',
         'subtitle',
         'tagline',
-        'cta_text',
-        'cta_link',
         'background_image',
     ];
 }
