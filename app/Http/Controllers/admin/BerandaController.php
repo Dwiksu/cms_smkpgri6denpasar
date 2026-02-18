@@ -36,14 +36,10 @@ class BerandaController extends Controller
             'hero.title' => 'required|string|max:255',
             'hero.subtitle' => 'required|string|max:255',
             'hero.tagline' => 'nullable|string|max:255',
-            'hero.cta_text' => 'required|string|max:100',
-            'hero.cta_link' => 'required|string|max:255',
             'hero.background_image' => 'required|string',
         ], [
             'hero.title.required' => 'Judul harus diisi',
             'hero.subtitle.required' => 'Sub judul harus diisi',
-            'hero.cta_text.required' => 'Teks tombol harus diisi',
-            'hero.cta_link.required' => 'Link tombol harus diisi',
         ]);
 
         Hero::updateOrCreate(['id' => 1], $data['hero']);

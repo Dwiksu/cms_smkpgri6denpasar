@@ -58,7 +58,18 @@ class NewsController extends Controller
             'published_at.required' => 'Tanggal publikasi harus diisi',
         ]);
 
-        $data['slug'] = str()->slug($data['title']);
+        $slug = str()->slug($data['title']);
+        $originalSlug = $slug;
+        $count = 1;
+
+        while (News::where('slug', $slug)->exists()) {
+            $slug = $originalSlug . '-' . $count;
+            $count++;
+        }
+
+        $data['slug'] = $slug;
+
+
         $data['author'] = auth()->user()->name ?? 'Admin';
 
         News::create($data);

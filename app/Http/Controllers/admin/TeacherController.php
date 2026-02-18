@@ -45,21 +45,13 @@ class TeacherController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'nip' => 'required|string|max:18',
             'position' => 'required|string|max:255',
             'subject' => 'nullable|string|max:255',
             'major_id' => 'nullable|exists:majors,id',
-            'photo' => 'required|string',
-            'email' => 'nullable|email|max:255',
-            'phone' => 'nullable|string|max:18',
-            'education' => 'required|string|max:100',
         ], [
             'name.required' => 'Nama guru harus diisi',
-            'nip.required' => 'NIP guru harus diisi',
             'position.required' => 'Posisi guru harus diisi',
             'photo.required' => 'Foto guru harus diisi',
-            'education.required' => 'Pendidikan guru harus diisi',
-            'email.email' => 'Format email tidak valid',
         ]);
 
         Teacher::create($data);
@@ -92,20 +84,14 @@ class TeacherController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'nip' => 'required|string|max:18',
             'position' => 'required|string|max:255',
             'subject' => 'nullable|string|max:255',
             'major_id' => 'nullable|exists:majors,id',
             'photo' => 'required|string',
-            'email' => 'nullable|email|max:255',
-            'phone' => 'nullable|string|max:18',
-            'education' => 'required|string|max:100',
         ], [
             'name.required' => 'Nama guru harus diisi',
-            'nip.required' => 'NIP guru harus diisi',
             'position.required' => 'Posisi guru harus diisi',
             'photo.required' => 'Foto guru harus diisi',
-            'education.required' => 'Pendidikan guru harus diisi',
         ]);
 
         $teacher->update($data);
