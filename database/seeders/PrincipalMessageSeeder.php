@@ -16,7 +16,7 @@ class PrincipalMessageSeeder extends Seeder
         PrincipalMessage::insert([
            'name' => 'Drs. I Wayan Sukarta',
            'photo' => '/storage/images/beranda/principal/foto-kepsek.jpeg',
-           'message' => '-',
+           'message' => 'lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae. dolor sit amet consectetur adipisicing elit. Quisquam, quae. ',
         ]);
     }
 }

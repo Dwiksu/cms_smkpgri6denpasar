@@ -32,6 +32,6 @@ class GalleryAlbum extends Model
     }
 
     public static function getGallery() {
-        return self::latest()->paginate(6);
+        return self::latest()->paginate(9);
     }
 }
