@@ -14,7 +14,7 @@ class UploadImageController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,webp,avif|max:5120',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,webp,avif',
             'folder' => 'nullable|string'
         ]);
 
