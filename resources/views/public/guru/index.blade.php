@@ -3,7 +3,7 @@
 
     <div class="min-h-screen">
         {{-- HERO --}}
-        <section class="relative aspect-5/1 bg-white w-full flex overflow-hidden">
+        <section class="bg-white aspect-auto min-h-[300px] md:min-h-0 md:aspect-5/1 w-full relative flex overflow-hidden">
             <div class="absolute inset-0 bg-cover bg-center bg-no-repeat"
                 style="background-image:url('{{ asset('assets/guru.jpeg') }}')">
                 <div class="absolute inset-0 bg-linear-to-r from-sky-600/90 to-sky-600/70"></div>
