@@ -48,6 +48,7 @@ class TeacherController extends Controller
             'position' => 'required|string|max:255',
             'subject' => 'nullable|string|max:255',
             'major_id' => 'nullable|exists:majors,id',
+            'photo' => 'required|string',
         ], [
             'name.required' => 'Nama guru harus diisi',
             'position.required' => 'Posisi guru harus diisi',

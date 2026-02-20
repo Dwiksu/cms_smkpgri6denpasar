@@ -17,8 +17,6 @@ class HeroSeeder extends Seeder
             'title' => 'SMK PGRI 6 DENPASAR',
             'subtitle' => 'lorem ipsum dolor sit amet',
             'tagline' => 'lorem ipsum dolor sit amet',
-            'cta_text' => 'Lihat Selengkapnya',
-            'cta_link' => '#tentang-kami',
             'background_image' => '/storage/images/beranda/hero/hero-background.jpeg'
         ]);
     }
