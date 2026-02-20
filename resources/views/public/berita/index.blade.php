@@ -4,7 +4,7 @@
 
 
     <div class="min-h-screen">
-        <section id="hero" class="bg-white aspect-5/1 w-full relative flex overflow-hidden">
+        <section id="hero" class="bg-white aspect-auto min-h-[300px] md:min-h-0 md:aspect-5/1 w-full relative flex overflow-hidden">
             <div class="absolute inset-0 bg-cover bg-center bg-no-repeat"
                 style="background-image: url('assets/guru.jpeg');">
                 <div class="absolute inset-0 bg-linear-to-r from-sky-600/90 to-sky-600/70"></div>
@@ -156,8 +156,10 @@
                     </div>
 
                     {{-- Pagination (Laravel Style) --}}
-                    <div class="mt-16 flex justify-center">
-                        {{ $news->appends(request()->input())->links() }}
+                    <div class="mt-16 w-full max-w-full overflow-x-auto pb-4 md:overflow-visible md:pb-0 md:flex md:justify-center">
+                        <div class="w-max mx-auto md:w-auto md:mx-0">
+                            {{ $news->appends(request()->input())->links() }}
+                        </div>
                     </div>
                 @else
                     <div class="text-center py-20 bg-white rounded-3xl border border-dashed border-slate-200">

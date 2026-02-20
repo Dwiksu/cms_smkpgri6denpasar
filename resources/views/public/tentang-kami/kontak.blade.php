@@ -1,7 +1,7 @@
 <x-app>
     <x-slot:title>Kontak</x-slot:title>
 
-    <section id="hero" class="bg-white aspect-5/1 w-full relative flex overflow-hidden">
+    <section id="hero" class="bg-white aspect-auto min-h-[300px] md:min-h-0 md:aspect-5/1 w-full relative flex overflow-hidden">
         <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('assets/guru.jpeg');">
             <div class="absolute inset-0 bg-linear-to-r from-sky-600/90 to-sky-600/70"></div>
         </div>

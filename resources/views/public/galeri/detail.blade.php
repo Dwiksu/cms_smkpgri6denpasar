@@ -1,23 +1,97 @@
 <x-app>
-    <x-slot:title>{{ $album->title }}</x-slot:title>
-
+    <x-slot:title>{{ $album->name }}</x-slot:title>
 
     <div class="min-h-screen" x-data="{
         selectedIndex: null,
         photos: {{ json_encode($album->photos) }},
-        next() { if (this.selectedIndex < this.photos.length - 1) this.selectedIndex++ },
-        prev() { if (this.selectedIndex > 0) this.selectedIndex-- },
-        close() { this.selectedIndex = null }
-    }" x-init="$watch('selectedIndex', value => {
-        if (value !== null) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = '';
+    
+        swipeX: 0, 
+        isSwiping: false, 
+        isAnimating: false, 
+        startX: 0, 
+        screenWidth: 0, 
+    
+        init() {
+            this.screenWidth = window.innerWidth || document.documentElement.clientWidth;
+            window.addEventListener('resize', () => {
+                this.screenWidth = window.innerWidth || document.documentElement.clientWidth;
+            });
+        },
+    
+        close() {
+            this.selectedIndex = null;
+            this.swipeX = 0;
+            this.isAnimating = false;
+        },
+    
+        handleChange(direction) {
+            if (this.isAnimating) return; 
+    
+            const nextIndex = direction === 'next' ? this.selectedIndex + 1 : this.selectedIndex - 1;
+    
+            if (nextIndex >= 0 && nextIndex < this.photos.length) {
+                this.isAnimating = true;
+    
+                this.swipeX = direction === 'next' ? -this.screenWidth : this.screenWidth;
+    
+                setTimeout(() => {
+                    this.selectedIndex = nextIndex; 
+                    this.swipeX = direction === 'next' ? this.screenWidth : -this.screenWidth;
+
+                    setTimeout(() => {
+                        this.swipeX = 0;
+                        setTimeout(() => { this.isAnimating = false; }, 300);
+                    }, 50);
+    
+                }, 300); 
+            } else {
+                this.swipeX = 0;
+            }
+        },
+        next() { this.handleChange('next'); },
+        prev() { this.handleChange('prev'); },
+    
+
+        startSwipe(e) {
+            if (this.isAnimating || this.selectedIndex === null) return;
+            this.isSwiping = true;
+            this.startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        },
+        moveSwipe(e) {
+            if (!this.isSwiping || this.isAnimating) return;
+    
+            const currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+            let diff = currentX - this.startX;
+
+            const isFirst = this.selectedIndex === 0;
+            const isLast = this.selectedIndex === this.photos.length - 1;
+            if ((isFirst && diff > 0) || (isLast && diff < 0)) {
+                diff = diff / (1 + Math.abs(diff) / this.screenWidth * 2);
+            }
+    
+            this.swipeX = diff;
+        },
+        endSwipe() {
+            if (!this.isSwiping) return;
+            this.isSwiping = false;
+            const threshold = 60;
+    
+            if (this.swipeX < -threshold && this.selectedIndex < this.photos.length - 1) {
+                this.handleChange('next');
+            } else if (this.swipeX > threshold && this.selectedIndex > 0) {
+                this.handleChange('prev');
+            } else {
+                this.swipeX = 0;
+            }
         }
+    }" x-init="init();
+    $watch('selectedIndex', value => {
+        document.body.style.overflow = value !== null ? 'hidden' : '';
     })" @keydown.escape.window="close()"
         @keydown.arrow-right.window="next()" @keydown.arrow-left.window="prev()">
 
-        <section id="hero" class="bg-white aspect-5/1 w-full relative flex overflow-hidden">
+        <section id="hero"
+            class="bg-white aspect-auto min-h-[300px] md:min-h-0 md:aspect-5/1 w-full relative flex overflow-hidden">
             <div class="absolute inset-0 bg-cover bg-center bg-no-repeat"
                 style="background-image: url('{{ asset($album->cover_image) }}');">
                 <div class="absolute inset-0 bg-linear-to-r from-sky-600/90 to-sky-600/70"></div>
@@ -75,31 +149,31 @@
 
         <template x-teleport="body">
             <div x-show="selectedIndex !== null"
-                class="fixed inset-0 z-[999] flex items-center justify-center bg-black/95 transition-opacity duration-300"
+                class="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-black/95 transition-opacity duration-300"
                 x-cloak>
-                {{-- Area Klik untuk Menutup (Overlay) --}}
-                <div class="absolute inset-0 z-0" @click="close()"></div>
 
-                {{-- Tombol Close --}}
+                {{-- Background Overlay --}}
+                <div class="absolute inset-0 z-0"></div>
+
+                {{-- Tombol Close (X) --}}
                 <button @click="close()"
-                    class="absolute top-5 right-5 z-[1001] text-white/70 hover:text-white p-2 transition-colors">
-                    <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    class="absolute top-4 right-4 md:top-5 md:right-5 z-[1001] bg-black/40 md:bg-transparent rounded-full text-white/80 hover:text-white p-2 transition-colors">
+                    <svg class="w-7 h-7 md:w-10 md:h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
 
-                {{-- Navigasi - Gunakan .stop untuk mencegah event bubbling --}}
+                {{-- Navigasi Desktop --}}
                 <div
-                    class="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-4 md:px-10 z-[1001] pointer-events-none">
+                    class="hidden md:flex absolute inset-x-0 top-1/2 -translate-y-1/2 justify-between px-10 z-[1001] pointer-events-none">
                     <button x-show="selectedIndex > 0" @click.stop="prev()"
                         class="pointer-events-auto p-4 text-white/50 hover:text-white bg-black/20 hover:bg-black/40 rounded-full transition-all">
                         <svg class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                         </svg>
                     </button>
-                    <div x-show="selectedIndex === 0"></div> {{-- Spacer --}}
-
+                    <div x-show="selectedIndex === 0"></div>
                     <button x-show="selectedIndex < photos.length - 1" @click.stop="next()"
                         class="pointer-events-auto p-4 text-white/50 hover:text-white bg-black/20 hover:bg-black/40 rounded-full transition-all">
                         <svg class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -108,25 +182,58 @@
                     </button>
                 </div>
 
-                {{-- Kontainer Foto --}}
-                <div
-                    class="relative z-[1000] max-w-5xl w-full h-full flex flex-col items-center justify-center gap-6 p-4 pointer-events-none">
-                    <img :src="photos[selectedIndex]?.url" :alt="photos[selectedIndex]?.caption"
-                        class="max-w-full max-h-[75vh] object-contain rounded-lg shadow-2xl pointer-events-auto"
-                        x-show="selectedIndex !== null" x-transition:enter="transition ease-out duration-300 transform"
-                        x-transition:enter-start="scale-95 opacity-0" x-transition:enter-end="scale-100 opacity-100">
+                {{-- Area Geser & Foto --}}
+                <div class="relative z-[1000] flex-grow w-full max-w-5xl flex items-center justify-center p-4 pt-16 pb-[100px] md:pb-4 pointer-events-auto cursor-grab active:cursor-grabbing overflow-hidden"
+                    style="touch-action: pan-y;" @touchstart="startSwipe" @touchmove="moveSwipe" @touchend="endSwipe"
+                    @mousedown="startSwipe" @mousemove="moveSwipe" @mouseup="endSwipe"
+                    @mouseleave="if(isSwiping) endSwipe()">
 
-                    {{-- Caption --}}
-                    <div
-                        class="pointer-events-auto w-full max-w-2xl bg-white/10 backdrop-blur-md p-5 rounded-2xl text-center border border-white/10">
-                        <p class="text-white text-lg font-medium"
+                    {{-- Bungkus Transform: Bergerak mengikuti swipeX --}}
+                    <div class="w-full h-full flex items-center justify-center will-change-transform"
+                        :style="`transform: translateX(${swipeX}px); transition: ${isSwiping || (isAnimating && Math.abs(swipeX) === screenWidth) ? 'none' : 'transform 0.3s cubic-bezier(0.25, 1, 0.5, 1)'}`">
+
+                        {{-- Gambar --}}
+                        <img :src="photos[selectedIndex]?.url" :alt="photos[selectedIndex]?.caption"
+                            class="max-w-full max-h-[70vh] md:max-h-[75vh] object-contain rounded-lg md:shadow-2xl pointer-events-none select-none"
+                            x-show="selectedIndex !== null">
+                    </div>
+                </div>
+
+                {{-- Kotak Caption (Fixed Bottom Mobile) --}}
+                <div class="pointer-events-auto fixed bottom-0 inset-x-0 md:static w-full md:max-w-2xl bg-[#1a1a1a] md:bg-white/10 md:backdrop-blur-md p-4 pb-6 md:p-5 rounded-t-3xl md:rounded-2xl border-t md:border border-white/10 flex items-center shadow-[0_-15px_40px_rgba(0,0,0,0.6)] md:shadow-xl z-[1002] md:mb-6 transition-transform duration-300"
+                    :class="isAnimating ? 'translate-y-[150%]' : 'translate-y-0'"> {{-- Sembunyikan caption saat animasi berjalan --}}
+
+                    {{-- Tombol Prev Mobile --}}
+                    <button x-show="selectedIndex > 0" @click.stop="prev()"
+                        class="md:hidden flex-shrink-0 p-2 text-white/70 hover:text-white bg-white/10 active:bg-white/20 rounded-full transition-colors"
+                        :disabled="isAnimating">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <div x-show="selectedIndex === 0" class="md:hidden w-10"></div>
+
+                    {{-- Teks Keterangan --}}
+                    <div class="flex-grow text-center px-2">
+                        <p class="text-white text-sm md:text-lg font-medium line-clamp-2"
                             x-text="photos[selectedIndex]?.caption || 'Tanpa keterangan'"></p>
-                        <div class="flex items-center justify-center gap-3 mt-2">
-                            <span class="px-3 py-1 bg-white/20 rounded-full text-white text-xs">
+                        <div class="inline-block mt-1.5 md:mt-2">
+                            <span
+                                class="px-3 py-1 bg-white/20 rounded-full text-white text-[10px] md:text-xs tracking-widest font-semibold">
                                 <span x-text="selectedIndex + 1"></span> / <span x-text="photos.length"></span>
                             </span>
                         </div>
                     </div>
+
+                    {{-- Tombol Next Mobile --}}
+                    <button x-show="selectedIndex < photos.length - 1" @click.stop="next()"
+                        class="md:hidden flex-shrink-0 p-2 text-white/70 hover:text-white bg-white/10 active:bg-white/20 rounded-full transition-colors"
+                        :disabled="isAnimating">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                    <div x-show="selectedIndex === photos.length - 1" class="md:hidden w-10"></div>
                 </div>
             </div>
         </template>
@@ -135,6 +242,10 @@
     <style>
         [x-cloak] {
             display: none !important;
+        }
+
+        .will-change-transform {
+            will-change: transform;
         }
     </style>
 </x-app>
