@@ -26,23 +26,14 @@
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div class="mb-5">
-                        <label for="teacher-name" class="block mb-2.5 text-sm font-medium text-heading">Nama <span
-                                class="text-red-500">*</span></label>
-                        <input id="teacher-name" name="name" type="text" data-error-input
-                            value="{{ old('name', $teacher->name ?? '') }}"
-                            class="bg-neutral-secondary-medium border {{ errorBorder('name') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" />
-                        @error('name')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
                     <div class="grid sm:grid-cols-2 gap-4">
                         <div class="mb-5">
-                            <label for="teacher-nip" class="block mb-2.5 text-sm font-medium text-heading">NIP</label>
-                            <input id="teacher-nip" name="nip" type="text" data-error-input
-                                value="{{ old('nip', $teacher->nip ?? '') }}"
-                                class="bg-neutral-secondary-medium border {{ errorBorder('nip') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" />
-                            @error('nip')
+                            <label for="teacher-name" class="block mb-2.5 text-sm font-medium text-heading">Nama <span
+                                    class="text-red-500">*</span></label>
+                            <input id="teacher-name" name="name" type="text" data-error-input
+                                value="{{ old('name', $teacher->name ?? '') }}"
+                                class="bg-neutral-secondary-medium border {{ errorBorder('name') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" />
+                            @error('name')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
@@ -83,36 +74,6 @@
                             </select>
                         </div>
                     </div>
-                    <div class="grid sm:grid-cols-2 gap-4">
-                        <div class="mb-5">
-                            <label for="teacher-email"
-                                class="block mb-2.5 text-sm font-medium text-heading">Email</label>
-                            <input id="teacher-email" name="email" type="email"
-                                value="{{ old('email', $teacher->email ?? '') }}"
-                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" />
-                            @error('email')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div class="mb-5">
-                            <label for="teacher-telepon"
-                                class="block mb-2.5 text-sm font-medium text-heading">Telepon</label>
-                            <input id="teacher-telepon" name="phone" type="text"
-                                value="{{ old('phone', $teacher->phone ?? '') }}"
-                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" />
-                        </div>
-                    </div>
-                    <div class="mb-5">
-                        <label for="teacher-pendidikan" class="block mb-2.5 text-sm font-medium text-heading">Pendidikan
-                            <span class="text-red-500">*</span></label>
-                        <input id="teacher-pendidikan" name="education" type="text" data-error-input=""
-                            value="{{ old('education', $teacher->education ?? '') }}"
-                            class="bg-neutral-secondary-medium border {{ errorBorder('education') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" />
-                        @error('education')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-
                     <button type="submit"
                         class="text-white bg-brand box-border border border-transparent inline-flex items-center  hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
                         @svg('lucide-save', 'h-4 w-4 me-1.5')

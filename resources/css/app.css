@@ -23,6 +23,10 @@
   }
 }
 
+body.lock-scroll {
+  overflow: hidden;
+}
+
 /* CALENDAR */
 /* Toolbar container */
 

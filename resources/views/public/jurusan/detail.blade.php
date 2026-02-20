@@ -39,7 +39,7 @@
                             <div class="prose prose-slate max-w-none">
                                 {!! $major->full_description !!}
                             </div>
-                            @if (count($teachers) > 0)
+                            @if (count($teachers ?? []) > 0)
                                 <div class="mt-12" x-intersect="$el.classList.add('animate-fade-up')">
                                     <h3 class="text-2xl font-bold mb-6 text-slate-800 flex items-center gap-2">
                                         <svg class="h-6 w-6 text-sky-600" fill="none" viewBox="0 0 24 24"
@@ -51,35 +51,32 @@
                                     </h3>
 
                                     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                                        @foreach ($teachers as $teacher)
+                                        @foreach ($teachers ?? [] as $teacher)
                                             <div
-                                                class="group bg-white rounded-2xl p-6 text-center border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
-                                                <div class="relative inline-block mb-4">
+                                                class="bg-white rounded-xl border border-slate-200 p-5
+                   transition hover:-translate-y-1 hover:shadow-lg">
+
+                                                {{-- Foto --}}
+                                                <div class="flex justify-center mb-4">
                                                     <img src="{{ $teacher->photo ?? '/placeholder-user.svg' }}"
                                                         alt="{{ $teacher->name }}"
-                                                        class="w-24 h-24 rounded-full mx-auto object-cover border-4 border-sky-50 shadow-md group-hover:border-sky-200 transition-colors" />
-                                                    <div
-                                                        class="absolute -bottom-1 -right-1 bg-emerald-500 w-6 h-6 rounded-full border-2 border-white flex items-center justify-center">
-                                                        <svg class="w-3 h-3 text-white" fill="currentColor"
-                                                            viewBox="0 0 20 20">
-                                                            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
-                                                            <path fill-rule="evenodd"
-                                                                d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
-                                                                clip-rule="evenodd" />
-                                                        </svg>
-                                                    </div>
+                                                        class="h-24 w-24 rounded-full object-cover bg-slate-100">
                                                 </div>
 
+                                                {{-- Nama --}}
                                                 <h4
-                                                    class="font-bold text-slate-800 leading-tight mb-1 group-hover:text-sky-600 transition-colors">
+                                                    class="text-center text-sm font-semibold text-slate-800 leading-snug capitalize">
                                                     {{ $teacher->name }}
                                                 </h4>
-                                                <p class="text-sm text-slate-500">
+
+                                                {{-- Mapel --}}
+                                                <p class="mt-1 text-center text-xs text-slate-500 capitalize">
                                                     {{ $teacher->subject ?? 'Guru Produktif' }}
                                                 </p>
                                             </div>
                                         @endforeach
                                     </div>
+
                                 </div>
                             @endif
                         </div>
@@ -101,7 +98,7 @@
                                     </div>
                                     <div>
                                         <p class="text-sm text-slate-500">Jumlah Kurikulum</p>
-                                        <p class="font-semibold">{{ count($major->subjects) }} Mata Pelajaran</p>
+                                        <p class="font-semibold">{{ count($major->subjects ?? []) }} Mata Pelajaran</p>
                                     </div>
                                     <a href="/kontak"
                                         class="block text-center bg-sky-600 text-white py-3 rounded-xl font-semibold hover:bg-sky-700 transition-colors shadow-md">
@@ -112,7 +109,7 @@
                         </div>
                     </div>
 
-                    @if (count($major->achievements) > 0)
+                    @if (count($major->achievements ?? []) > 0)
                         <div>
                             <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-slate-800">
                                 <svg class="h-5 w-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
@@ -122,7 +119,7 @@
                                 Prestasi Jurusan
                             </h3>
                             <div class="grid sm:grid-cols-2 gap-4">
-                                @foreach ($major->achievements as $achievement)
+                                @foreach ($major->achievements ?? [] as $achievement)
                                     <div
                                         class="bg-white p-4 rounded-xl shadow-sm flex items-center gap-3 border border-slate-100">
                                         <svg class="h-5 w-5 text-emerald-500 flex-shrink-0" fill="none"
@@ -151,7 +148,7 @@
                             akan dipelajari.</p>
 
                         <div class="space-y-3">
-                            @forelse($major->subjects as $index => $item)
+                            @forelse($major->subjects ?? [] as $index => $item)
                                 <div class="border border-slate-200 rounded-2xl bg-white overflow-hidden shadow-sm transition-all duration-300"
                                     :class="selected === {{ $index }} ?
                                         'ring-2 ring-sky-500 border-transparent shadow-md' : ''">
@@ -210,9 +207,9 @@
                             industri saat ini. Berikut adalah peluang karir yang dapat Anda raih:
                         </p>
 
-                        @if (count($major->careers) > 0)
+                        @if (count($major->careers ?? []) > 0)
                             <div class="grid sm:grid-cols-2 gap-4">
-                                @foreach ($major->careers as $career)
+                                @foreach ($major->careers ?? [] as $career)
                                     <div
                                         class="group bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-4 hover:border-sky-200 hover:shadow-md transition-all duration-300">
                                         <div

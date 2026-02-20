@@ -87,7 +87,7 @@
                                                             :class="getCategoryClass(event.category)"
                                                             class="text-[10px] px-1.5 py-0.5 rounded-md truncate shadow-sm cursor-pointer"
                                                             :title="event.title">
-                                                            <span x-text="event.title"></span>
+                                                            <span x-text="event.title.charAt(0).toUpperCase() + event.title.slice(1)"></span>
                                                         </div>
                                                     </template>
                                                 </div>
@@ -134,7 +134,7 @@
                                                 class="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full mb-1 inline-block">
                                                 <span x-text="event.category"></span>
                                             </span>
-                                            <h4 class="font-bold text-slate-800 text-sm line-clamp-1"
+                                            <h4 class="font-bold text-slate-800 text-sm line-clamp-1 capitalize"
                                                 x-text="event.title"></h4>
                                             <p class="text-xs text-slate-500 mt-1 line-clamp-2"
                                                 x-text="event.description"></p>
@@ -176,7 +176,7 @@
                         </button>
                         <span class="text-xs font-bold uppercase tracking-widest opacity-80"
                             x-text="selectedEvent?.category"></span>
-                        <h3 class="text-2xl font-bold mt-1" x-text="selectedEvent?.title"></h3>
+                        <h3 class="text-2xl font-bold mt-1" x-text="selectedEvent?.title.charAt(0).toUpperCase() + selectedEvent?.title.slice(1)"></h3>
                     </div>
 
                     <div class="p-8 space-y-6">

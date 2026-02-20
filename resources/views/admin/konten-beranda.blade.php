@@ -64,43 +64,23 @@
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div class="mb-5">
-                        <label class="block mb-2.5 text-sm font-medium text-heading">Subtitle</label>
-                        <input type="text" name="hero[subtitle]" data-error-input
-                            value="{{ old('hero.subtitle', $hero->subtitle ?? '') }}"
-                            class="bg-neutral-secondary-medium border {{ errorBorder('hero.subtitle') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                            placeholder="Mencetak Generasi Unggul dan Berkarakter" />
-                        @error('hero.subtitle')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    <div class="mb-5">
-                        <label class="block mb-2.5 text-sm font-medium text-heading">Tagline</label>
-                        <input type="text" name="hero[tagline]"
-                            value="{{ old('hero.tagline', $hero->tagline ?? '') }}"
-                            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                            placeholder="Siap Kerja, Cerdas, dan Kompetitif" />
-                    </div>
                     <div class="grid sm:grid-cols-2 gap-4">
                         <div class="mb-5">
-                            <label class="block mb-2.5 text-sm font-medium text-heading">Teks Tombol CTA</label>
-                            <input type="text" name="hero[cta_text]"
-                                value="{{ old('hero.cta_text', $hero->cta_text ?? '') }}"
-                                class="bg-neutral-secondary-medium border {{ errorBorder('hero.cta_text') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="Daftar Sekarang" />
-                            @error('hero.cta_text')
+                            <label class="block mb-2.5 text-sm font-medium text-heading">Subtitle</label>
+                            <input type="text" name="hero[subtitle]" data-error-input
+                                value="{{ old('hero.subtitle', $hero->subtitle ?? '') }}"
+                                class="bg-neutral-secondary-medium border {{ errorBorder('hero.subtitle') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                placeholder="Mencetak Generasi Unggul dan Berkarakter" />
+                            @error('hero.subtitle')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="mb-5">
-                            <label class="block mb-2.5 text-sm font-medium text-heading">Link Tombol CTA</label>
-                            <input type="text" name="hero[cta_link]"
-                                value="{{ old('hero.cta_link', $hero->cta_link ?? '') }}"
-                                class="bg-neutral-secondary-medium border {{ errorBorder('hero.cta_link') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="/pendaftaran" />
-                            @error('hero.cta_link')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
+                            <label class="block mb-2.5 text-sm font-medium text-heading">Tagline</label>
+                            <input type="text" name="hero[tagline]"
+                                value="{{ old('hero.tagline', $hero->tagline ?? '') }}"
+                                class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                placeholder="Siap Kerja, Cerdas, dan Kompetitif" />
                         </div>
                     </div>
                     <button type="submit"
@@ -244,16 +224,16 @@
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
-                        <div class="mb-5">
-                            <label class="block mb-2.5 text-sm font-medium text-heading">Nama Kepala Sekolah</label>
-                            <input type="text" name="principal[name]" data-error-input
-                                value="{{ old('principal.name', $principal->name ?? '') }}"
-                                class="bg-neutral-secondary-medium border {{ errorBorder('principal.name') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="Nama Kepala Sekolah" />
-                            @error('principal.name')
-                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
+                    <div class="mb-5">
+                        <label class="block mb-2.5 text-sm font-medium text-heading">Nama Kepala Sekolah</label>
+                        <input type="text" name="principal[name]" data-error-input
+                            value="{{ old('principal.name', $principal->name ?? '') }}"
+                            class="bg-neutral-secondary-medium border {{ errorBorder('principal.name') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                            placeholder="Nama Kepala Sekolah" />
+                        @error('principal.name')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
                     <div class="mb-5">
                         <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Teks
                             Sambutan</label>

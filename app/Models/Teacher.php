@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 use App\Models\Major;
+use Illuminate\Http\Request;
 
 class Teacher extends Model
 {
@@ -15,14 +16,10 @@ class Teacher extends Model
 
     protected $fillable = [
         'name',
-        'nip',
         'position',
         'subject',
         'major_id',
         'photo',
-        'email',
-        'phone',
-        'education',
     ];
 
     public function major(): BelongsTo
@@ -30,7 +27,19 @@ class Teacher extends Model
         return $this->belongsTo(Major::class);
     }
 
-    public static function getTeacher() {
+    public static function getTeacher()
+    {
         return self::with('major')->latest()->paginate(10);
+    }
+
+    public static function getProfilGuru(Request $request, int $perPage = 12)
+    {
+        return self::with('major')
+            ->when($request->filled('filter') && $request->filter !== 'all', function ($q) use ($request) {
+                $q->where('major_id', $request->filter);
+            })
+            ->latest()
+            ->paginate($perPage)
+            ->withQueryString();
     }
 }

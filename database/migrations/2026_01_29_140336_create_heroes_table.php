@@ -15,8 +15,6 @@ return new class extends Migration {
             $table->string('title');
             $table->string('subtitle');
             $table->string('tagline')->nullable();
-            $table->string('cta_text');
-            $table->string('cta_link');
             $table->string('background_image');
             $table->timestamps();
         });

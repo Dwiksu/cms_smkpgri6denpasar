@@ -17,14 +17,9 @@ return new class extends Migration {
             ->nullOnDelete()->onDelete('cascade')->onUpdate('cascade');
 
             $table->string('name');
-            $table->string('nip');
             $table->string('position');
             $table->string('subject')->nullable();
             $table->string('photo')->nullable();
-
-            $table->string('email')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('education');
             $table->timestamps();
         });
     }

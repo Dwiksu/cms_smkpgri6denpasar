@@ -2,85 +2,88 @@
     <x-slot:title>Beranda</x-slot:title>
 
     <section id="hero"
-        class="bg-white aspect-5/2 pb-10 w-full relative flex items-center justify-center overflow-hidden overlay-bottom">
-        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        class="relative flex items-center justify-center overflow-hidden overlay-bottom bg-white
+        aspect-[3/4] sm:aspect-[4/3] lg:aspect-5/2">
+
+        <div class="absolute inset-0 bg-cover bg-center"
             style="background-image: url({{ asset($hero->background_image) }});">
-            <div class="absolute inset-0 bg-linear-to-r from-sky-600/90 to-sky-600/70"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-sky-600/90 to-sky-600/70"></div>
         </div>
-        <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12 relative z-10">
-            <h1 class="mb-4 text-xl font-bold tracking-tight text-white md:text-2xl lg:text-3xl">
-                {{ $hero->tagline }}</h1>
-            <h1 class="mb-4 text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl">
-                {{ $hero->title }}</h1>
-            <p class="mb-8 text-lg font-normal text-white lg:text-xl sm:px-16 xl:px-48">
-                {{ $hero->subtitle }}</p>
-            <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
-                <a href="{{ $hero->cta_link }}"
-                    class="inline-flex justify-center gap-2 items-center py-3 px-7 text-base font-medium text-center bg-amber-300 text-white rounded-full border border-amber-300 hover:bg-transparent hover:text-amber-300 focus:ring-4 focus:ring-gray-100 transition-all duration-300">
-                    {{ $hero->cta_text }}
-                    @svg('lucide-arrow-right', 'w-5 h-5')
+
+        <div class="relative z-10 px-4 py-10 max-w-screen-xl text-center">
+            <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white mb-3">
+                {{ $hero->tagline }}
+            </h1>
+
+            <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4">
+                {{ $hero->title }}
+            </h2>
+
+            <p class="text-base sm:text-lg lg:text-xl text-white mb-8 sm:px-12 xl:px-40">
+                {{ $hero->subtitle }}
+            </p>
+
+            <div class="flex flex-col items-center sm:flex-row gap-4 justify-center">
+                <a href="#tentang-kami"
+                    class="w-fit py-3 px-7 rounded-full bg-amber-300 text-white font-medium hover:bg-transparent hover:text-amber-300 border border-amber-300 transition">
+                    Lihat Selengkapnya
                 </a>
                 <a href="#jurusan"
-                    class="inline-flex justify-center items-center py-3 px-7 text-base font-medium text-center text-white rounded-full border border-gray-300 hover:bg-gray-100 hover:text-gray-900 focus:ring-4 focus:ring-gray-100 transition-all duration-300">
+                    class="w-fit py-3 px-7 rounded-full border border-white text-white hover:bg-white hover:text-gray-900 transition">
                     Lihat Jurusan
                 </a>
             </div>
         </div>
     </section>
 
-    <section id="tentang-kami" class="bg-white py-16">
-        <div
-            class="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
-            <div class="relative h-fit">
-                <div class="absolute -inset-4 bg-sky-600/5 rounded-3xl -rotate-3"></div>
-                <img class="relative rounded-2xl shadow-2xl w-full object-cover aspect-4/3 z-10"
-                    src="{{ asset($about->image) }}" alt="dashboard image">
+    {{-- ================= TENTANG ================= --}}
+    <section id="tentang-kami" class="py-20 bg-white">
+        <div class="max-w-screen-xl mx-auto px-4 flex flex-col-reverse md:grid md:grid-cols-2 gap-10 items-center">
+            <div class="relative">
+                <div class="absolute scale-105 inset-0 bg-sky-600/5 rounded-3xl -rotate-3"></div>
+                <img src="{{ asset($about->image) }}" class="relative rounded-2xl shadow-xl aspect-4/3 object-cover">
             </div>
-            <div class="mt-4 md:mt-0">
-                <div>
-                    <h6 class="w-fit uppercase mb-2 border-b-2 border-dashed">Tentang Kami</h6>
-                    <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-sky-600">{{ $about->title }}</h2>
-                </div>
-                <p class="mb-6 font-light text-gray-500 md:text-lg">{{ $about->description }}</p>
+
+            <div>
+                <h6 class="uppercase border-b-2 border-dashed w-fit mb-2">Tentang Kami</h6>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-sky-600 mb-4">
+                    {{ $about->title }}
+                </h2>
+                <p class="text-gray-500 mb-6 text-justify">
+                    {{ $about->description }}
+                </p>
                 <a href="{{ route('public.tentang.sejarah') }}"
-                    class="inline-flex justify-center gap-2 items-center py-3 px-7 text-base font-medium text-center bg-sky-600 text-white rounded-full border border-sky-600 hover:bg-transparent hover:text-sky-600 focus:ring-4 focus:ring-gray-100 transition-all duration-300">
+                    class="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-sky-600 text-white border border-sky-600 hover:bg-transparent hover:text-sky-600 transition">
                     Selengkapnya
-                    @svg('lucide-arrow-right', 'w-5 h-5')
                 </a>
             </div>
         </div>
     </section>
 
-    <section id='stats' class="bg-image">
-        <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
-            <div class="space-y-8 grid grid-cols-2 md:grid-cols-4 md:gap-12 md:space-y-0">
-                <div class="flex items-center flex-col">
-                    <h3 class="mb-2 text-5xl font-extrabold text-sky-600">{{ $stats[0]->value }}</h3>
-                    <p class="text-gray-500">{{ $stats[0]->label }}</p>
-                </div>
-                <div class="flex items-center flex-col">
-                    <h3 class="mb-2 text-5xl font-extrabold text-sky-600">{{ $stats[1]->value }}</h3>
-                    <p class="text-gray-500">{{ $stats[1]->label }}</p>
-                </div>
-                <div class="flex items-center flex-col">
-                    <h3 class="mb-2 text-5xl font-extrabold text-sky-600">{{ $stats[2]->value }}</h3>
-                    <p class="text-gray-500">{{ $stats[2]->label }}</p>
-                </div>
-                <div class="flex items-center flex-col">
-                    <h3 class="mb-2 text-5xl font-extrabold text-sky-600">{{ $stats[3]->value }}</h3>
-                    <p class="text-gray-500">{{ $stats[3]->label }}</p>
-                </div>
-
+    {{-- ================= STATS ================= --}}
+    <section id="stats" class="bg-image py-14">
+        <div class="max-w-screen-xl mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-{{ min($statsCount, 4) }} gap-8 text-center">
+                @foreach ($stats as $stat)
+                    <div>
+                        <h3 class="text-4xl sm:text-5xl font-extrabold text-sky-600">
+                            {{ $stat->value }}
+                        </h3>
+                        <p class="text-gray-500">{{ $stat->label }}</p>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>
+
 
     <section id="jurusan" class="py-16 bg-white">
         <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
             <div class="max-w-screen-md mx-auto text-center mb-8 lg:mb-16">
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-sky-600">Bidang Jurusan
                     Kami</h2>
-                <p class="text-gray-500 sm:text-md dark:text-gray-400">Pilih program keahlian yang sesuai dengan minat
+                <p class="text-gray-500 sm:text-md dark:text-gray-400">Pilih program keahlian yang sesuai dengan
+                    minat
                     dan bakat Anda untuk masa depan yang cerah.</p>
             </div>
 
@@ -135,8 +138,10 @@
                     </div>
 
                     <!-- Navigation -->
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next bg-white border border-sky-600 rounded-full p-2 w-3 h-3">
+                        @svg('lucide-chevron-right')</div>
+                    <div class="swiper-button-prev bg-white border border-sky-600 rounded-full p-2 w-3 h-3">
+                        @svg('lucide-chevron-left')</div>
                 </div>
             </div>
 
@@ -147,16 +152,19 @@
     <section id="pilih" class="bg-image">
         <div
             class="gap-6 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-3 sm:py-16 lg:px-6">
-            <div class="mt-4 md:mt-0">
+            <div class="my-4 md:my-0">
                 <div>
                     <h6 class="w-fit uppercase mb-2 border-b-2 border-dashed">KENAPA PILIH</h6>
                     <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-sky-600">SMK PGRI 6 DENPASAR?</h2>
                 </div>
-                <p class="mb-6 font-light text-gray-500 md:text-lg">Lorem, ipsum dolor sit amet consectetur adipisicing
-                    elit. Ea tempora odit, iste neque ullam consectetur veniam nesciunt ex vel ratione qui iure soluta,
-                    dicta fuga maiores repellendus accusantium laudantium veritatis blanditiis. Ratione, id? Asperiores.
+                <p class="mb-6 font-light text-gray-500 md:text-lg">Lorem, ipsum dolor sit amet consectetur
+                    adipisicing
+                    elit. Ea tempora odit, iste neque ullam consectetur veniam nesciunt ex vel ratione qui iure
+                    soluta,
+                    dicta fuga maiores repellendus accusantium laudantium veritatis blanditiis. Ratione, id?
+                    Asperiores.
                 </p>
-                <a href="#"
+                <a href="{{ $ppdb_link ?? '#' }}"
                     class="inline-flex justify-center gap-2 items-center py-3 px-7 text-base font-medium text-center bg-sky-600 text-white rounded-full border border-sky-600 hover:bg-transparent hover:text-sky-600 focus:ring-4 focus:ring-gray-100 transition-all duration-300">
                     Daftar Sekarang
                     @svg('lucide-arrow-right', 'w-5 h-5')
@@ -171,7 +179,8 @@
                     <div class="p-0">
                         <h5 class="text-center mb-3 text-lg font-semibold tracking-tight text-sky-600 leading-8">
                             Kurikulum Praktis</h5>
-                        <p class="text-center text-body">Fokus pada keterampilan yang relevan dengan industri saat ini.
+                        <p class="text-center text-body">Fokus pada keterampilan yang relevan dengan industri saat
+                            ini.
                         </p>
                     </div>
                 </div>
@@ -183,7 +192,8 @@
                     <div class="p-0">
                         <h5 class="text-center mb-3 text-lg font-semibold tracking-tight text-sky-600 leading-8">
                             Fasilitas Lengkap</h5>
-                        <p class="text-center text-body">Laboratorium dan ruang praktik modern mendukung pembelajaran.
+                        <p class="text-center text-body">Laboratorium dan ruang praktik modern mendukung
+                            pembelajaran.
                         </p>
                     </div>
                 </div>
@@ -222,7 +232,7 @@
                 <div class="col-span-2">
                     <div class="flex justify-between items-center">
                         <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-sky-600">Berita terkini</h2>
-                        <div>
+                        <div class="hidden md:block">
                             <a href="{{ route('public.berita.index') }}"
                                 class="inline-flex justify-center gap-2 items-center py-3 px-7 text-base font-medium text-center bg-transparent text-sky-600 rounded-full border border-sky-600 hover:bg-sky-600 hover:text-white focus:ring-4 focus:ring-gray-100 transition-all duration-300">
                                 Lihat Semua
@@ -230,9 +240,9 @@
                             </a>
                         </div>
                     </div>
-                    <div class="mt-8 grid grid-cols-3 gap-4">
-                        @foreach ($news as $n)
-                            <a href="{{ route('public.berita.show', $n->slug) }}">
+                    <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        @forelse ($news as $index => $n)
+                            <a href="{{ route('public.berita.show', $n->slug) }}" class="{{ $index > 2 ? 'hidden md:block' : '' }}">
                                 <article class="bg-white rounded-lg shadow c-hover group">
                                     <div class="aspect-video rounded-t-lg overflow-hidden relative">
                                         <img src="{{ asset($n->image) }}" alt="{{ $n->title }}" loading="lazy"
@@ -252,9 +262,19 @@
                                     </div>
                                 </article>
                             </a>
-                        @endforeach
+                        @empty
+                            <p class="text-gray-500 text-center w-full col-span-full">Belum ada berita terbaru.</p>
+                        @endforelse
                     </div>
                 </div>
+            </div>
+            <div class="text-center
+                        mt-8">
+                <a href="{{ route('public.berita.index') }}"
+                    class="md:hidden inline-flex justify-center gap-2 items-center py-3 px-7 text-base font-medium text-center bg-transparent text-sky-600 rounded-full border border-sky-600 hover:bg-sky-600 hover:text-white focus:ring-4 focus:ring-gray-100 transition-all duration-300">
+                    Lihat Semua
+                    @svg('lucide-arrow-right', 'w-5 h-5')
+                </a>
             </div>
         </div>
     </section>
@@ -263,7 +283,8 @@
         <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
             <div class="max-w-screen-md mx-auto text-center mb-8 lg:mb-16">
                 <h6 class="w-fit uppercase mb-2 mx-auto border-b-2 border-dashed">Kata Mereka</h6>
-                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-sky-600">Apa Kata Alumni & Orang Tua</h2>
+                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-sky-600">Apa Kata Alumni & Orang Tua
+                </h2>
             </div>
 
 
@@ -278,7 +299,8 @@
                                 @svg('lucide-star', 'w-4 h-4')
                                 @svg('lucide-star', 'w-4 h-4')
                             </div>
-                            <p class="text-gray-600 mb-6 italic">"Lorem ipsum dolor sit amet consectetur adipisicing
+                            <p class="text-gray-600 mb-6 italic">"Lorem ipsum dolor sit amet consectetur
+                                adipisicing
                                 elit. Sunt optio recusandae accusamus quibusdam, distinctio asperiores dolore illo
                                 tempora cumque."</p>
                             <div class="flex items-center gap-4">
@@ -300,7 +322,8 @@
                                 @svg('lucide-star', 'w-4 h-4')
                                 @svg('lucide-star', 'w-4 h-4')
                             </div>
-                            <p class="text-gray-600 mb-6 italic">"Lorem ipsum dolor sit amet, consectetur adipisicing
+                            <p class="text-gray-600 mb-6 italic">"Lorem ipsum dolor sit amet, consectetur
+                                adipisicing
                                 elit. Repudiandae, eaque similique. Reiciendis dicta placeat suscipit pariatur eius
                                 fugit corporis veritatis voluptatum, accusamus itaque non?"</p>
                             <div class="flex items-center gap-4">
@@ -322,7 +345,8 @@
                                 @svg('lucide-star', 'w-4 h-4')
                                 @svg('lucide-star', 'w-4 h-4')
                             </div>
-                            <p class="text-gray-600 mb-6 italic">"Lorem, ipsum dolor sit amet consectetur adipisicing
+                            <p class="text-gray-600 mb-6 italic">"Lorem, ipsum dolor sit amet consectetur
+                                adipisicing
                                 elit. Amet, adipisci aspernatur impedit quam ex corrupti numquam, laboriosam non ea
                                 ratione totam."</p>
                             <div class="flex items-center gap-4">
@@ -344,8 +368,10 @@
                                 @svg('lucide-star', 'w-4 h-4')
                                 @svg('lucide-star', 'w-4 h-4')
                             </div>
-                            <p class="text-gray-600 mb-6 italic">"Lorem ipsum dolor sit amet, consectetur adipisicing
-                                elit. Ut sit, delectus voluptatum repellat fugiat ad magnam facere amet necessitatibus
+                            <p class="text-gray-600 mb-6 italic">"Lorem ipsum dolor sit amet, consectetur
+                                adipisicing
+                                elit. Ut sit, delectus voluptatum repellat fugiat ad magnam facere amet
+                                necessitatibus
                                 eveniet dolor illo."</p>
                             <div class="flex items-center gap-4">
                                 <div
@@ -374,7 +400,7 @@
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]">
-                @foreach ($galleries as $gallery)
+                @forelse ($galleries as $gallery)
                     <a href="{{ route('public.galeri.show', $gallery) }}"
                         class="relative overflow-hidden rounded-xl {{ $loop->first ? 'col-span-2 row-span-2' : '' }} group cursor-pointer">
                         <img src="{{ $gallery->cover_image }}" alt="Kegiatan"
@@ -385,9 +411,12 @@
                                 class="text-white font-bold {{ $loop->first ? 'text-lg' : 'text-sm' }}">{{ $gallery->name }}</span>
                         </div>
                     </a>
-                @endforeach
+                @empty
+                    <p class="text-gray-500 text-center w-full col-span-full">Belum ada galeri yang tersedia.</p>
+                @endforelse
             </div>
-            <div class="text-center mt-8">
+            <div class="text-center
+                        mt-8">
                 <a href="{{ route('public.galeri.index') }}"
                     class="inline-flex justify-center gap-2 items-center py-3 px-7 text-base font-medium text-center bg-transparent text-sky-600 rounded-full border border-sky-600 hover:bg-sky-600 hover:text-white focus:ring-4 focus:ring-gray-100 transition-all duration-300">
                     Lihat Galeri Lengkap

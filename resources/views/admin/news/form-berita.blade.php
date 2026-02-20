@@ -20,16 +20,16 @@
                     @endif
 
                     <div class="space-y-2 mb-5">
-                        <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Gambar</label>
+                        <label class="block mb-2.5 text-sm font-medium text-heading">Gambar</label>
                         <x-image-upload name="image" :value="$news->image ?? ''" folder="hero" aspect="video" />
                         @error('image')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="mb-5">
-                        <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Judul <span
+                        <label class="block mb-2.5 text-sm font-medium text-heading">Judul <span
                                 class="text-red-500">*</span></label>
-                        <input id="hero-title" type="text" name="title" data-error-input
+                        <input type="text" name="title" data-error-input
                             value="{{ old('title', $news->title ?? '') }}"
                             class="bg-neutral-secondary-medium border {{ errorBorder('title') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                             placeholder="Judul berita" />
@@ -119,6 +119,16 @@
             .create(document.querySelector('#konten-berita-textarea'), {
                 ckfinder: {
                     uploadUrl: "{{ route('admin.berita.store.content.image') }}?_token={{ csrf_token() }}"
+                },
+                toolbar: [
+                    'heading', '|',
+                    'bold', 'italic', 'link', '|',
+                    'bulletedList', 'numberedList', 'blockQuote', '|',
+                    'undo', 'redo', '|',
+                    'uploadImage', 'insertTable'
+                ],
+                mediaEmbed: {
+                    previewsInData: true
                 }
             }).then(editor => {
                 editor.model.document.on('change:data', () => {

@@ -22,7 +22,7 @@
         <ul class="space-y-2 font-medium border-t border-cyan/40 pt-4 mt-4">
             <li>
                 <a href="{{ route('admin.dashboard') }}"
-                    class="flex items-center px-2 py-1.5 rounded-base {{ isActiveSidebar('dashboard.admin') }}">
+                    class="flex items-center px-2 py-1.5 rounded-base {{ isActiveSidebar('admin.dashboard') }}">
                     <svg class="w-5 h-5 transition duration-75 group-hover:text-cyan-600" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                         viewBox="0 0 24 24">
