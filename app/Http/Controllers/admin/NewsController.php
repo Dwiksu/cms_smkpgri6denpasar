@@ -44,7 +44,7 @@ class NewsController extends Controller
             'title' => 'required|string|max:255',
             'excerpt' => 'required|string',
             'content' => 'required|string',
-            'category' => 'required|string|max:255',
+            'category' => 'required|string|in:berita,pengumuman,prestasi,kegiatan',
             'image' => 'required|string',
             'published_at' => 'required|date',
             'meta_title' => 'nullable|string|max:255',
@@ -139,7 +139,15 @@ class NewsController extends Controller
             'published_at.required' => 'Tanggal publikasi harus diisi',
         ]);
 
-        $data['slug'] = str()->slug($data['title']);
+        $slug = str()->slug($data['title']);
+
+        $count = News::where('slug', 'like', $slug . '%')
+            ->where('id', '!=', $news->id)
+            ->count();
+
+        $data['slug'] = $count
+            ? $slug . '-' . ($count + 1)
+            : $slug;
 
         $news->update($data);
 
