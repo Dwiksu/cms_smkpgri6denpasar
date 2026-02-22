@@ -6,6 +6,54 @@
 
 <x-navbar></x-navbar>
 
+<div
+    x-data="{ progress: 0, show: false }"
+    x-init="
+        const update = () => {
+            const scrollTop = window.scrollY
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight
+            progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0
+            show = scrollTop > 300
+        }
+        update()
+        window.addEventListener('scroll', update)
+    "
+    class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50"
+>
+    <button
+        x-show="show"
+        x-transition
+        @click="window.scrollTo({ top: 0, behavior: 'smooth' })"
+        class="relative
+               w-10 h-10 sm:w-14 sm:h-14
+               rounded-full
+               flex items-center justify-center
+               bg-transparent text-sky-600
+               shadow-lg"
+        aria-label="Scroll to top"
+    >
+        <!-- progress ring -->
+        <svg class="absolute inset-0 -rotate-90"
+             viewBox="0 0 56 56"
+             :width="$el.parentElement.offsetWidth"
+             :height="$el.parentElement.offsetHeight">
+            <circle cx="28" cy="28" r="25"
+                    stroke="rgba(0, 132, 209,0.3)"
+                    stroke-width="3"
+                    fill="transparent"/>
+            <circle cx="28" cy="28" r="25"
+                    stroke="rgba(0, 132, 209,0.7)"
+                    stroke-width="3"
+                    fill="transparent"
+                    stroke-dasharray="157"
+                    :stroke-dashoffset="157 - (157 * progress / 100)"
+                    stroke-linecap="round"/>
+        </svg>
+
+        <span class="text-sm sm:text-base">@svg('lucide-chevron-up', 'w-4 h-4 md:w-8 md:h-8')</span>
+    </button>
+</div>
+
 <main class="flex-1 bg-white min-h-screen">
     {{ $slot }}
 </main>
