@@ -16,7 +16,7 @@ class AboutSeeder extends Seeder
     {
         About::insert([
             'title' => 'Tentang Sekolah Kami',
-            'description' => 'SMK PGRI 6 DENPASAR Adalah Lembaga Pendidikan Kejuruan Swasta Yang Berlokasi Di Jl. Tukad Gerinding No. 21 A Panjer, Kec. Denpasar Selatan, Kota Denpasar, Bali. Sekolah Ini Berada Di Bawah Naungan Kementerian Pendidikan Dan Kebudayaan Serta Yayasan Pembina Lembaga Pendidikan (Yplp) Pgri, Berfokus Pada Pendidikan Kejuruan Untuk Menyiapkan Tenaga Kerja Siap Pakai. SMK PGRI 6 Denpasar terakrediatsi A Unggul.',
+            'description' => 'SMK PGRI 6 DENPASAR Adalah Lembaga Pendidikan Kejuruan Swasta Yang Berlokasi Di Jl. Tukad Gerinding No. 21 A Panjer, Kec. Denpasar Selatan, Kota Denpasar, Bali. Tahun Berdiri SMK PGRI 6 DENPASAR : 21 Mei 2009 dengan ijin operasional. SMK PGRI 6 Denpasar terakrediatsi A Unggul. Sekolah Ini Berada Di Bawah Naungan Kementerian Pendidikan Dan Kebudayaan Serta Yayasan Pembina Lembaga Pendidikan (Yplp) Pgri, Berfokus Pada Pendidikan Kejuruan Untuk Menyiapkan Tenaga Kerja Siap Pakai.',
             'history' => 'SMK PGRI 6 DENPASAR Adalah Lembaga Pendidikan Kejuruan Swasta Yang Berlokasi Di Jl. Tukad Gerinding No. 21 A Panjer, Kec. Denpasar Selatan, Kota Denpasar, Bali. Tahun Berdiri SMK PGRI 6 DENPASAR : 21 Mei 2009 dengan ijin operasional. SMK PGRI 6 Denpasar terakrediatsi A Unggul. Sekolah Ini Berada Di Bawah Naungan Kementerian Pendidikan Dan Kebudayaan Serta Yayasan Pembina Lembaga Pendidikan (Yplp) Pgri, Berfokus Pada Pendidikan Kejuruan Untuk Menyiapkan Tenaga Kerja Siap Pakai.',
             'vision' => 'Menghasilkan Lulusan Yang Cerdas, Profesional,Mandiri,Berkarakter, Dan Berbudaya',
             'mission' => Json::encode(
