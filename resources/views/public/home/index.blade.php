@@ -157,12 +157,9 @@
                     <h6 class="w-fit uppercase mb-2 border-b-2 border-dashed">KENAPA PILIH</h6>
                     <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-sky-600">SMK PGRI 6 DENPASAR?</h2>
                 </div>
-                <p class="mb-6 font-light text-gray-500 md:text-lg">Lorem, ipsum dolor sit amet consectetur
-                    adipisicing
-                    elit. Ea tempora odit, iste neque ullam consectetur veniam nesciunt ex vel ratione qui iure
-                    soluta,
-                    dicta fuga maiores repellendus accusantium laudantium veritatis blanditiis. Ratione, id?
-                    Asperiores.
+                <p class="mb-6 font-light text-gray-500 md:text-lg">SMK PGRI 6 Denpasar menawarkan pendidikan
+                    berkualitas dengan kurikulum praktis, fasilitas lengkap, jurusan unggulan, dan pengajar
+                    berpengalaman untuk mempersiapkan siswa menghadapi dunia kerja.
                 </p>
                 <a href="{{ $ppdb_link ?? '#' }}"
                     class="inline-flex justify-center gap-2 items-center py-3 px-7 text-base font-medium text-center bg-sky-600 text-white rounded-full border border-sky-600 hover:bg-transparent hover:text-sky-600 focus:ring-4 focus:ring-gray-100 transition-all duration-300">
@@ -291,102 +288,60 @@
             <div class="max-w-6xl mx-auto">
                 <div class="swiper majorsSwiper">
                     <div class="swiper-wrapper pb-8">
-                        <div class="swiper-slide bg-white p-8 rounded-2xl shadow-sm hover:shadow-md">
-                            <div class="flex text-yellow-400 mb-4">
-                                @svg('lucide-star', 'w-4 h-4')
-                                @svg('lucide-star', 'w-4 h-4')
-                                @svg('lucide-star', 'w-4 h-4')
-                                @svg('lucide-star', 'w-4 h-4')
-                                @svg('lucide-star', 'w-4 h-4')
-                            </div>
-                            <p class="text-gray-600 mb-6 italic">"Lorem ipsum dolor sit amet consectetur
-                                adipisicing
-                                elit. Sunt optio recusandae accusamus quibusdam, distinctio asperiores dolore illo
-                                tempora cumque."</p>
-                            <div class="flex items-center gap-4">
-                                <div
-                                    class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 font-bold text-xl">
-                                    B
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-gray-900">Budi Santoso</h4>
-                                    <span class="text-sm text-gray-500">Orang Tua Siswa</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide bg-white p-8 rounded-2xl shadow-sm hover:shadow-md">
-                            <div class="flex text-yellow-400 mb-4">
-                                @svg('lucide-star', 'w-4 h-4')
-                                @svg('lucide-star', 'w-4 h-4')
-                                @svg('lucide-star', 'w-4 h-4')
-                                @svg('lucide-star', 'w-4 h-4')
-                                @svg('lucide-star', 'w-4 h-4')
-                            </div>
-                            <p class="text-gray-600 mb-6 italic">"Lorem ipsum dolor sit amet, consectetur
-                                adipisicing
-                                elit. Repudiandae, eaque similique. Reiciendis dicta placeat suscipit pariatur eius
-                                fugit corporis veritatis voluptatum, accusamus itaque non?"</p>
-                            <div class="flex items-center gap-4">
-                                <div
-                                    class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 font-bold text-xl">
-                                    B
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-gray-900">Siti Aminah</h4>
-                                    <span class="text-sm text-gray-500">Alumni 2023</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide bg-white p-8 rounded-2xl shadow-sm hover:shadow-md">
-                            <div class="flex text-yellow-400 mb-4">
-                                @svg('lucide-star', 'w-4 h-4')
-                                @svg('lucide-star', 'w-4 h-4')
-                                @svg('lucide-star', 'w-4 h-4')
-                                @svg('lucide-star', 'w-4 h-4')
-                                @svg('lucide-star', 'w-4 h-4')
-                            </div>
-                            <p class="text-gray-600 mb-6 italic">"Lorem, ipsum dolor sit amet consectetur
-                                adipisicing
-                                elit. Amet, adipisci aspernatur impedit quam ex corrupti numquam, laboriosam non ea
-                                ratione totam."</p>
-                            <div class="flex items-center gap-4">
-                                <div
-                                    class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 font-bold text-xl">
-                                    B
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-gray-900">El Susilo</h4>
-                                    <span class="text-sm text-gray-500">Orang Tua Siswa</span>
+                        @php
+                            $reviews = [
+                                [
+                                    'name' => 'Angga Pratama',
+                                    'role' => 'Siswa Angkatan 2025',
+                                    'comment' =>
+                                        'Fasilitas lengkap dan pengajar yang berdedikasi membuat pengalaman belajar saya di SMK PGRI 6 Denpasar sangat menyenangkan dan bermanfaat untuk masa depan saya.',
+                                ],
+                                [
+                                    'name' => 'Putu Devi',
+                                    'role' => 'Alumni 2023',
+                                    'comment' =>
+                                        'Saya sangat bersyukur bisa belajar di SMK PGRI 6 Denpasar. Kurikulumnya yang praktis dan relevan dengan kebutuhan industri membuat saya siap menghadapi dunia kerja setelah lulus.',
+                                ],
+                                [
+                                    'name' => 'Iqbal Rohiman',
+                                    'role' => 'Orang Tua Siswa',
+                                    'comment' =>
+                                        'Sebagai orang tua, saya merasa tenang karena anak saya mendapatkan pendidikan yang berkualitas di SMK PGRI 6 Denpasar. Fasilitas yang lengkap dan pengajar yang berpengalaman memberikan lingkungan belajar yang ideal untuk perkembangan anak saya.',
+                                ],
+                                [
+                                    'name' => 'Julia Sari',
+                                    'role' => 'Alumni 2022',
+                                    'comment' =>
+                                        'SMK PGRI 6 Denpasar memberikan pengalaman belajar yang luar biasa. Saya mendapatkan banyak keterampilan praktis yang sangat berguna dalam pekerjaan saya sekarang. Terima kasih kepada semua guru dan staf yang telah mendukung saya selama ini.',
+                                ],
+                            ];
+                        @endphp
+                        @foreach ($reviews as $r)
+                            <div class="swiper-slide bg-white p-8 rounded-2xl shadow-sm hover:shadow-md">
+                                <div class="flex flex-col justify-between h-full">
+                                    <div>
+                                        <div class="flex mb-4">
+                                            @svg('lucide-quote', 'w-4 h-4 rotate-180')
+                                        </div>
+                                        <p class="text-gray-600 mb-6 italic">"{{ $r['comment'] }}"</p>
+                                    </div>
+                                    <div class="flex items-center gap-4">
+                                        <div
+                                            class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center text-sky-600 font-bold text-xl">
+                                            {{ strtoupper(substr($r['name'], 0, 1)) ?? '' }}
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-gray-900">{{ $r['name'] }}</h4>
+                                            <span class="text-sm text-gray-500">{{ $r['role'] }}</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="swiper-slide bg-white p-8 rounded-2xl shadow-sm hover:shadow-md">
-                            <div class="flex text-yellow-400 mb-4">
-                                @svg('lucide-star', 'w-4 h-4')
-                                @svg('lucide-star', 'w-4 h-4')
-                                @svg('lucide-star', 'w-4 h-4')
-                                @svg('lucide-star', 'w-4 h-4')
-                                @svg('lucide-star', 'w-4 h-4')
-                            </div>
-                            <p class="text-gray-600 mb-6 italic">"Lorem ipsum dolor sit amet, consectetur
-                                adipisicing
-                                elit. Ut sit, delectus voluptatum repellat fugiat ad magnam facere amet
-                                necessitatibus
-                                eveniet dolor illo."</p>
-                            <div class="flex items-center gap-4">
-                                <div
-                                    class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 font-bold text-xl">
-                                    B
-                                </div>
-                                <div>
-                                    <h4 class="font-bold text-gray-900">Rizky Pratama</h4>
-                                    <span class="text-sm text-gray-500">Alumni 2022</span>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
+        </div>
 
 
         </div>
