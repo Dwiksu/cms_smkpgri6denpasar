@@ -38,6 +38,7 @@ class BerandaController extends Controller
             'hero.tagline' => 'nullable|string|max:255',
             'hero.background_image' => 'required|string',
         ], [
+            'hero.background_image.required' => 'Gambar harus diisi',
             'hero.title.required' => 'Judul harus diisi',
             'hero.subtitle.required' => 'Sub judul harus diisi',
         ]);

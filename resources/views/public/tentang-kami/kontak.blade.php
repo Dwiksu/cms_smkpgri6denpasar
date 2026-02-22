@@ -20,7 +20,7 @@
             <div class="grid lg:grid-cols-2 gap-12 lg:gap-20">
 
                 <!-- Contact Info (Left Column) -->
-                <div>
+                <div data-aos="fade-up">
                     <h2 class="text-2xl font-bold text-gray-900 mb-6">Informasi Kontak</h2>
                     <p class="text-gray-600 mb-8">
                         Silakan kunjungi sekolah kami pada jam kerja atau hubungi kami melalui saluran komunikasi
@@ -114,7 +114,7 @@
 
                 <!-- Map (Right Column - Replaces Form) -->
                 <div
-                    class="bg-white p-4 rounded-2xl shadow-lg border border-gray-100 h-full min-h-[400px] flex flex-col">
+                    class="bg-white p-4 rounded-2xl shadow-lg border border-gray-100 h-full min-h-[400px] flex flex-col" data-aos="fade-up">
                     <h2 class="text-2xl font-bold text-gray-900 mb-6 px-4 pt-2">Lokasi Kami</h2>
                     <div class="relative w-full flex-grow rounded-xl overflow-hidden bg-gray-100">
                         <iframe

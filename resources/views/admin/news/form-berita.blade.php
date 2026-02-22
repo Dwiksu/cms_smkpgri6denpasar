@@ -20,7 +20,8 @@
                     @endif
 
                     <div class="space-y-2 mb-5">
-                        <label class="block mb-2.5 text-sm font-medium text-heading">Gambar</label>
+                        <label class="block mb-2.5 text-sm font-medium text-heading">Gambar <span
+                                class="text-red-500">*</span></label>
                         <x-image-upload name="image" :value="$news->image ?? ''" folder="hero" aspect="video" />
                         @error('image')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -94,8 +95,9 @@
                         @enderror
                     </div>
                     <div class="mb-5">
-                        <label class="block mb-2.5 text-sm font-medium text-heading">Konten</label>
-                        <textarea type="text" id="konten-berita-textarea" name="content"
+                        <label class="block mb-2.5 text-sm font-medium text-heading">Konten <span
+                                class="text-red-500">*</span></label>
+                        <textarea type="text" id="konten-berita-textarea" name="content" 
                             class="bg-neutral-secondary-medium border {{ errorBorder('content') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                             placeholder="Konten berita" rows="5">{{ old('content', $news->content ?? '') }}</textarea>
                         @error('content')

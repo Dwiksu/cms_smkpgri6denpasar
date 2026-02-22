@@ -47,7 +47,7 @@
                     @csrf
                     <div class="space-y-2 mb-5">
                         <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Gambar
-                            Background</label>
+                            Background <span class="text-red-500">*</span></label>
                         <x-image-upload name="hero[background_image]" :value="$hero->background_image ?? ''" folder="beranda/hero"
                             aspect="video" />
                         @error('hero.background_image')
@@ -55,7 +55,8 @@
                         @enderror
                     </div>
                     <div class="mb-5">
-                        <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Judul</label>
+                        <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Judul <span
+                                class="text-red-500">*</span></label>
                         <input id="hero-title" type="text" name="hero[title]" data-error-input
                             value="{{ old('hero.title', $hero->title ?? '') }}"
                             class="bg-neutral-secondary-medium border {{ errorBorder('hero.title') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
@@ -66,7 +67,8 @@
                     </div>
                     <div class="grid sm:grid-cols-2 gap-4">
                         <div class="mb-5">
-                            <label class="block mb-2.5 text-sm font-medium text-heading">Subtitle</label>
+                            <label class="block mb-2.5 text-sm font-medium text-heading">Subtitle <span
+                                    class="text-red-500">*</span></label>
                             <input type="text" name="hero[subtitle]" data-error-input
                                 value="{{ old('hero.subtitle', $hero->subtitle ?? '') }}"
                                 class="bg-neutral-secondary-medium border {{ errorBorder('hero.subtitle') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
@@ -109,7 +111,7 @@
                     </div>
                     <div class="mb-5">
                         <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Judul
-                            Section</label>
+                            Section <span class="text-red-500">*</span></label>
                         <input type="text" name="about[title]" data-error-input
                             value="{{ old('about.title', $about->title ?? '') }}"
                             class="bg-neutral-secondary-medium border {{ errorBorder('about.title') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
@@ -119,7 +121,8 @@
                         @enderror
                     </div>
                     <div class="mb-5">
-                        <label class="block mb-2.5 text-sm font-medium text-heading">Deskripsi</label>
+                        <label class="block mb-2.5 text-sm font-medium text-heading">Deskripsi <span
+                                class="text-red-500">*</span></label>
                         <textarea rows="4" name="about[description]" data-error-input
                             class="bg-neutral-secondary-medium border {{ errorBorder('about.description') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                             placeholder="Deskripsi tentang sekolah">{{ old('about.description', $about->description ?? '') }}</textarea>
@@ -137,7 +140,8 @@
                         @enderror
                     </div>
                     <div class="mb-5">
-                        <label class="block mb-2.5 text-sm font-medium text-heading">Visi</label>
+                        <label class="block mb-2.5 text-sm font-medium text-heading">Visi <span
+                                class="text-red-500">*</span></label>
                         <textarea rows="4" name="about[vision]" data-error-input
                             class="bg-neutral-secondary-medium border {{ errorBorder('about.vision') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                             placeholder="Visi sekolah">{{ old('about.vision', $about->vision ?? '') }}</textarea>
@@ -146,7 +150,8 @@
                         @enderror
                     </div>
                     <div x-data="missionField()" class="mb-5">
-                        <label class="block mb-2.5 text-sm font-medium text-heading">Misi</label>
+                        <label class="block mb-2.5 text-sm font-medium text-heading">Misi <span
+                                class="text-red-500">*</span></label>
                         <template x-for="(mission, index) in missions" :key="index">
                             <div class="flex gap-2 mb-2">
                                 <input type="text" :name="'about[mission][' + index + ']'"
@@ -217,7 +222,8 @@
                     data-delay-submit>
                     @csrf
                     <div class="space-y-2 mb-5">
-                        <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Foto</label>
+                        <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Foto <span
+                                class="text-red-500">*</span></label>
                         <x-image-upload name="principal[photo]" :value="$principal->photo ?? ''" folder="beranda/principal"
                             aspect="video" />
                         @error('principal.photo')
@@ -225,7 +231,8 @@
                         @enderror
                     </div>
                     <div class="mb-5">
-                        <label class="block mb-2.5 text-sm font-medium text-heading">Nama Kepala Sekolah</label>
+                        <label class="block mb-2.5 text-sm font-medium text-heading">Nama Kepala Sekolah <span
+                                class="text-red-500">*</span></label>
                         <input type="text" name="principal[name]" data-error-input
                             value="{{ old('principal.name', $principal->name ?? '') }}"
                             class="bg-neutral-secondary-medium border {{ errorBorder('principal.name') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
@@ -236,7 +243,7 @@
                     </div>
                     <div class="mb-5">
                         <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Teks
-                            Sambutan</label>
+                            Sambutan <span class="text-red-500">*</span></label>
                         <textarea id="sambutan-textarea" rows="4" name="principal[message]" data-error-input
                             class="bg-neutral-secondary-medium border {{ errorBorder('principal.position') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                             placeholder="Teks sambutan sekolah...">{{ old('principal.message', $principal->message ?? '') }}</textarea>
@@ -310,7 +317,8 @@
                     @csrf
                     <div class="grid sm:grid-cols-2 gap-4">
                         <div class="mb-5">
-                            <label class="block mb-2.5 text-sm font-medium text-heading">Nama Singkat</label>
+                            <label class="block mb-2.5 text-sm font-medium text-heading">Nama Singkat <span
+                                    class="text-red-500">*</span></label>
                             <input type="text" name="short_name" data-error-input
                                 value="{{ old('short_name', $school->short_name ?? '') }}"
                                 class="bg-neutral-secondary-medium read-only:bg-neutral-secondary border {{ errorBorder('short_name') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
@@ -320,7 +328,8 @@
                             @enderror
                         </div>
                         <div class="mb-5">
-                            <label class="block mb-2.5 text-sm font-medium text-heading">Nama Lengkap</label>
+                            <label class="block mb-2.5 text-sm font-medium text-heading">Nama Lengkap <span
+                                    class="text-red-500">*</span></label>
                             <input type="text" name="full_name" data-error-input
                                 value="{{ old('full_name', $school->full_name ?? '') }}"
                                 class="bg-neutral-secondary-medium border {{ errorBorder('full_name') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
@@ -331,7 +340,8 @@
                         </div>
                     </div>
                     <div class="mb-5">
-                        <label class="block mb-2.5 text-sm font-medium text-heading">Alamat</label>
+                        <label class="block mb-2.5 text-sm font-medium text-heading">Alamat <span
+                                class="text-red-500">*</span></label>
                         <textarea type="text" name="address" data-error-input
                             class="bg-neutral-secondary-medium border {{ errorBorder('address') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                             placeholder="Alamat..." rows="3">{{ old('address', $school->address ?? '') }}</textarea>

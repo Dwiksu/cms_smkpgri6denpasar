@@ -15,8 +15,8 @@ class HeroSeeder extends Seeder
     {
         Hero::insert([
             'title' => 'SMK PGRI 6 DENPASAR',
-            'subtitle' => 'lorem ipsum dolor sit amet',
-            'tagline' => 'lorem ipsum dolor sit amet',
+            'subtitle' => 'Cerdas, Profesional, Mandiri, Berkarakter, dan Berbudaya',
+            'tagline' => 'SADGRISKA JAYA',
             'background_image' => '/storage/images/beranda/hero/hero-background.jpeg'
         ]);
     }

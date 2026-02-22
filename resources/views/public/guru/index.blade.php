@@ -51,7 +51,7 @@
                     @forelse ($teachers as $teacher)
                         <div
                             class="bg-white rounded-2xl shadow-md hover:shadow-xl transition
-                       flex flex-col items-center px-6 pt-6 pb-8">
+                       flex flex-col items-center px-6 pt-6 pb-8" data-aos="fade-up">
 
                             <div class="w-full flex justify-center mb-6">
                                 <img src="{{ asset($teacher->photo) }}" alt="{{ $teacher->name }}"

@@ -21,7 +21,7 @@
 
                     <div class="space-y-2 mb-5">
                         <label for="background_jurusan" class="block mb-2.5 text-sm font-medium text-heading">Gambar
-                            Background</label>
+                            Background <span class="text-red-500">*</span></label>
                         <x-image-upload name="image" :value="$major->image ?? ''" folder="jurusan" aspect="video" />
                         @error('image')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -29,7 +29,8 @@
                     </div>
                     <div class="grid sm:grid-cols-2 gap-4">
                         <div class="mb-5">
-                            <label class="block mb-2.5 text-sm font-medium text-heading">Nama Jurusan</label>
+                            <label class="block mb-2.5 text-sm font-medium text-heading">Nama Jurusan <span
+                                    class="text-red-500">*</span></label>
                             <input type="text" name="name" value="{{ old('name', $major->name ?? '') }}"
                                 class="bg-neutral-secondary-medium border {{ errorBorder('name') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="Teknik Sepeda Motor" data-error-input />
@@ -38,7 +39,8 @@
                             @enderror
                         </div>
                         <div class="mb-5">
-                            <label class="block mb-2.5 text-sm font-medium text-heading">Kode Singkat</label>
+                            <label class="block mb-2.5 text-sm font-medium text-heading">Kode Singkat <span
+                                    class="text-red-500">*</span></label>
                             <input type="text" name="short_name" data-error-input
                                 value="{{ old('short_name', $major->short_name ?? '') }}"
                                 class="bg-neutral-secondary-medium border {{ errorBorder('short_name') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
@@ -49,7 +51,8 @@
                         </div>
                     </div>
                     <div class="mb-5">
-                        <label class="block mb-2.5 text-sm font-medium text-heading">Deskripsi Singkat</label>
+                        <label class="block mb-2.5 text-sm font-medium text-heading">Deskripsi Singkat <span
+                                class="text-red-500">*</span></label>
                         <textarea type="text" name="description" data-error-input
                             class="bg-neutral-secondary-medium border {{ errorBorder('description') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                             placeholder="Deskripsi singkat jurusan">{{ old('description', $major->description ?? '') }}</textarea>
@@ -58,7 +61,8 @@
                         @enderror
                     </div>
                     <div class="mb-5">
-                        <label class="block mb-2.5 text-sm font-medium text-heading">Deskripsi Lengkap</label>
+                        <label class="block mb-2.5 text-sm font-medium text-heading">Deskripsi Lengkap <span
+                                class="text-red-500">*</span></label>
                         <textarea type="text" id="major-description-textarea" name="full_description"
                             class="bg-neutral-secondary-medium border {{ errorBorder('full_description') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                             placeholder="Deskripsi Lengkap Jurusan">{{ old('full_description', $major->full_description ?? '') }}</textarea>
@@ -69,7 +73,7 @@
                     <div x-data="curriculumField()" class="mb-5">
                         <label class="block mb-2.5 text-sm font-medium text-heading">
                             Mata Pelajaran
-                        </label>
+                            <span class="text-red-500">*</span></label>
 
                         {{-- ERROR GROUP --}}
                         @error('subjects')

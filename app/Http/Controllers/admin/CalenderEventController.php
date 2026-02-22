@@ -38,13 +38,12 @@ class CalenderEventController extends Controller
     {
         $data = $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
+            'description' => 'nullable|string',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
             'category' => 'required|string|max:255',
         ], [
             'title.required' => 'Judul harus diisi',
-            'description.required' => 'Deskripsi harus diisi',
             'start_date.required' => 'Tanggal mulai harus diisi',
             'end_date.required' => 'Tanggal selesai harus diisi',
             'category.required' => 'Kategori harus diisi',
@@ -80,13 +79,12 @@ class CalenderEventController extends Controller
     {
         $data = $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
+            'description' => 'nullable|string',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
             'category' => 'required|string|max:255',
         ], [
             'title.required' => 'Judul harus diisi',
-            'description.required' => 'Deskripsi harus diisi',
             'start_date.required' => 'Tanggal mulai harus diisi',
             'end_date.required' => 'Tanggal selesai harus diisi',
             'category.required' => 'Kategori harus diisi',

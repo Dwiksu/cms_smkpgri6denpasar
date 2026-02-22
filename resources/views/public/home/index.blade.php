@@ -12,7 +12,7 @@
 
         <div class="relative z-10 px-4 py-10 max-w-screen-xl text-center">
             <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white mb-3">
-                {{ $hero->tagline }}
+                Selamat Datang di Website
             </h1>
 
             <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4">
@@ -38,7 +38,7 @@
 
     {{-- ================= TENTANG ================= --}}
     <section id="tentang-kami" class="py-20 bg-white">
-        <div class="max-w-screen-xl mx-auto px-4 flex flex-col-reverse md:grid md:grid-cols-2 gap-10 items-center">
+        <div class="max-w-screen-xl mx-auto px-4 flex flex-col-reverse md:grid md:grid-cols-2 gap-10 items-center" data-aos="fade-up">
             <div class="relative">
                 <div class="absolute scale-105 inset-0 bg-sky-600/5 rounded-3xl -rotate-3"></div>
                 <img src="{{ asset($about->image) }}" class="relative rounded-2xl shadow-xl aspect-4/3 object-cover">
@@ -62,7 +62,7 @@
 
     {{-- ================= STATS ================= --}}
     <section id="stats" class="bg-image py-14">
-        <div class="max-w-screen-xl mx-auto px-4">
+        <div class="max-w-screen-xl mx-auto px-4" data-aos="fade-up">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-{{ min($statsCount, 4) }} gap-8 text-center">
                 @foreach ($stats as $stat)
                     <div>
@@ -78,7 +78,7 @@
 
 
     <section id="jurusan" class="py-16 bg-white">
-        <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
+        <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6" data-aos="fade-up">
             <div class="max-w-screen-md mx-auto text-center mb-8 lg:mb-16">
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-sky-600">Bidang Jurusan
                     Kami</h2>
@@ -151,7 +151,7 @@
 
     <section id="pilih" class="bg-image">
         <div
-            class="gap-6 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-3 sm:py-16 lg:px-6">
+            class="gap-6 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-3 sm:py-16 lg:px-6" data-aos="fade-up">
             <div class="my-4 md:my-0">
                 <div>
                     <h6 class="w-fit uppercase mb-2 border-b-2 border-dashed">KENAPA PILIH</h6>
@@ -226,7 +226,7 @@
     </section>
 
     <section id="berita" class="bg-white py-16">
-        <div class="gap-6 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 sm:py-16 lg:px-6">
+        <div class="gap-6 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 sm:py-16 lg:px-6" data-aos="fade-up">
             <h6 class="w-fit uppercase mb-2 border-b-2 border-dashed">Artikel</h6>
             <div>
                 <div class="col-span-2">
@@ -243,7 +243,7 @@
                     <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                         @forelse ($news as $index => $n)
                             <a href="{{ route('public.berita.show', $n->slug) }}" class="{{ $index > 2 ? 'hidden md:block' : '' }}">
-                                <article class="bg-white rounded-lg shadow c-hover group">
+                                <article class="bg-white rounded-lg shadow c-hover group" data-aos="fade-up">
                                     <div class="aspect-video rounded-t-lg overflow-hidden relative">
                                         <img src="{{ asset($n->image) }}" alt="{{ $n->title }}" loading="lazy"
                                             class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"">
@@ -280,7 +280,7 @@
     </section>
 
     <section id="ulasan" class="py-16 bg-image">
-        <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
+        <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6" data-aos="fade-up">
             <div class="max-w-screen-md mx-auto text-center mb-8 lg:mb-16">
                 <h6 class="w-fit uppercase mb-2 mx-auto border-b-2 border-dashed">Kata Mereka</h6>
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-sky-600">Apa Kata Alumni & Orang Tua
@@ -393,7 +393,7 @@
     </section>
 
     <section id="galeri" class="py-16 bg-white">
-        <div class="max-w-screen-xl mx-auto px-6 lg:px-12">
+        <div class="max-w-screen-xl mx-auto px-6 lg:px-12" data-aos="fade-up">
             <div class="text-center mb-12 fade-in-section">
                 <h2 class="text-3xl md:text-4xl font-extrabold text-sky-600 mb-4">Galeri Sekolah</h2>
                 <p class="text-gray-600">Momen-momen berharga dalam kegiatan belajar dan aktivitas siswa.</p>

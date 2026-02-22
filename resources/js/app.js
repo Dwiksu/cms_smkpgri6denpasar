@@ -2,6 +2,16 @@ import "./bootstrap";
 
 import Alpine from "alpinejs";
 import Swal from "sweetalert2";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+document.addEventListener("DOMContentLoaded", () => {
+    AOS.init({
+        once: false,
+        duration: 800,
+        easing: "ease-in-out",
+    });
+});
 
 window.Swal = Swal;
 

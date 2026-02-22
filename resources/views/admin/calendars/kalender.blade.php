@@ -13,91 +13,6 @@
                 Tambah Agenda</a>
         </div>
 
-        {{-- Calendar Table --}}
-        {{-- <div class="overflow-x-auto rounded-lg border border-default bg-white shadow-sm">
-            <table class="w-full text-sm text-left">
-                <thead class="bg-neutral-secondary-medium text-heading">
-                    <tr>
-                        <th class="px-4 py-3 w-24">Tanggal</th>
-                        <th class="px-4 py-3">Agenda</th>
-                        <th class="px-4 py-3">Kategori</th>
-                        <th class="px-4 py-3">Periode</th>
-                        <th class="px-4 py-3 text-center w-28">Aksi</th>
-                    </tr>
-                </thead>
-
-                <tbody class="divide-y divide-default">
-                    @forelse ($events as $e)
-                        <tr class="hover:bg-gray-50"> --}}
-        {{-- Date --}}
-        {{-- <td class="px-4 py-3 text-center">
-                                <p class="text-lg font-bold text-blue-600">
-                                    {{ \Carbon\Carbon::parse($e->start_date)->format('d') }}
-                                </p>
-                                <p class="text-xs text-gray-500 uppercase">
-                                    {{ \Carbon\Carbon::parse($e->start_date)->format('M') }}
-                                </p>
-                            </td> --}}
-
-        {{-- Title & Description --}}
-        {{-- <td class="px-4 py-3">
-                                <p class="font-semibold">
-                                    {{ $e->title }}
-                                </p>
-                                <p class="text-xs text-gray-500 line-clamp-2">
-                                    {{ $e->description }}
-                                </p>
-                            </td> --}}
-
-        {{-- Category --}}
-        {{-- <td class="px-4 py-3">
-                                <span
-                                    class="{{ CalendarCategoryColor($e->category) }} text-white text-xs font-semibold px-2 py-1 rounded-full">
-                                    {{ ucfirst($e->category) }}
-                                </span>
-                            </td> --}}
-
-        {{-- Date Range --}}
-        {{-- <td class="px-4 py-3 text-gray-500">
-                                {{ \Carbon\Carbon::parse($e->start_date)->translatedFormat('d M Y') }}
-                                @if ($e->end_date)
-                                    <br>
-                                    <span class="text-xs text-gray-400">
-                                        s/d {{ \Carbon\Carbon::parse($e->end_date)->translatedFormat('d M Y') }}
-                                    </span>
-                                @endif
-                            </td> --}}
-
-        {{-- Action --}}
-        {{-- <td class="px-4 py-3 text-center">
-                                <div class="flex justify-center gap-2">
-                                    <a href="{{ route('admin.kalender.edit', $e) }}"
-                                        class="bg-amber-400 hover:bg-amber-300 p-2 rounded shadow-sm">
-                                        @svg('lucide-pencil', 'h-4 w-4')
-                                    </a>
-
-                                    <form action="{{ route('admin.kalender.destroy', $e) }}" method="POST"
-                                        class="delete-form" data-confirm="Hapus agenda {{ $e->title }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                            class="bg-red-500 hover:bg-red-400 text-white p-2 rounded shadow-sm">
-                                            @svg('lucide-trash-2', 'h-4 w-4')
-                                        </button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="5" class="px-4 py-6 text-center text-gray-500">
-                                Tidak ada agenda.
-                            </td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div> --}}
         <div x-data="calendarPage()" x-init="initCalendar()" class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
             <!-- KIRI: KALENDER -->
@@ -132,7 +47,7 @@
 
                         <!-- ACTION -->
                         <div class="flex gap-2 pt-4">
-                            <a :href="`/admin/kalender/${selectedEvent.id}/edit`"
+                            <a :href="`/cp-smkpgri-6/kalender/${selectedEvent.id}/edit`"
                                 class="bg-amber-400 hover:bg-amber-300 p-2 rounded shadow-sm text-white">
                                 @svg('lucide-pencil', 'h-4 w-4')
                             </a>
@@ -166,7 +81,7 @@
                     this.calendar = new FullCalendar.Calendar(el, {
                         initialView: 'dayGridMonth',
                         height: 'auto',
-                        events: '/admin/calendar-events',
+                        events: '/cp-smkpgri-6/calendar-events',
 
                         eventClick: (info) => {
                             this.selectedEvent = {
@@ -194,7 +109,7 @@
                     }).then(r => {
                         if (!r.isConfirmed) return
 
-                        fetch(`/admin/kalender/${id}/delete`, {
+                        fetch(`/cp-smkpgri-6/kalender/${id}/delete`, {
                                 method: 'DELETE',
                                 headers: {
                                     'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content,

@@ -38,11 +38,19 @@ class GalleryAlbumController extends Controller
             'meta_description' => 'nullable|string|max:255',
         ], [
             'name.required' => 'Nama galeri harus diisi',
-            'description.required' => 'Deskripsi galeri harus diisi',
             'cover_image.required' => 'Cover galeri harus diisi',
         ]);
 
-        $data['slug'] = str()->slug($data['name']);
+        $slug = str()->slug($data['name']);
+        $originalSlug = $slug;
+        $count = 1;
+
+        while (GalleryAlbum::where('slug', $slug)->exists()) {
+            $slug = $originalSlug . '-' . $count;
+            $count++;
+        }
+
+        $data['slug'] = $slug;
 
         GalleryAlbum::create($data);
 
@@ -72,17 +80,25 @@ class GalleryAlbumController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
             'cover_image' => 'required|string',
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:255',
         ], [
             'name.required' => 'Nama galeri harus diisi',
-            'description.required' => 'Deskripsi galeri harus diisi',
             'cover_image.required' => 'Cover galeri harus diisi',
         ]);
 
-        $data['slug'] = str()->slug($data['name']);
+        $slug = str()->slug($data['name']);
+
+        $count = GalleryAlbum::where('slug', 'like', $slug . '%')
+            ->where('id', '!=', $album->id)
+            ->count();
+
+        $data['slug'] = $count
+            ? $slug . '-' . ($count + 1)
+            : $slug;
+
 
         $album->update($data);
 

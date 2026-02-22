@@ -41,18 +41,18 @@
                                 Akademik
                             </option>
 
-                            <option value="kegiatan">
-                                {{ old('category', $event->category ?? '') == 'kegiatan' ? 'selected' : '' }}
+                            <option value="kegiatan"
+                                {{ old('category', $event->category ?? '') == 'kegiatan' ? 'selected' : '' }}>
                                 Kegiatan
                             </option>
 
-                            <option value="libur">
-                                {{ old('category', $event->category ?? '') == 'libur' ? 'selected' : '' }}
+                            <option value="libur"
+                                {{ old('category', $event->category ?? '') == 'libur' ? 'selected' : '' }}>
                                 Libur
                             </option>
 
-                            <option value="ujian">
-                                {{ old('category', $event->category ?? '') == 'ujian' ? 'selected' : '' }}
+                            <option value="ujian"
+                                {{ old('category', $event->category ?? '') == 'ujian' ? 'selected' : '' }}>
                                 Ujian
                             </option>
 

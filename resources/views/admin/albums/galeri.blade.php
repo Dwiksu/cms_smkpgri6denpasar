@@ -288,7 +288,7 @@
 
                 openEdit(item) {
                     this.isEdit = true
-                    this.formAction = `/admin/galeri/update/${item.id}`
+                    this.formAction = `/cp-smkpgri-6/galeri/update/${item.id}`
 
                     this.form = {
                         ...item
@@ -350,7 +350,7 @@
                 },
 
                 openEdit(photo) {
-                    this.formAction = "/admin/galeri/photo/update/" + photo.id
+                    this.formAction = "/cp-smkpgri-6/galeri/photo/update/" + photo.id
 
                     this.form = {
                         gallery_album_id: photo.gallery_album_id,

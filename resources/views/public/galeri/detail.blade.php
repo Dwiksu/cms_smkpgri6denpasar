@@ -121,7 +121,7 @@
                 @if (count($album->photos) > 0)
                     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                         @foreach ($album->photos as $index => $photo)
-                            <div class="aspect-square cursor-pointer group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-500"
+                            <div class="aspect-square cursor-pointer group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-500" data-aos="fade-up"
                                 @click="selectedIndex = {{ $index }}">
                                 <img src="{{ $photo['url'] }}" alt="{{ $photo['caption'] ?? 'Foto' }}"
                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />

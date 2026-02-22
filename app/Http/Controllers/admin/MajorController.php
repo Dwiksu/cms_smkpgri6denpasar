@@ -32,7 +32,7 @@ class MajorController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
+            'description' => 'required|string',
             'short_name' => 'required|string|max:100',
             'full_description' => 'required|string',
             'image' => 'required|string',
@@ -86,7 +86,7 @@ class MajorController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
+            'description' => 'required|string',
             'short_name' => 'required|string|max:100',
             'full_description' => 'required|string',
             'image' => 'required|string',

@@ -30,7 +30,7 @@ class LoginController extends Controller
             
             $request->session()->regenerate();
 
-            return redirect()->intended('/admin/dashboard'); // isi nya url nya
+            return redirect()->intended('/cp-smkpgri-6/dashboard'); // isi nya url nya
         }
 
         return back()->withErrors([

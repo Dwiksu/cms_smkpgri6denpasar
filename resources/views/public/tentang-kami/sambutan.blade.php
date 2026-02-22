@@ -22,7 +22,7 @@
         <div
             class="flex flex-col gap-8 py-8 px-4 mx-auto max-w-screen-xl md:grid md:grid-cols-4 xl:gap-16 sm:py-16 lg:px-6">
 
-            <div class="w-full max-w-xs mx-auto md:max-w-none md:sticky md:top-32 h-fit">
+            <div class="w-full max-w-xs mx-auto md:max-w-none md:sticky md:top-32 h-fit" data-aos="fade-up">
                 <div class="relative text-center">
                     <div class="absolute -inset-4 bg-sky-600/5 rounded-3xl -rotate-3"></div>
 
@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <div class="md:col-span-3">
+            <div class="md:col-span-3" data-aos="fade-up">
                 <div class="text-body">
                     <h2 class="text-2xl mt-8 md:mt-0 sm:text-3xl font-bold text-sky-600 mb-6 text-center md:text-left">
                         Kata Sambutan
