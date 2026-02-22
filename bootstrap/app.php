@@ -13,6 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
+            'desktop.only' => \App\Http\Middleware\DesktopOnly::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
