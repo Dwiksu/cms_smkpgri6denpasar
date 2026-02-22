@@ -29,7 +29,7 @@
                             :class="activeTab === tab ? 'bg-white shadow-sm text-sky-600' :
                                 'text-slate-600 hover:text-slate-900'"
                             class="whitespace-nowrap px-5 md:px-6 py-2 rounded-md text-sm md:text-base font-medium transition-all capitalize"
-                            x-text="tab === 'overview' ? 'Overview' : (tab === 'curriculum' ? 'Kurikulum' : (tab === 'careers' ? 'Karir' : 'Galeri'))">
+                            x-text="tab === 'overview' ? 'Overview' : (tab === 'curriculum' ? 'Mata Pelajaran' : (tab === 'careers' ? 'Karir' : 'Galeri'))">
                         </button>
                     </template>
                 </div>
@@ -146,7 +146,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                             </svg>
-                            Kurikulum & Kompetensi
+                            Mata Pelajaran & Kompetensi
                         </h2>
                         <p class="text-sm md:text-base text-slate-600 mb-6 md:mb-8">Klik pada mata pelajaran untuk
                             melihat detail kompetensi yang

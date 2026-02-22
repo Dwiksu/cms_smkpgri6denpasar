@@ -3,7 +3,7 @@
 
 
     <section id="hero" class="bg-white aspect-auto min-h-[300px] md:min-h-0 md:aspect-5/1 w-full relative flex overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('assets/guru.jpeg');">
+        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('assets/galeri.jpeg');">
             <div class="absolute inset-0 bg-linear-to-r from-sky-600/90 to-sky-600/70"></div>
         </div>
         <div class="py-8 px-4 max-w-screen-xl mx-auto w-full lg:py-16 lg:px-8 relative z-10 flex items-end">

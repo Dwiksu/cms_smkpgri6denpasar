@@ -3,7 +3,7 @@
 
     <section id="hero"
         class="bg-white aspect-auto min-h-[300px] md:min-h-0 md:aspect-5/1 w-full relative flex overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('assets/guru.jpeg');">
+        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('assets/sejarah.jpg');">
             <div class="absolute inset-0 bg-linear-to-r from-sky-600/90 to-sky-600/70"></div>
         </div>
         <div class="py-8 px-4 max-w-screen-xl mx-auto w-full lg:py-16 lg:px-8 relative z-10 flex items-end">
@@ -26,7 +26,7 @@
                     <div class="relative">
                         <div class="absolute scale-105 inset-0 bg-sky-600/5 rounded-3xl -rotate-3"></div>
                         <img class="relative rounded-2xl shadow-2xl w-full object-cover aspect-4/3 z-10"
-                            src="{{ asset($about->image) }}" alt="dashboard image">
+                            src="{{ asset('assets/sejarah-2.jpg') }}" alt="dashboard image">
                     </div>
                 </div>
                 <div class="mt-4 md:mt-0">
@@ -60,7 +60,7 @@
                     <div class="relative">
                         <div class="absolute scale-105 inset-0 bg-sky-600/5 rounded-3xl -rotate-3"></div>
                         <img class="relative rounded-2xl shadow-2xl w-full object-cover aspect-4/3 z-10"
-                            src="{{ asset($about->image) }}" alt="dashboard image">
+                            src="{{ asset('assets/sejarah-3.jpeg') }}" alt="dashboard image">
                     </div>
                 </div>
             </div>

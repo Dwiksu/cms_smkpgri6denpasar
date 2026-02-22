@@ -12,7 +12,7 @@
 
         <div class="relative z-10 px-4 py-10 max-w-screen-xl text-center">
             <h1 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white mb-3">
-                {{ $hero->tagline }}
+                Selamat Datang di Website
             </h1>
 
             <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4">
