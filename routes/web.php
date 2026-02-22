@@ -70,16 +70,16 @@ Route::name('public.')->group(function () {
 
 
 /* HALAMAN ADMIN */
-Route::prefix('admin')->group(function () {
+Route::prefix('cp-smkpgri-6')->group(function () {
 
     // LOGIN GUEST ONLY
-    Route::middleware(['guest'])->group(function () {
+    Route::middleware(['guest', 'desktop.only'])->group(function () {
         Route::get('/login', [LoginController::class, 'login'])->name('login');
         Route::post('/login', [LoginController::class, 'authenticate']);
     });
 
     // KALAU SUDAH LOGIN
-    Route::middleware(['auth', 'admin'])->group(function () {
+    Route::middleware(['auth', 'admin', 'desktop.only'])->group(function () {
 
         Route::get('/', fn() => redirect()->route('admin.dashboard'))->name('admin');
 
