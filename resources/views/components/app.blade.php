@@ -10,7 +10,7 @@
     {{ $slot }}
 </main>
 
-<footer class="bg-gray-800 antialiased pt-32 relative overlay-top">
+<footer class="bg-gray-800 antialiased pt-32 relative overlay-top" data-aos="fade-up">
     <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
 
         <div class="border-b border-gray-700 pb-14">

@@ -38,13 +38,13 @@
                     <div class="flex flex-col-reverse lg:grid lg:grid-cols-3 gap-8">
 
                         <div class="lg:col-span-2">
-                            <h2 class="text-2xl font-bold mb-4 text-slate-800">Tentang Jurusan</h2>
-                            <div class="prose prose-slate max-w-none text-justify sm:text-left leading-relaxed">
+                            <h2 class="text-2xl font-bold mb-4 text-slate-800" data-aos="fade-up">Tentang Jurusan</h2>
+                            <div class="prose prose-slate max-w-none text-justify sm:text-left leading-relaxed" data-aos="fade-up">
                                 {!! $major->full_description !!}
                             </div>
 
                             @if (count($teachers ?? []) > 0)
-                                <div class="mt-12" x-intersect="$el.classList.add('animate-fade-up')">
+                                <div class="mt-12" x-intersect="$el.classList.add('animate-fade-up')" data-aos="fade-up">
                                     <h3
                                         class="text-xl md:text-2xl font-bold mb-6 text-slate-800 flex items-center gap-2">
                                         <svg class="h-6 w-6 text-sky-600" fill="none" viewBox="0 0 24 24"
@@ -113,7 +113,7 @@
                     </div>
 
                     @if (count($major->achievements ?? []) > 0)
-                        <div class="mt-8 md:mt-0">
+                        <div class="mt-8 md:mt-0" data-aos="fade-up">
                             <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-slate-800">
                                 <svg class="h-5 w-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
                                     <path
@@ -140,7 +140,7 @@
                 </div>
 
                 <div x-show="activeTab === 'curriculum'" x-transition style="display: none;">
-                    <div class="max-w-3xl" x-data="{ selected: null }">
+                    <div class="max-w-3xl" x-data="{ selected: null }" data-aos="fade-up">
                         <h2 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 flex items-center gap-2">
                             <svg class="h-6 w-6 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -200,7 +200,7 @@
                 <div x-show="activeTab === 'careers'" style="display: none;"
                     x-transition:enter="transition ease-out duration-300"
                     x-transition:enter-start="opacity-0 transform translate-y-4">
-                    <div class="max-w-3xl">
+                    <div class="max-w-3xl" data-aos="fade-up">
                         <h2 class="text-xl md:text-2xl font-bold mb-4 flex items-center gap-2 text-slate-800">
                             <svg class="h-6 w-6 text-sky-600" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
@@ -253,10 +253,10 @@
                 </div>
 
                 <div x-show="activeTab === 'gallery'" style="display: none;" x-transition>
-                    <h2 class="text-xl md:text-2xl font-bold mb-4 md:mb-6">Galeri Jurusan</h2>
+                    <h2 class="text-xl md:text-2xl font-bold mb-4 md:mb-6" data-aos="fade-up">Galeri Jurusan</h2>
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
                         @forelse ($major->gallery ?? [] as $img)
-                            <div class="aspect-video rounded-xl overflow-hidden group shadow-md bg-slate-200">
+                            <div class="aspect-video rounded-xl overflow-hidden group shadow-md bg-slate-200" data-aos="fade-up">
                                 <img src="{{ $img }}"
                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                             </div>
@@ -271,12 +271,12 @@
 
         <section class="py-12 md:py-16 bg-white">
             <div class="max-w-screen-xl mx-auto px-4 lg:px-8">
-                <h2 class="text-xl md:text-2xl font-bold mb-6 md:mb-8">Jurusan Lainnya</h2>
+                <h2 class="text-xl md:text-2xl font-bold mb-6 md:mb-8" data-aos="fade-up">Jurusan Lainnya</h2>
                 <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     @foreach ($otherMajors as $m)
                         <a href="{{ route('public.jurusan.show', $m->slug) }}" class="swiper-slide mb-1 block">
                             <article
-                                class="bg-white rounded-lg shadow c-hover group h-full border border-slate-100 overflow-hidden flex flex-col">
+                                class="bg-white rounded-lg shadow c-hover group h-full border border-slate-100 overflow-hidden flex flex-col" data-aos="fade-up">
                                 <div class="w-full h-40 md:h-48 overflow-hidden bg-slate-100">
                                     <img src="{{ asset($m->image) }}" alt="{{ $m->name }}" loading="lazy"
                                         class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110">

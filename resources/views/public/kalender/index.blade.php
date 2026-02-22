@@ -24,9 +24,9 @@
             <div class="max-w-screen-xl mx-auto px-4 lg:px-8">
                 <div class="grid lg:grid-cols-3 gap-6 md:gap-8">
 
-                    <div class="lg:col-span-2">
+                    <div class="lg:col-span-2" data-aos="fade-up">
                         <div
-                            class="bg-white rounded-2xl md:rounded-3xl shadow-xl border border-slate-100 overflow-hidden">
+                            class="bg-white rounded-2xl md:rounded-3xl shadow-xl border border-slate-100 overflow-hidden" >
 
                             <div
                                 class="p-4 md:p-6 border-b border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -149,7 +149,7 @@
 
                     <div class="space-y-6">
                         <div
-                            class="bg-white rounded-2xl md:rounded-3xl p-5 md:p-6 shadow-xl border border-slate-100 lg:sticky lg:top-24">
+                            class="bg-white rounded-2xl md:rounded-3xl p-5 md:p-6 shadow-xl border border-slate-100 lg:sticky lg:top-24" data-aos="fade-up">
                             <h3 class="text-lg md:text-xl font-bold text-slate-800 mb-5 md:mb-6">Agenda Mendatang</h3>
 
                             <div class="space-y-4 md:space-y-6">

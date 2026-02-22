@@ -97,7 +97,7 @@
                                 {{-- Action --}}
                                 <td class="px-4 py-3 text-center">
                                     <div class="flex justify-center gap-2">
-                                        <a :href="`/admin/berita/${item.id}/edit`"
+                                        <a :href="`/cp-smkpgri-6/berita/${item.id}/edit`"
                                             class="bg-amber-400 hover:bg-amber-300 p-2 rounded shadow-sm">
                                             @svg('lucide-pencil', 'h-4 w-4')
                                         </a>

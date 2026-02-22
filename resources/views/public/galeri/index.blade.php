@@ -23,7 +23,7 @@
                 <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     @foreach ($albums as $album)
                         <a href="/galeri/{{ $album->slug }}"
-                            class="group block bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300">
+                            class="group block bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300" data-aos="fade-up">
 
                             {{-- Image Wrapper --}}
                             <div class="aspect-[16/10] overflow-hidden relative bg-slate-200">
