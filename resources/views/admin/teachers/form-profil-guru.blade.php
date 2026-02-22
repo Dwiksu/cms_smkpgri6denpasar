@@ -20,7 +20,8 @@
                     @endif
 
                     <div class="space-y-2 mb-5">
-                        <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Foto</label>
+                        <label for="hero-title" class="block mb-2.5 text-sm font-medium text-heading">Foto <span
+                                class="text-red-500">*</span></label>
                         <x-image-upload name="photo" :value="$teacher->photo ?? ''" folder="guru" aspect="video" />
                         @error('photo')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -39,7 +40,8 @@
                         </div>
                         <div class="mb-5">
                             <label for="teacher-jabatan"
-                                class="block mb-2.5 text-sm font-medium text-heading">Jabatan</label>
+                                class="block mb-2.5 text-sm font-medium text-heading">Jabatan <span
+                                class="text-red-500">*</span></label>
                             <input id="teacher-jabatan" name="position" type="text" data-error-input
                                 value="{{ old('position', $teacher->position ?? '') }}"
                                 class="bg-neutral-secondary-medium border {{ errorBorder('position') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" />

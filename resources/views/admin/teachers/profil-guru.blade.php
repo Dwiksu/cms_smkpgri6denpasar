@@ -97,7 +97,7 @@
                                 {{-- Aksi --}}
                                 <td class="px-4 py-3">
                                     <div class="flex justify-center gap-2">
-                                        <a :href="`/admin/profil/${item.id}/edit`"
+                                        <a :href="`/cp-smkpgri-6/profil/${item.id}/edit`"
                                             class="bg-amber-400 hover:bg-amber-300 text-white rounded p-2">
                                             @svg('lucide-pencil', 'h-4 w-4')
                                         </a>
