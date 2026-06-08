@@ -1,0 +1,253 @@
+<x-app-layout>
+    <x-slot:title>Jurusan</x-slot:title>
+
+    <div class="space-y-6">
+
+        <div>
+            <h1 class="text-3xl font-bold">{{ isset($major) ? 'Edit' : 'Tambah' }} Jurusan</h1>
+            <p class="text-gray-500 mt-1">{{ isset($major) ? 'Edit' : 'Tambah' }} jurusan baru ke dalam sistem.</p>
+        </div>
+
+        <div>
+            <div class="rounded-xl border border-default bg-neutral-primary-soft shadow-xs text-card-foreground">
+                <form class="p-6"
+                    action="{{ isset($major) ? route('admin.jurusan.update', $major->id) : route('admin.jurusan.store') }}"
+                    method="POST" data-delay-submit>
+                    @csrf
+
+                    @if (isset($major))
+                        @method('PUT')
+                    @endif
+
+                    <div class="space-y-2 mb-5">
+                        <label for="background_jurusan" class="block mb-2.5 text-sm font-medium text-heading">Gambar
+                            Background <span class="text-red-500">*</span></label>
+                        <x-image-upload name="image" :value="$major->image ?? ''" folder="jurusan" aspect="video" />
+                        @error('image')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div class="mb-5">
+                            <label class="block mb-2.5 text-sm font-medium text-heading">Nama Jurusan <span
+                                    class="text-red-500">*</span></label>
+                            <input type="text" name="name" value="{{ old('name', $major->name ?? '') }}"
+                                class="bg-neutral-secondary-medium border {{ errorBorder('name') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                placeholder="Teknik Sepeda Motor" data-error-input />
+                            @error('name')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="mb-5">
+                            <label class="block mb-2.5 text-sm font-medium text-heading">Kode Singkat <span
+                                    class="text-red-500">*</span></label>
+                            <input type="text" name="short_name" data-error-input
+                                value="{{ old('short_name', $major->short_name ?? '') }}"
+                                class="bg-neutral-secondary-medium border {{ errorBorder('short_name') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                placeholder="TSM" />
+                            @error('short_name')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="mb-5">
+                        <label class="block mb-2.5 text-sm font-medium text-heading">Deskripsi Singkat <span
+                                class="text-red-500">*</span></label>
+                        <textarea type="text" name="description" data-error-input
+                            class="bg-neutral-secondary-medium border {{ errorBorder('description') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                            placeholder="Deskripsi singkat jurusan">{{ old('description', $major->description ?? '') }}</textarea>
+                        @error('description')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div class="mb-5">
+                        <label class="block mb-2.5 text-sm font-medium text-heading">Deskripsi Lengkap <span
+                                class="text-red-500">*</span></label>
+                        <textarea type="text" id="major-description-textarea" name="full_description"
+                            class="bg-neutral-secondary-medium border {{ errorBorder('full_description') }} text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                            placeholder="Deskripsi Lengkap Jurusan">{{ old('full_description', $major->full_description ?? '') }}</textarea>
+                        @error('full_description')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div x-data="curriculumField()" class="mb-5">
+                        <label class="block mb-2.5 text-sm font-medium text-heading">
+                            Mata Pelajaran
+                            <span class="text-red-500">*</span></label>
+
+                        {{-- ERROR GROUP --}}
+                        @error('subjects')
+                            <p class="text-sm text-red-600 mb-2">{{ $message }}</p>
+                        @enderror
+                        @error('subjects.*.name')
+                            <p class="text-sm text-red-600 mb-2">{{ $message }}</p>
+                        @enderror
+                        @error('subjects.*.description')
+                            <p class="text-sm text-red-600 mb-2">{{ $message }}</p>
+                        @enderror
+
+                        <template x-for="(item, index) in mapel" :key="index">
+                            <div class="flex flex-col gap-1 mb-3">
+
+                                <div class="flex gap-2">
+                                    {{-- NAMA MAPEL --}}
+                                    <input type="text" :name="`subjects[${index}][name]`" x-model="item.name"
+                                        placeholder="Nama mata pelajaran"
+                                        class="w-1/3 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block px-3 py-2.5 shadow-xs placeholder:text-body">
+
+                                    {{-- DESKRIPSI MAPEL --}}
+                                    <input type="text" :name="`subjects[${index}][description]`"
+                                        x-model="item.description" placeholder="Deskripsi mata pelajaran"
+                                        class="flex-1 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body">
+
+                                    <button type="button" @click="removeMapel(index)"
+                                        class="bg-red-500 text-white px-3 rounded">
+                                        @svg('lucide-trash-2', 'h-4 w-4')
+                                    </button>
+                                </div>
+                            </div>
+                        </template>
+
+                        <button type="button" @click="addMapel"
+                            class="bg-gray-200 box-border border border-transparent inline-flex items-center hover:bg-gray-300 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+                            @svg('lucide-plus', 'h-4 w-4 me-2')
+                            Tambah Mata Pelajaran
+                        </button>
+                    </div>
+
+
+                    <div x-data="prospectusField()" class="mb-5">
+                        <label class="block mb-2.5 text-sm font-medium text-heading">Prospek Karir</label>
+                        <template x-for="(p, index) in prospek" :key="index">
+                            <div class="flex gap-2 mb-2">
+                                <input type="text" :name="'careers[' + index + ']'" x-model="prospek[index]"
+                                    class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                                    :placeholder="'Prospek Karir ' + (index + 1)">
+                                <button type="button" @click="removeProspek(index)"
+                                    class="bg-red-500 text-white px-3 rounded">
+                                    @svg('lucide-trash-2', 'h-4 w-4')
+                                </button>
+                            </div>
+                        </template>
+
+                        <button type="button" @click="addProspek"
+                            class="bg-gray-200 box-border border border-transparent inline-flex items-center  hover:bg-gray-300 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+                            @svg('lucide-plus', 'h-4 w-4 me-2')
+                            Tambah Karir
+                        </button>
+                    </div>
+                    <div x-data="prestationField()" class="mb-5">
+                        <label class="block mb-2.5 text-sm font-medium text-heading">Prestasi</label>
+
+                        <template x-for="(p, index) in prestasi" :key="index">
+                            <div class="flex gap-2 mb-2">
+
+                                <input type="text" :name="'achievements[' + index + ']'" x-model="prestasi[index]"
+                                    :placeholder="'Prestasi ' + (index + 1)"
+                                    class="w-full bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block px-3 py-2.5 shadow-xs placeholder:text-body">
+
+                                <button type="button" @click="removePrestasi(index)"
+                                    class="bg-red-500 text-white px-3 rounded">
+                                    @svg('lucide-trash-2', 'h-4 w-4')
+                                </button>
+
+                            </div>
+                        </template>
+
+                        <button type="button" @click="addPrestasi"
+                            class="bg-gray-200 box-border border border-transparent inline-flex items-center  hover:bg-gray-300 focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+                            @svg('lucide-plus', 'h-4 w-4 me-2')
+                            Tambah Prestasi
+                        </button>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="background_jurusan"
+                            class="block mb-2.5 text-sm font-medium text-heading">Galeri</label>
+                        <x-multiple-image-upload name="gallery" :values="$major->gallery ?? []" folder="jurusan/gallery"
+                            aspect="video" />
+                    </div>
+
+                    <button type="submit"
+                        class="text-white bg-brand box-border border border-transparent inline-flex items-center  hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+                        @svg('lucide-save', 'h-4 w-4 me-1.5')
+                        {{ isset($major) ? 'Update' : 'Tambah' }} Jurusan</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function prestationField() {
+            return {
+                prestasi: @json(old('prestasi', $major->achievements ?? [''])),
+
+                addPrestasi() {
+                    this.prestasi.push('');
+                },
+
+                removePrestasi(index) {
+                    this.prestasi.splice(index, 1);
+                }
+            }
+        }
+
+        function prospectusField() {
+            return {
+                prospek: @json(old('prospek', $major->careers ?? [''])),
+
+                addProspek() {
+                    this.prospek.push('');
+                },
+
+                removeProspek(index) {
+                    this.prospek.splice(index, 1);
+                }
+            }
+        }
+
+        function curriculumField() {
+            return {
+                mapel: @json(old('subjects', $major->subjects ?? [['name' => '', 'description' => '']])),
+
+                addMapel() {
+                    this.mapel.push({
+                        name: '',
+                        description: ''
+                    });
+                },
+
+                removeMapel(index) {
+                    this.mapel.splice(index, 1);
+                }
+            }
+        }
+    </script>
+    <script>
+        ClassicEditor.create(document.querySelector('#major-description-textarea'), {
+                toolbar: [
+                    'heading', '|',
+                    'bold', 'italic', 'link', '|',
+                    'bulletedList', 'numberedList', 'blockQuote', '|',
+                    'undo', 'redo'
+                ]
+            }).then(editor => {
+                editor.model.document.on('change:data', () => {
+                    const textarea = document.querySelector('#major-description-textarea');
+
+                    textarea.classList.remove(
+                        "bg-red-50",
+                        "border-red-100",
+                        "focus:border-red-300",
+                        "focus:ring-red-300"
+                    );
+
+                    textarea.classList.add("border-default-medium");
+                });
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+
+</x-app-layout>
